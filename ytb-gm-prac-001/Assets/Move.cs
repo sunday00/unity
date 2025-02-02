@@ -34,5 +34,35 @@ public class Move : MonoBehaviour
         {
             print("done");
         }
+        
+        if (Input.GetMouseButtonDown(0))
+        {
+            print("click");
+        }
+        
+        if (Input.GetMouseButton(0))
+        {
+            print("click");
+        }
+        
+        if (Input.GetMouseButtonUp(0))
+        {
+            print("click");
+        }
+        
+        if (Input.GetMouseButtonDown(1))
+        {
+            print("click1");
+        }
+        
+        if (Input.GetMouseButton(1))
+        {
+            print("click1");
+        }
+        
+        if (Input.GetMouseButtonUp(1))
+        {
+            print("click1");
+        }
     }
 }
