@@ -64,5 +64,31 @@ public class Move : MonoBehaviour
         {
             print("click1");
         }
+        
+        // Look UnityEditor/Edit/ProjectSetting/InputManager/Axes
+        if (Input.GetButtonDown("Jump"))
+        {
+            print("jump prepare");
+        }
+        
+        if (Input.GetButton("Jump"))
+        {
+            print("jump save");
+        }
+        
+        if (Input.GetButtonUp("Jump"))
+        {
+            print("jump!");
+        }
+        
+        if (Input.GetButton("Fire1"))
+        {
+            print("fire");
+        }
+        
+        if (Input.GetButton("Boo"))
+        {
+            print("booo");
+        }
     }
 }
