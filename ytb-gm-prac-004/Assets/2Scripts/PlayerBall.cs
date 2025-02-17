@@ -7,12 +7,19 @@ namespace _2Scripts
     public class PlayerBall : MonoBehaviour
     {
         private Rigidbody _rb;
-        public int jumpForce;
+        private AudioSource _audio;
+        
         private int _isJump = 0;
+        public int jumpForce;
+        
+        public int itemCount = 0;
+        
         
         public void Awake()
         {
             this._rb = GetComponent<Rigidbody>();
+            this._audio = GetComponent<AudioSource>();
+
         }
 
         public void FixedUpdate()
@@ -39,9 +46,20 @@ namespace _2Scripts
 
         public void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.name == "Floor" )
+            if (collision.gameObject.CompareTag("Floor") )
             {
                 this._isJump = 0;
+            }
+        }
+        
+        public void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Item"))
+            {
+                this.itemCount++;
+                this._audio.Play();
+                
+                other.gameObject.SetActive(false);
             }
         }
     }    
