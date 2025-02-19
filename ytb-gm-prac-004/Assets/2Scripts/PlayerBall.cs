@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -54,7 +55,8 @@ namespace _2Scripts
 
         public void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Box") )
+            // if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("Box") )
+            if ((new[] { "Floor", "Box" }).Contains(collision.gameObject.tag) )
             {
                 this._isJump = 0;
             }
@@ -66,6 +68,7 @@ namespace _2Scripts
             {
                 case "Item":
                     this.itemCount++;
+                    this.gameManagerLogic.SetPlayerItemText(this.itemCount);
                     this._audio.Play();
                 
                     other.gameObject.SetActive(false);    
@@ -75,6 +78,11 @@ namespace _2Scripts
                     if (this.gameManagerLogic.totalItemCount == this.itemCount)
                     {
                         this.gameManagerLogic.stage++;
+                        
+                        if (this.gameManagerLogic.stage >= SceneManager.sceneCountInBuildSettings)
+                        {
+                            this.gameManagerLogic.stage = 0;
+                        }
                     }
                     
                     SceneManager.LoadScene(

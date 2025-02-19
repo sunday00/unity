@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _2Scripts
 {
@@ -6,7 +8,18 @@ namespace _2Scripts
     {
         public int totalItemCount;
         public int stage;
+        public Text playerItemText;
+        public Text stageItemText;
+
+        public void Awake()
+        {
+            stageItemText.text = this.totalItemCount.ToString();
+        }
+
+        public void SetPlayerItemText(int score)
+        {
+            this.playerItemText.text = score.ToString();    
+        }
     }
-    
 }
 
