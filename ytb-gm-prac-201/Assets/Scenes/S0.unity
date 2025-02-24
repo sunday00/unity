@@ -183,7 +183,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 15
   m_Sprite: {fileID: -6447722072507503168, guid: 10f3cacccb0c4c547be76836eba20664, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -319,6 +319,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   maxSpeed: 5
+  jumpForce: 15
+  sr: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!1 &133768312
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +333,7 @@ GameObject:
   - component: {fileID: 133768314}
   - component: {fileID: 133768313}
   - component: {fileID: 133768316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -933,7 +936,7 @@ GameObject:
   - component: {fileID: 572782115}
   - component: {fileID: 572782114}
   - component: {fileID: 572782117}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FloorS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1151,7 +1154,7 @@ GameObject:
   - component: {fileID: 678787149}
   - component: {fileID: 678787148}
   - component: {fileID: 678787147}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1653,7 +1656,7 @@ GameObject:
   - component: {fileID: 1289293109}
   - component: {fileID: 1289293108}
   - component: {fileID: 1289293107}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1934,7 +1937,7 @@ GameObject:
   - component: {fileID: 1560464410}
   - component: {fileID: 1560464409}
   - component: {fileID: 1560464412}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2068,7 +2071,7 @@ GameObject:
   - component: {fileID: 1711978577}
   - component: {fileID: 1711978576}
   - component: {fileID: 1711978575}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2202,7 +2205,7 @@ GameObject:
   - component: {fileID: 1734452984}
   - component: {fileID: 1734452983}
   - component: {fileID: 1734452986}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2336,7 +2339,7 @@ GameObject:
   - component: {fileID: 1950906212}
   - component: {fileID: 1950906211}
   - component: {fileID: 1950906210}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
