@@ -6,6 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float maxSpeed;  
+    public Color originalColor;
 
     public float jumpForce;
     public int jumpCount = 0;
@@ -18,6 +19,7 @@ public class PlayerMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        originalColor = sr.color;
     }
 
     public void Update()
@@ -77,5 +79,31 @@ public class PlayerMove : MonoBehaviour
         {
             SceneManager.LoadScene("Scenes/S0");
         }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            OnDamaged(collision.transform.position);
+        }
+    }
+
+    public void OnDamaged(Vector2 targetPos)
+    {
+        gameObject.layer = 16;
+        sr.color = new Color(1, 1, 1, 0.4f);
+
+        rb.AddForce(new Vector2(transform.position.x - targetPos.x > 0 ? 1: -1, 1) * 10, ForceMode2D.Impulse);
+        
+        animator.SetTrigger("damaged");
+        
+        Invoke("Recover", 3);
+    }
+
+    public void Recover()
+    {
+        gameObject.layer = 15;
+        sr.color = originalColor;
     }
 }
