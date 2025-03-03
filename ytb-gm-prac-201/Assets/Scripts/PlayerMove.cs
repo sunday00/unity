@@ -4,9 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
+    public GameManager gameManager;
+    
     public Rigidbody2D rb;
     public float maxSpeed;  
     public Color originalColor;
+    public Collider2D col;
 
     public float jumpForce;
     public int jumpCount = 0;
@@ -18,6 +21,7 @@ public class PlayerMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
         originalColor = sr.color;
     }
@@ -97,6 +101,8 @@ public class PlayerMove : MonoBehaviour
 
     public void OnDamaged(Vector2 targetPos)
     {
+        gameManager.PlayerDamaged();
+        
         gameObject.layer = 16;
         sr.color = new Color(1, 1, 1, 0.4f);
 
@@ -115,8 +121,33 @@ public class PlayerMove : MonoBehaviour
     
     public void OnAttack(Collision2D collision)
     {
+        gameManager.stagePoints += 100;
+        
         rb.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
         EnemyMove em = collision.transform.GetComponent<EnemyMove>();
         em.OnDamaged();
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            collision.gameObject.SetActive(false);
+            gameManager.stagePoints += 100;
+        }
+
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            // Next stage
+            gameManager.NextStage();
+        }
+    }
+
+    public void OnDeath()
+    {
+        sr.color = new Color(1f, 1f, 1f, 0.4f);
+        sr.flipY = true;
+        col.enabled = false;
+        rb.AddForce(Vector2.up * 3f, ForceMode2D.Impulse);
     }
 }
