@@ -4,6 +4,8 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     public Rigidbody2D rigid;
+    public BoxCollider2D col;
+    
     public int nextMove;
     
     public Animator animator;
@@ -13,6 +15,7 @@ public class EnemyMove : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        col = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         
         this.Think();
@@ -50,5 +53,20 @@ public class EnemyMove : MonoBehaviour
         if (!nextMove.Equals(0)) spriteRenderer.flipX = nextMove > 0;
         
         Invoke(nameof(Think), 5);
+    }
+
+    public void OnDamaged()
+    {
+        spriteRenderer.color = new Color(1f, 1f, 1f, 0.4f);
+        spriteRenderer.flipY = true;
+        col.enabled = false;
+        rigid.AddForce(Vector2.up * 3f, ForceMode2D.Impulse);
+        
+        Invoke(nameof(DeActivate), 5);
+    }
+
+    private void DeActivate()
+    {
+        gameObject.SetActive(false);
     }
 }

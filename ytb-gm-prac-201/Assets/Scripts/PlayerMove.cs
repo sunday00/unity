@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetButtonDown("Horizontal"))
+        if (Input.GetButton("Horizontal"))
         {
             this.sr.flipX = Input.GetAxisRaw("Horizontal") < 0;
         }
@@ -85,6 +85,12 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            if (rb.linearVelocityY < 0 && transform.position.y > collision.transform.position.y)
+            {
+                OnAttack(collision);
+                return;
+            }
+            
             OnDamaged(collision.transform.position);
         }
     }
@@ -105,5 +111,12 @@ public class PlayerMove : MonoBehaviour
     {
         gameObject.layer = 15;
         sr.color = originalColor;
+    }
+    
+    public void OnAttack(Collision2D collision)
+    {
+        rb.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
+        EnemyMove em = collision.transform.GetComponent<EnemyMove>();
+        em.OnDamaged();
     }
 }
