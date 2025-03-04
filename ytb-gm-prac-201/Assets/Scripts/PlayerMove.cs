@@ -81,7 +81,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (rb.position.y < -10)
         {
-            SceneManager.LoadScene("Scenes/S0");
+            // SceneManager.LoadScene("Scenes/S0");
+            OnFallen();
         }
     }
 
@@ -112,6 +113,20 @@ public class PlayerMove : MonoBehaviour
         
         Invoke("Recover", 3);
     }
+    
+    public void OnFallen()
+    {
+        gameManager.PlayerDamaged();
+        
+        gameObject.layer = 16;
+        sr.color = new Color(1, 1, 1, 0.4f);
+
+        gameManager.Respawn();  
+        
+        animator.SetTrigger("damaged");
+        
+        Invoke("Recover", 3);
+    }
 
     public void Recover()
     {
@@ -123,7 +138,7 @@ public class PlayerMove : MonoBehaviour
     {
         gameManager.stagePoints += 100;
         
-        rb.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * 15f, ForceMode2D.Impulse);
         EnemyMove em = collision.transform.GetComponent<EnemyMove>();
         em.OnDamaged();
     }

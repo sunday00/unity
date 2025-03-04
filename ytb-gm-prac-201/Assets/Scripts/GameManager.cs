@@ -1,4 +1,7 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,12 +14,26 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] stages;
     
+    public Image[] UIHealth;
+    public Text UIPoints;
+    public Text UIStage;
+    public GameObject UIRestart;
+
+    public void Update()
+    {
+         UIPoints.text = (totalPoints + stagePoints).ToString();
+         UIStage.text = "STAGE " + (stageIndex + 1).ToString();  
+    }
+
     public void NextStage()
     {
         if (stageIndex >= stages.Length - 1)
         {
             Time.timeScale = 0;
-            
+
+            Text btnText = UIRestart.GetComponentInChildren<Text>();
+            btnText.text = "CLEAR!";
+            UIRestart.SetActive(true);
             return;
         }
         
@@ -33,11 +50,16 @@ public class GameManager : MonoBehaviour
     {
         if (health > 0)
         {
-            health -= 25;
+            health -= 1;
+            UIHealth[health].color = new Color(1, 1, 1, 0.2f);
         }
         else
         {
             player.OnDeath();
+            
+            Text btnText = UIRestart.GetComponentInChildren<Text>();
+            btnText.text = "Retry?";
+            UIRestart.SetActive(true);
         }
     }
 
@@ -45,5 +67,11 @@ public class GameManager : MonoBehaviour
     {
         player.transform.position = new Vector3(0, 0, 0);
         player.rb.linearVelocity = Vector3.zero;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("Scenes/S0");
+        Time.timeScale = 1;
     }
 }
