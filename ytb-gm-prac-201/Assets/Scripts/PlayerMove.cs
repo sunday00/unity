@@ -17,6 +17,10 @@ public class PlayerMove : MonoBehaviour
     public SpriteRenderer sr;
     public Animator animator;
     
+    public AudioSource audioSource;
+    public AudioClip jumpSound;
+    public AudioClip itemSound;
+    
     public void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,6 +28,7 @@ public class PlayerMove : MonoBehaviour
         col = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
         originalColor = sr.color;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Update()
@@ -52,6 +57,7 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("isJumping", true);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             jumpCount++;
+            audioSource.PlayOneShot(jumpSound);
         }
     }
 
@@ -149,6 +155,7 @@ public class PlayerMove : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             gameManager.stagePoints += 100;
+            audioSource.PlayOneShot(itemSound);
         }
 
         if (collision.gameObject.CompareTag("Finish"))
