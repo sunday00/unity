@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
@@ -5,11 +6,13 @@ public class PlayerAction : MonoBehaviour
     private float _h;
     private float _v;
     public int speed;
-    public Vector3 direction;
+    public Vector3 direction = Vector3.down;
 
     private Rigidbody2D _rigid;
     private Animator _animator;
 
+    private GameObject _facialObject;
+    
     void Awake()
     {
         _rigid = GetComponent<Rigidbody2D>();
@@ -20,14 +23,18 @@ public class PlayerAction : MonoBehaviour
     {
         _h = Input.GetAxisRaw("Horizontal");
         _v = Input.GetAxisRaw("Vertical");
+
+        int hDirection = _animator.GetInteger("hAxisRaw");
+        int vDirection = _animator.GetInteger("vAxisRaw");
         
-        if(_animator.GetInteger("hAxisRaw") != _h)
+        // set animation direction
+        if(hDirection != _h)
         {
             _animator.SetInteger("hAxisRaw", (int)_h);
             _animator.SetBool("isWalk", true);
         }
         
-        else if(_animator.GetInteger("vAxisRaw") != _v)
+        else if(vDirection != _v)
         {
             _animator.SetInteger("vAxisRaw", (int)_v);
             _animator.SetBool("isWalk", true);
@@ -37,12 +44,29 @@ public class PlayerAction : MonoBehaviour
         {
             _animator.SetBool("isWalk", false);    
         }
+
+        // get and set facial direction
+        if (hDirection != 0 || vDirection != 0)
+        {
+            direction = new Vector3( hDirection, vDirection, 0 );
+        }
         
+        // get facial object
+        if (Input.GetButtonDown("Interact") && !_facialObject.IsUnityNull())
+        {
+            print(_facialObject.name);
+        }
     }
 
     void FixedUpdate()
     {
+        // Player move
         Vector2 movement = _h != 0 ? new Vector2(_h, 0) : new Vector2(0, _v);
         _rigid.linearVelocity =  movement * speed;
+        
+        Debug.DrawRay(_rigid.position, direction * 0.75f, Color.red);
+        RaycastHit2D rayHit = Physics2D.Raycast(_rigid.position, direction, 0.75f, LayerMask.GetMask("Interactive"));
+
+        _facialObject = rayHit.collider?.gameObject;
     }
 }
