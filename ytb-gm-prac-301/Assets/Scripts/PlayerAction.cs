@@ -26,8 +26,8 @@ public class PlayerAction : MonoBehaviour
         _h = Input.GetAxisRaw("Horizontal");
         _v = Input.GetAxisRaw("Vertical");
 
-        int hDirection = _animator.GetInteger("hAxisRaw");
-        int vDirection = _animator.GetInteger("vAxisRaw");
+        int hDirection = _animator.GetInteger(manager.playerAnimatorProps.hAxisRaw);
+        int vDirection = _animator.GetInteger(manager.playerAnimatorProps.vAxisRaw);
         
         this.Facial(hDirection, vDirection);
 
@@ -47,21 +47,21 @@ public class PlayerAction : MonoBehaviour
         if (manager.talkPanel.activeSelf) return;
         
         // set animation direction
-        if(hDirection != _h)
+        if(!hDirection.Equals((int) _h))
         {
-            _animator.SetInteger("hAxisRaw", (int)_h);
-            _animator.SetBool("isWalk", true);
+            _animator.SetInteger(manager.playerAnimatorProps.hAxisRaw, (int)_h);
+            _animator.SetBool(manager.playerAnimatorProps.isWalk, true);
         }
         
-        else if(vDirection != _v)
+        else if(!vDirection.Equals((int) _v))
         {
-            _animator.SetInteger("vAxisRaw", (int)_v);
-            _animator.SetBool("isWalk", true);
+            _animator.SetInteger(manager.playerAnimatorProps.vAxisRaw, (int)_v);
+            _animator.SetBool(manager.playerAnimatorProps.isWalk, true);
         }
 
         else 
         {
-            _animator.SetBool("isWalk", false);    
+            _animator.SetBool(manager.playerAnimatorProps.isWalk, false);    
         }
         
         // get and set facial direction

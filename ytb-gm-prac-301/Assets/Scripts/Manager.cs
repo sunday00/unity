@@ -7,6 +7,8 @@ public class Manager : MonoBehaviour
     public Text talkText;
     public GameObject talkTarget;
 
+    public PlayerAnimatorProps playerAnimatorProps;
+
     public void Interact(GameObject target)
     {
         if (talkPanel.activeSelf)
