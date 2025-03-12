@@ -7,6 +7,7 @@ public class Manager : MonoBehaviour
     public GameObject talkPanel;
     public Text talkText;
     public GameObject talkTarget;
+    public Image talkTargetImage;
 
     public TalkManager talkManager;
     public int talkIndex = 0;
@@ -30,16 +31,21 @@ public class Manager : MonoBehaviour
             talkPanel.SetActive(false);
             talkText.text = "";
             talkIndex = 0;
+            talkTargetImage.sprite = null;
             return;
         }
 
         if (isNpc)
         {
-            talkText.text = talk;
+            string[] talks = talk.Split(':');
+            talkText.text = talks[0];
+            talkTargetImage.sprite = talkManager.GetPortrait(talkId, int.Parse(talks[1])); 
+            talkTargetImage.color = new Color(1f, 1f, 1f, 1f);
         }
         else
         {
             talkText.text = talk;
+            talkTargetImage.color = new Color(1f, 1f, 1f, 0f);
         }
 
         talkIndex++;

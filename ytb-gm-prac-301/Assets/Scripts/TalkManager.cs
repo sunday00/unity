@@ -3,11 +3,15 @@ using UnityEngine;
 
 public class TalkManager : MonoBehaviour
 {
+    public Sprite[] portraits;
+    
     private Dictionary<int, string[]> talkData;
+    private Dictionary<int, Sprite> portraitsData;
 
     void Awake()
     {
         talkData = new Dictionary<int, string[]>();
+        portraitsData = new Dictionary<int, Sprite>();
         GenerateData();
     }
 
@@ -15,9 +19,9 @@ public class TalkManager : MonoBehaviour
     {
         talkData.Add(1000, new string[]
         {
-            "Hello Staring?",
-            "You should be here very right before, right?",
-            "Let me updated something you.",
+            "Hello Staring?:0",
+            "You should be here very right before, right?:1",
+            "Let me updated something you.:2",
         });
         
         talkData.Add(100, new string[]
@@ -25,6 +29,11 @@ public class TalkManager : MonoBehaviour
             "Something is written.",
             "Don't Open before 9.",
         });
+        
+        portraitsData.Add(1000 + 0, portraits[0]);
+        portraitsData.Add(1000 + 1, portraits[1]);
+        portraitsData.Add(1000 + 2, portraits[2]);
+        portraitsData.Add(1000 + 3, portraits[3]);
     }
 
     public string GetTalk(int talkId, int index)
@@ -32,5 +41,10 @@ public class TalkManager : MonoBehaviour
         if(index >= talkData[talkId].Length) return null;
         
         return talkData[talkId][index];
+    }
+
+    public Sprite GetPortrait(int id, int index)
+    {
+        return portraitsData[id + index];
     }
 }
