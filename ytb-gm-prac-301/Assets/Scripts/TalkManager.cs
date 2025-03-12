@@ -24,10 +24,23 @@ public class TalkManager : MonoBehaviour
             "Let me updated something you.:2"
         });
 
+        talkData.Add(2000, new[]
+        {
+            "BOY:0",
+            "NOT GIRL:1",
+            "WHAT??:2"
+        });
+
         talkData.Add(1010, new[]
         {
             "Here's new quest.:0",
             "You can find something:1"
+        });
+
+        talkData.Add(2010, new[]
+        {
+            "Oh, you here.:0",
+            "I... I.... mmm... :1"
         });
 
         talkData.Add(100, new[]
@@ -40,6 +53,11 @@ public class TalkManager : MonoBehaviour
         portraitsData.Add(1000 + 1, portraits[1]);
         portraitsData.Add(1000 + 2, portraits[2]);
         portraitsData.Add(1000 + 3, portraits[3]);
+
+        portraitsData.Add(2000 + 0, portraits[4]);
+        portraitsData.Add(2000 + 1, portraits[5]);
+        portraitsData.Add(2000 + 2, portraits[6]);
+        portraitsData.Add(2000 + 3, portraits[7]);
     }
 
     public string GetTalk(int talkId, int index)
