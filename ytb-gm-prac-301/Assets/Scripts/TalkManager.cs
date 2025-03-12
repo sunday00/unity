@@ -4,32 +4,38 @@ using UnityEngine;
 public class TalkManager : MonoBehaviour
 {
     public Sprite[] portraits;
-    
-    private Dictionary<int, string[]> talkData;
     private Dictionary<int, Sprite> portraitsData;
 
-    void Awake()
+    private Dictionary<int, string[]> talkData;
+
+    private void Awake()
     {
         talkData = new Dictionary<int, string[]>();
         portraitsData = new Dictionary<int, Sprite>();
         GenerateData();
     }
 
-    void GenerateData()
+    private void GenerateData()
     {
-        talkData.Add(1000, new string[]
+        talkData.Add(1000, new[]
         {
             "Hello Staring?:0",
             "You should be here very right before, right?:1",
-            "Let me updated something you.:2",
+            "Let me updated something you.:2"
         });
-        
-        talkData.Add(100, new string[]
+
+        talkData.Add(1010, new[]
+        {
+            "Here's new quest.:0",
+            "You can find something:1"
+        });
+
+        talkData.Add(100, new[]
         {
             "Something is written.",
-            "Don't Open before 9.",
+            "Don't Open before 9."
         });
-        
+
         portraitsData.Add(1000 + 0, portraits[0]);
         portraitsData.Add(1000 + 1, portraits[1]);
         portraitsData.Add(1000 + 2, portraits[2]);
@@ -38,8 +44,8 @@ public class TalkManager : MonoBehaviour
 
     public string GetTalk(int talkId, int index)
     {
-        if(index >= talkData[talkId].Length) return null;
-        
+        if (index >= talkData[talkId].Length) return null;
+
         return talkData[talkId][index];
     }
 
