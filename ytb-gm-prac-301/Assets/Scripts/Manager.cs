@@ -37,6 +37,9 @@ public class Manager : MonoBehaviour
             talkText.text = "";
             talkIndex = 0;
             talkTargetImage.sprite = null;
+
+            var questName = questManager.CheckQuest(talkId);
+            print(questName);
             return;
         }
 

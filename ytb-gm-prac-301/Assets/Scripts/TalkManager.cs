@@ -24,7 +24,7 @@ public class TalkManager : MonoBehaviour
             "Let me updated something you.:2"
         });
 
-        talkData.Add(2000, new[]
+        talkData.Add(2010, new[]
         {
             "BOY:0",
             "NOT GIRL:1",
@@ -37,7 +37,7 @@ public class TalkManager : MonoBehaviour
             "You can find something:1"
         });
 
-        talkData.Add(2010, new[]
+        talkData.Add(2011, new[]
         {
             "Oh, you here.:0",
             "I... I.... mmm... :1"
