@@ -5,6 +5,7 @@ public class QuestManager : MonoBehaviour
 {
     public int questId;
     public int questActionId;
+    public GameObject[] questObjects;
 
     private Dictionary<int, QuestData> quests;
 
@@ -29,14 +30,42 @@ public class QuestManager : MonoBehaviour
     {
         if (id == quests[questId].npcId[questActionId]) questActionId++;
 
+        ControlObject();
+
         if (questActionId == quests[questId].npcId.Length) NextQuest();
+
+        // TODO: 
+        // when get coin then skip this. 
+        if (questActionId >= 2) questActionId = 1;
 
         return quests[questId].questName;
     }
 
     public void NextQuest()
     {
+        // TODO: 
+        // when get coin then turn off.
+        if (questId >= 20) return;
+
         questId += 10;
         questActionId = 0;
+    }
+
+    private void ControlObject()
+    {
+        print("questId: " + questId);
+        print("questActionId: " + questActionId);
+
+        switch (questId)
+        {
+            case 10:
+                if (questActionId.Equals(2)) questObjects[0].SetActive(true);
+                break;
+            case 20:
+                // TODO: 
+                // when get coin then turn off.
+                if (questActionId.Equals(2)) questObjects[0].SetActive(false);
+                break;
+        }
     }
 }

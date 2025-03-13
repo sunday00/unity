@@ -30,6 +30,7 @@ public class Manager : MonoBehaviour
         var questTalkId = questManager.GetQuestTalkId(talkId);
 
         // var talk = talkManager.GetTalk(talkId, talkIndex);
+
         var talk = talkManager.GetTalk(talkId + questTalkId, talkIndex);
         if (talk.IsUnityNull())
         {

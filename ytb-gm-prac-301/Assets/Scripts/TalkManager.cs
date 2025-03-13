@@ -24,6 +24,29 @@ public class TalkManager : MonoBehaviour
             "Let me updated something you.:2"
         });
 
+        talkData.Add(1010, new[]
+        {
+            "Here's new quest.:0",
+            "You can find something:1"
+        });
+
+        talkData.Add(1011, new[]
+        {
+            "Go to Boy....:1"
+        });
+
+        talkData.Add(1020, new[]
+        {
+            "Isn't there you need to something?:1",
+            "Find Cooooin!!:2"
+        });
+
+
+        talkData.Add(1021, new[]
+        {
+            "Isn't there you need to something?:1",
+            "Find Cooooin!!:2"
+        });
         talkData.Add(2010, new[]
         {
             "BOY:0",
@@ -31,16 +54,20 @@ public class TalkManager : MonoBehaviour
             "WHAT??:2"
         });
 
-        talkData.Add(1010, new[]
-        {
-            "Here's new quest.:0",
-            "You can find something:1"
-        });
-
         talkData.Add(2011, new[]
         {
             "Oh, you here.:0",
             "I... I.... mmm... :1"
+        });
+
+        talkData.Add(2020, new[]
+        {
+            "I need coin.. :0"
+        });
+
+        talkData.Add(2021, new[]
+        {
+            "I need coin.. :0"
         });
 
         talkData.Add(100, new[]
