@@ -30,7 +30,7 @@ public class QuestManager : MonoBehaviour
     {
         if (id == quests[questId].npcId[questActionId]) questActionId++;
 
-        ControlObject();
+        ControlObject(id);
 
         if (questActionId == quests[questId].npcId.Length) NextQuest();
 
@@ -51,10 +51,10 @@ public class QuestManager : MonoBehaviour
         questActionId = 0;
     }
 
-    private void ControlObject()
+    private void ControlObject(int targetId)
     {
-        print("questId: " + questId);
-        print("questActionId: " + questActionId);
+        // print("questId: " + questId);
+        // print("questActionId: " + questActionId);
 
         switch (questId)
         {
@@ -64,7 +64,7 @@ public class QuestManager : MonoBehaviour
             case 20:
                 // TODO: 
                 // when get coin then turn off.
-                if (questActionId.Equals(2)) questObjects[0].SetActive(false);
+                if (targetId.Equals(5000)) questObjects[0].SetActive(false);
                 break;
         }
     }

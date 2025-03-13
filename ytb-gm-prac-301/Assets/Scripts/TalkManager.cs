@@ -76,6 +76,16 @@ public class TalkManager : MonoBehaviour
             "Don't Open before 9."
         });
 
+        talkData.Add(5020, new[]
+        {
+            "Got it!"
+        });
+
+        talkData.Add(5021, new[]
+        {
+            "Got it!"
+        });
+
         portraitsData.Add(1000 + 0, portraits[0]);
         portraitsData.Add(1000 + 1, portraits[1]);
         portraitsData.Add(1000 + 2, portraits[2]);
