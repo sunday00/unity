@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
-    public GameObject talkPanel;
+    // public GameObject talkPanel;
+    public Animator talkPanel;
     public Text talkText;
     public GameObject talkTarget;
     public Image talkTargetImage;
@@ -18,7 +19,8 @@ public class Manager : MonoBehaviour
 
     public void Interact(GameObject target)
     {
-        talkPanel.SetActive(true);
+        // talkPanel.SetActive(true);
+        talkPanel.SetBool("isShow", true);
 
         talkTarget = target;
         var talkData = talkTarget.GetComponent<ObjectData>();
@@ -34,7 +36,8 @@ public class Manager : MonoBehaviour
         var talk = talkManager.GetTalk(talkId + questTalkId, talkIndex);
         if (talk.IsUnityNull())
         {
-            talkPanel.SetActive(false);
+            // talkPanel.SetActive(false);
+            talkPanel.SetBool("isShow", false);
             talkText.text = "";
             talkIndex = 0;
             talkTargetImage.sprite = null;

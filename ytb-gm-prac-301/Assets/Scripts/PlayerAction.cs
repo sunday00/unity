@@ -4,91 +4,85 @@ using UnityEngine;
 public class PlayerAction : MonoBehaviour
 {
     public Manager manager;
-    
-    private float _h;
-    private float _v;
     public int speed;
     public Vector3 direction = Vector3.down;
-
-    private Rigidbody2D _rigid;
     private Animator _animator;
 
     private GameObject _facialObject;
-    
-    void Awake()
+
+    private float _h;
+
+    private Rigidbody2D _rigid;
+    private float _v;
+
+    private void Awake()
     {
         _rigid = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();   
+        _animator = GetComponent<Animator>();
     }
 
-    void Update()
+    private void Update()
     {
         _h = Input.GetAxisRaw("Horizontal");
         _v = Input.GetAxisRaw("Vertical");
 
-        int hDirection = _animator.GetInteger(manager.playerAnimatorProps.hAxisRaw);
-        int vDirection = _animator.GetInteger(manager.playerAnimatorProps.vAxisRaw);
-        
-        this.Facial(hDirection, vDirection);
+        var hDirection = _animator.GetInteger(manager.playerAnimatorProps.hAxisRaw);
+        var vDirection = _animator.GetInteger(manager.playerAnimatorProps.vAxisRaw);
 
-        if (Input.GetButtonDown("Interact"))
-        {
-            this.Interact();
-        }
+        Facial(hDirection, vDirection);
+
+        if (Input.GetButtonDown("Interact")) Interact();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        this.Move();
+        Move();
     }
 
-    void Facial(int hDirection, int vDirection)
+    private void Facial(int hDirection, int vDirection)
     {
-        if (manager.talkPanel.activeSelf) return;
-        
+        if (manager.talkPanel.GetBool("isShow")) return;
+
         // set animation direction
-        if(!hDirection.Equals((int) _h))
+        if (!hDirection.Equals((int)_h))
         {
             _animator.SetInteger(manager.playerAnimatorProps.hAxisRaw, (int)_h);
             _animator.SetBool(manager.playerAnimatorProps.isWalk, true);
         }
-        
-        else if(!vDirection.Equals((int) _v))
+
+        else if (!vDirection.Equals((int)_v))
         {
             _animator.SetInteger(manager.playerAnimatorProps.vAxisRaw, (int)_v);
             _animator.SetBool(manager.playerAnimatorProps.isWalk, true);
         }
 
-        else 
+        else
         {
-            _animator.SetBool(manager.playerAnimatorProps.isWalk, false);    
+            _animator.SetBool(manager.playerAnimatorProps.isWalk, false);
         }
-        
+
         // get and set facial direction
-        if (hDirection != 0 || vDirection != 0)
-        {
-            direction = new Vector3( hDirection, vDirection, 0 );
-        }
+        if (hDirection != 0 || vDirection != 0) direction = new Vector3(hDirection, vDirection, 0);
     }
 
-    void Move()
+    private void Move()
     {
-        if (manager.talkPanel.activeSelf) return;
-        
+        if (manager.talkPanel.GetBool("isShow")) return;
+
         // Player move
-        Vector2 movement = _h != 0 ? new Vector2(_h, 0) : new Vector2(0, _v);
-        _rigid.linearVelocity =  movement * speed;
-        
+        var movement = _h != 0 ? new Vector2(_h, 0) : new Vector2(0, _v);
+        _rigid.linearVelocity = movement * speed;
+
         Debug.DrawRay(_rigid.position, direction * 0.75f, Color.red);
-        RaycastHit2D rayHit = Physics2D.Raycast(_rigid.position, direction, 0.75f, LayerMask.GetMask("Interactive"));
+        var rayHit = Physics2D.Raycast(_rigid.position, direction, 0.75f, LayerMask.GetMask("Interactive"));
 
         _facialObject = rayHit.collider?.gameObject;
     }
 
-    void Interact()
+    private void Interact()
     {
         if (_facialObject.IsUnityNull()) return;
-        
+
         manager.Interact(_facialObject);
     }
 }

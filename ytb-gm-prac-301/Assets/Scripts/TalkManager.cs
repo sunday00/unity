@@ -99,6 +99,8 @@ public class TalkManager : MonoBehaviour
 
     public string GetTalk(int talkId, int index)
     {
+        if (!talkData.ContainsKey(talkId)) return null;
+
         if (index >= talkData[talkId].Length) return null;
 
         return talkData[talkId][index];
