@@ -6,7 +6,9 @@ public class Manager : MonoBehaviour
 {
     // public GameObject talkPanel;
     public Animator talkPanel;
-    public Text talkText;
+
+    // public Text talkText;
+    public TalkTextEffect talkText;
     public GameObject talkTarget;
     public Image talkTargetImage;
 
@@ -29,6 +31,12 @@ public class Manager : MonoBehaviour
 
     public void Talk(int talkId, bool isNpc)
     {
+        if (talkText.isEffecting)
+        {
+            talkText.SetMessage("");
+            return;
+        }
+
         var questTalkId = questManager.GetQuestTalkId(talkId);
 
         // var talk = talkManager.GetTalk(talkId, talkIndex);
@@ -38,9 +46,10 @@ public class Manager : MonoBehaviour
         {
             // talkPanel.SetActive(false);
             talkPanel.SetBool("isShow", false);
-            talkText.text = "";
+            // talkText.text = "";
+            talkText.SetMessage("");
             talkIndex = 0;
-            talkTargetImage.sprite = null;
+            // talkTargetImage.sprite = null;
 
             var questName = questManager.CheckQuest(talkId);
             print(questName);
@@ -50,13 +59,15 @@ public class Manager : MonoBehaviour
         if (isNpc)
         {
             var talks = talk.Split(':');
-            talkText.text = talks[0];
+            // talkText.text = talks[0];
+            talkText.SetMessage(talks[0]);
             talkTargetImage.sprite = talkManager.GetPortrait(talkId, int.Parse(talks[1]));
             talkTargetImage.color = new Color(1f, 1f, 1f, 1f);
         }
         else
         {
-            talkText.text = talk;
+            // talkText.text = talk;
+            talkText.SetMessage(talk);
             talkTargetImage.color = new Color(1f, 1f, 1f, 0f);
         }
 

@@ -1628,7 +1628,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: -3803466081661082397, guid: 20d6cce5c7ac33b4e97f0f98a09aa347, type: 3}
       - {fileID: 2752588384504392991, guid: 20d6cce5c7ac33b4e97f0f98a09aa347, type: 3}
-      m_AnimationSpeed: 2.098235
+      m_AnimationSpeed: 2.2332144
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 2, y: 0, z: 0}
@@ -1637,7 +1637,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: -3803466081661082397, guid: 20d6cce5c7ac33b4e97f0f98a09aa347, type: 3}
       - {fileID: 2752588384504392991, guid: 20d6cce5c7ac33b4e97f0f98a09aa347, type: 3}
-      m_AnimationSpeed: 2.0049124
+      m_AnimationSpeed: 2.6585329
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -2471,7 +2471,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6.25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2495,7 +2495,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1, y: 2, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2516,8 +2516,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ComponentVersion: 1
   m_AssetsPPU: 16
-  m_RefResolutionX: 300
-  m_RefResolutionY: 200
+  m_RefResolutionX: 1
+  m_RefResolutionY: 150
   m_CropFrame: 0
   m_GridSnapping: 2
   m_FilterMode: 0
@@ -2623,12 +2623,12 @@ GameObject:
   - component: {fileID: 688569927}
   - component: {fileID: 688569926}
   m_Layer: 5
-  m_Name: Arrow
+  m_Name: EndCursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &688569925
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3593,6 +3593,7 @@ GameObject:
   - component: {fileID: 1177217456}
   - component: {fileID: 1177217458}
   - component: {fileID: 1177217457}
+  - component: {fileID: 1177217459}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -3661,6 +3662,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1177217455}
   m_CullTransparentMesh: 1
+--- !u!114 &1177217459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177217455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2360ccc9835ba4cb393e5834aed24659, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharPerSecond: 10
+  endCursor: {fileID: 688569924}
 --- !u!1 &1239213762
 GameObject:
   m_ObjectHideFlags: 0
@@ -4041,8 +4056,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71cfb87a7b8e0470c8d5e6b2ce2e8dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  talkPanel: {fileID: 0}
-  talkText: {fileID: 1177217457}
+  talkPanel: {fileID: 1868586412}
+  talkText: {fileID: 1177217459}
   talkTarget: {fileID: 0}
   talkTargetImage: {fileID: 2058729420}
   talkManager: {fileID: 373424347}
