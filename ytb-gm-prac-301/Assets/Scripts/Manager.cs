@@ -17,13 +17,27 @@ public class Manager : MonoBehaviour
 
     public QuestManager questManager;
 
+    public GameObject player;
     public PlayerAnimatorProps playerAnimatorProps;
 
     public GameObject SubmenuSet;
 
+    private void Start()
+    {
+        // GameLoad();
+        questManager.questText.text = questManager.CheckQuest(questManager.questId);
+        SubmenuSet.SetActive(false);
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) SubmenuSet.SetActive(!SubmenuSet.activeSelf);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            print("x: " + player.transform.position.x);
+            print("y: " + player.transform.position.y);
+
+            SubmenuSet.SetActive(!SubmenuSet.activeSelf);
+        }
     }
 
     public void Interact(GameObject target)
@@ -81,6 +95,41 @@ public class Manager : MonoBehaviour
         }
 
         talkIndex++;
+    }
+
+    public void GameSave()
+    {
+        PlayerPrefs.SetFloat("PX", player.transform.position.x);
+        PlayerPrefs.SetFloat("PY", player.transform.position.y);
+        PlayerPrefs.SetInt("QI", questManager.questId);
+        PlayerPrefs.SetInt("QAI", questManager.questActionId);
+
+        SubmenuSet.SetActive(false);
+
+        print(player.transform.position.x);
+        print(player.transform.position.y);
+
+        PlayerPrefs.Save();
+    }
+
+    public void GameLoad()
+    {
+        if (!PlayerPrefs.HasKey("PX")) return;
+
+        var playerPos = new Vector3(
+            PlayerPrefs.GetFloat("PX"),
+            PlayerPrefs.GetFloat("PY"),
+            -5f
+        );
+        player.transform.position = playerPos;
+        questManager.questId = PlayerPrefs.GetInt("QI");
+        questManager.questActionId = PlayerPrefs.GetInt("QAI");
+
+        SubmenuSet.SetActive(false);
+
+        // player.transform.position = new Vector3(
+        //     0, 0, -5f
+        // );
     }
 
     public void GameExit()
