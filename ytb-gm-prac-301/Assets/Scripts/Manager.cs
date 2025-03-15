@@ -19,6 +19,13 @@ public class Manager : MonoBehaviour
 
     public PlayerAnimatorProps playerAnimatorProps;
 
+    public GameObject SubmenuSet;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) SubmenuSet.SetActive(!SubmenuSet.activeSelf);
+    }
+
     public void Interact(GameObject target)
     {
         // talkPanel.SetActive(true);
@@ -52,7 +59,9 @@ public class Manager : MonoBehaviour
             // talkTargetImage.sprite = null;
 
             var questName = questManager.CheckQuest(talkId);
+            questManager.questText.text = questName;
             print(questName);
+
             return;
         }
 
@@ -72,5 +81,10 @@ public class Manager : MonoBehaviour
         }
 
         talkIndex++;
+    }
+
+    public void GameExit()
+    {
+        Application.Quit();
     }
 }

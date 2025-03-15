@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
     public int questId;
     public int questActionId;
     public GameObject[] questObjects;
+
+    public Text questText;
 
     private Dictionary<int, QuestData> quests;
 
