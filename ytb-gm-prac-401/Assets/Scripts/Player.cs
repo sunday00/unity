@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float _s;
+    public float s;
 
     private float _h;
 
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
         if ((_h > 0 && _isTouchRight) || (_h < 0 && _isTouchLeft)) _h = 0;
 
         var currentPos = transform.position;
-        var velocity = _s * Time.deltaTime;
+        var velocity = s * Time.deltaTime;
         var targetPos = new Vector3(_h * velocity, _v * velocity, 0);
 
         transform.position = currentPos + targetPos;
