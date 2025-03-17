@@ -1,20 +1,30 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Constants constants;
+
     public float s;
 
+    private Animator _animator;
+
+    private Dictionary<string, bool> _blockedPos;
+
     private float _h;
-
-    private bool _isTouchBottom;
-    private bool _isTouchLeft;
-    private bool _isTouchRight;
-    private bool _isTouchTop;
-
     private float _v;
 
     private void Awake()
     {
+        _blockedPos = new Dictionary<string, bool>
+        {
+            { "Top", false },
+            { "Bottom", false },
+            { "Left", false },
+            { "Right", false }
+        };
+
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -37,8 +47,11 @@ public class Player : MonoBehaviour
         _h = Input.GetAxisRaw("Horizontal");
         _v = Input.GetAxisRaw("Vertical");
 
-        if ((_v > 0 && _isTouchTop) || (_v < 0 && _isTouchBottom)) _v = 0;
-        if ((_h > 0 && _isTouchRight) || (_h < 0 && _isTouchLeft)) _h = 0;
+        _animator.SetInteger(constants.playerAniInputH, (int)_h);
+
+        if ((_v > 0 && _blockedPos["Top"]) || (_v < 0 && _blockedPos["Bottom"])) _v = 0;
+        if ((_h < 0 && _blockedPos["Left"]) || (_h > 0 && _blockedPos["Right"])) _h = 0;
+
 
         var currentPos = transform.position;
         var velocity = s * Time.deltaTime;
@@ -49,31 +62,11 @@ public class Player : MonoBehaviour
 
     private void BlockByBorder(Collider2D other)
     {
-        switch (other.name)
-        {
-            case "Top":
-                _isTouchTop = true; break;
-            case "Bottom":
-                _isTouchBottom = true; break;
-            case "Left":
-                _isTouchLeft = true; break;
-            case "Right":
-                _isTouchRight = true; break;
-        }
+        _blockedPos[other.gameObject.name] = true;
     }
 
     private void AwayFromBorder(Collider2D other)
     {
-        switch (other.gameObject.name)
-        {
-            case "Top":
-                _isTouchTop = false; break;
-            case "Bottom":
-                _isTouchBottom = false; break;
-            case "Left":
-                _isTouchLeft = false; break;
-            case "Right":
-                _isTouchRight = false; break;
-        }
+        _blockedPos[other.gameObject.name] = false;
     }
 }
