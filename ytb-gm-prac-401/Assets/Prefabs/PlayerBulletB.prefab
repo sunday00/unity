@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6953672913991084127}
   - component: {fileID: 25463840143663958}
   - component: {fileID: 2974530515373855129}
+  - component: {fileID: -8228589193620843941}
   m_Layer: 0
   m_Name: PlayerBulletB
   m_TagString: Untagged
@@ -153,3 +154,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-8228589193620843941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697278120766390204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dfdc90856ae64e82b76e66c76b4152d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 0.5

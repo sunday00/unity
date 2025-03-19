@@ -7,8 +7,9 @@ public class Player : MonoBehaviour
 
     public float s;
 
-    public GameObject bulletA;
-    public GameObject bulletB;
+    public Bullet curBullet;
+    public Bullet subBullet;
+
     public float maxFireRate;
     public float curFireRate;
 
@@ -34,9 +35,15 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetButtonDown("Fire2")) SwitchWepon();
+
         Move();
         Fire();
         Reload();
+    }
+
+    private void FixedUpdate()
+    {
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -77,12 +84,21 @@ public class Player : MonoBehaviour
         _blockedPos[other.gameObject.name] = false;
     }
 
+    private void SwitchWepon()
+    {
+        var _ = curBullet;
+        curBullet = subBullet;
+        subBullet = _;
+
+        maxFireRate = curBullet.GetBulletSpeed();
+    }
+
     private void Fire()
     {
         if (!Input.GetButton("Fire1")) return;
         if (curFireRate < maxFireRate) return;
 
-        var bullet = Instantiate(bulletA, transform.position, Quaternion.identity);
+        var bullet = Instantiate(curBullet, transform.position, Quaternion.identity);
         // var bullet = Instantiate(bulletA, transform.position, transform.rotation);
         bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 10, ForceMode2D.Impulse);
 

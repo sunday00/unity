@@ -732,8 +732,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   constants: {fileID: 1627746501}
   s: 3
-  bulletA: {fileID: 2775284477091301203, guid: 6ac403b17f36b421fbac5ed375a16efb, type: 3}
-  bulletB: {fileID: 4697278120766390204, guid: a1c623e27ae0f4d06bc4787ad32d13b7, type: 3}
+  curBullet: {fileID: -8906178550632230447, guid: 6ac403b17f36b421fbac5ed375a16efb, type: 3}
+  subBullet: {fileID: -8228589193620843941, guid: a1c623e27ae0f4d06bc4787ad32d13b7, type: 3}
   maxFireRate: 0.2
   curFireRate: 0
 --- !u!212 &1018219994
