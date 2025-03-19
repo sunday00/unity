@@ -118,8 +118,7 @@ public class Player : MonoBehaviour
             bulletSide.GetComponent<Rigidbody2D>()
                 .AddForce(new Vector2((float)i * 0.5f, 1).normalized * 10, ForceMode2D.Impulse);
         }
-
-
+        
         curFireRate = 0;
     }
 
