@@ -7,6 +7,11 @@ public class Player : MonoBehaviour
 
     public float s;
 
+    public GameObject bulletA;
+    public GameObject bulletB;
+    public float maxFireRate;
+    public float curFireRate;
+
     private Animator _animator;
 
     private Dictionary<string, bool> _blockedPos;
@@ -30,6 +35,8 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Move();
+        Fire();
+        Reload();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -68,5 +75,22 @@ public class Player : MonoBehaviour
     private void AwayFromBorder(Collider2D other)
     {
         _blockedPos[other.gameObject.name] = false;
+    }
+
+    private void Fire()
+    {
+        if (!Input.GetButton("Fire1")) return;
+        if (curFireRate < maxFireRate) return;
+
+        var bullet = Instantiate(bulletA, transform.position, Quaternion.identity);
+        // var bullet = Instantiate(bulletA, transform.position, transform.rotation);
+        bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+
+        curFireRate = 0;
+    }
+
+    private void Reload()
+    {
+        curFireRate += Time.deltaTime;
     }
 }
