@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +32,10 @@ public class Player : MonoBehaviour
         };
 
         _animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
     }
 
     private void Update()
@@ -98,9 +103,22 @@ public class Player : MonoBehaviour
         if (!Input.GetButton("Fire1")) return;
         if (curFireRate < maxFireRate) return;
 
+        // center fire
         var bullet = Instantiate(curBullet, transform.position, Quaternion.identity);
         // var bullet = Instantiate(bulletA, transform.position, transform.rotation);
         bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+
+        // sub fire
+        var harf = Math.Floor((double)curBullet.bulletCount / 2);
+        for (var i = -1 * harf; i <= harf; i++)
+        {
+            if (i.Equals(0)) continue;
+
+            var bulletSide = Instantiate(curBullet, transform.position, Quaternion.Euler(0, 0, (float)(30 * -i)));
+            bulletSide.GetComponent<Rigidbody2D>()
+                .AddForce(new Vector2((float)i * 0.5f, 1).normalized * 10, ForceMode2D.Impulse);
+        }
+
 
         curFireRate = 0;
     }

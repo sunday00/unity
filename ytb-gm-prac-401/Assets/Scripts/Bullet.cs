@@ -3,6 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float bulletSpeed;
+    public int bulletCount;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
