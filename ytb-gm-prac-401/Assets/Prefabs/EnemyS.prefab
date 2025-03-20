@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2120061258363996043}
   - component: {fileID: 6829759034011252864}
   - component: {fileID: 2426293011974967746}
+  - component: {fileID: -7728710595429445616}
   m_Layer: 11
   m_Name: EnemyS
   m_TagString: Enemy
@@ -187,3 +188,20 @@ MonoBehaviour:
   sprites:
   - {fileID: 8414478535512612329, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
   - {fileID: 4326287474489854147, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+--- !u!114 &-7728710595429445616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8879702694449798695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9400a488b9b3141ec96c62f55dd1852e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxFireRate: 0
+  curFireRate: 0
+  bulletA: {fileID: -8228589193620843941, guid: badb856a6262c4ad686285cc60e15baa, type: 3}
+  bulletB: {fileID: -8228589193620843941, guid: 2c0b075b64e84461d827b36ad1d6ca15, type: 3}
+  player: {fileID: 0}

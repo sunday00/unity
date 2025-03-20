@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +6,6 @@ public class Player : MonoBehaviour
     public Constants constants;
 
     public float s;
-
-    public Bullet curBullet;
-    public Bullet subBullet;
-
-    public float maxFireRate;
-    public float curFireRate;
 
     private Animator _animator;
 
@@ -40,11 +33,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire2")) SwitchWepon();
-
         Move();
-        Fire();
-        Reload();
     }
 
     private void FixedUpdate()
@@ -87,43 +76,5 @@ public class Player : MonoBehaviour
     private void AwayFromBorder(Collider2D other)
     {
         _blockedPos[other.gameObject.name] = false;
-    }
-
-    private void SwitchWepon()
-    {
-        var _ = curBullet;
-        curBullet = subBullet;
-        subBullet = _;
-
-        maxFireRate = curBullet.GetBulletSpeed();
-    }
-
-    private void Fire()
-    {
-        if (!Input.GetButton("Fire1")) return;
-        if (curFireRate < maxFireRate) return;
-
-        // center fire
-        var bullet = Instantiate(curBullet, transform.position, Quaternion.identity);
-        // var bullet = Instantiate(bulletA, transform.position, transform.rotation);
-        bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 10, ForceMode2D.Impulse);
-
-        // sub fire
-        var harf = Math.Floor((double)curBullet.bulletCount / 2);
-        for (var i = -1 * harf; i <= harf; i++)
-        {
-            if (i.Equals(0)) continue;
-
-            var bulletSide = Instantiate(curBullet, transform.position, Quaternion.Euler(0, 0, (float)(30 * -i)));
-            bulletSide.GetComponent<Rigidbody2D>()
-                .AddForce(new Vector2((float)i * 0.5f, 1).normalized * 10, ForceMode2D.Impulse);
-        }
-        
-        curFireRate = 0;
-    }
-
-    private void Reload()
-    {
-        curFireRate += Time.deltaTime;
     }
 }

@@ -13,8 +13,6 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-
-        rb.linearVelocity = Vector2.down * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -30,6 +28,15 @@ public class Enemy : MonoBehaviour
             OnHit(other.gameObject.GetComponent<Bullet>().dmg);
             Destroy(other.gameObject);
         }
+    }
+
+    public void SetVelocity(string n)
+    {
+        var z = n.Equals("PointLeft") ? 45 : n.Equals("PointRight") ? -45 : 0;
+        transform.Rotate(Vector3.forward * z);
+
+        var x = n.Equals("PointLeft") ? 1 : n.Equals("PointRight") ? -1 : 0;
+        rb.linearVelocity = new Vector2(x, -1 * speed);
     }
 
     private void OnHit(int damage)
