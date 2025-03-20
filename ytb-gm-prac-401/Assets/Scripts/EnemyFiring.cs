@@ -27,6 +27,11 @@ public class EnemyFiring : MonoBehaviour
             Quaternion.identity
         );
 
+        bullet.GetComponent<Rigidbody2D>().AddForce(
+            (player.transform.position - transform.position).normalized * 10,
+            ForceMode2D.Impulse
+        );
+
         curFireRate = 0;
     }
 

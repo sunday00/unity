@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9400a488b9b3141ec96c62f55dd1852e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFireRate: 0.8
+  maxFireRate: 2
   curFireRate: 0
   bulletA: {fileID: -8228589193620843941, guid: badb856a6262c4ad686285cc60e15baa, type: 3}
   bulletB: {fileID: -8228589193620843941, guid: 2c0b075b64e84461d827b36ad1d6ca15, type: 3}
