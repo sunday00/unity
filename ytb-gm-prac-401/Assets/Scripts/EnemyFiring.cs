@@ -21,18 +21,33 @@ public class EnemyFiring : MonoBehaviour
         if (curFireRate < maxFireRate) return;
         if (name.Contains("EnemyS")) return;
 
+        if (name.Contains("EnemyL"))
+        {
+            SpawnBullets(bulletB, Vector3.right * 0.3f);
+            SpawnBullets(bulletB, Vector3.left * 0.3f);
+        }
+        else
+        {
+            SpawnBullets(bulletA, Vector3.zero);
+        }
+
+        curFireRate = 0;
+    }
+
+    private void SpawnBullets(Bullet bulletType, Vector3 offsetModifier)
+    {
         var bullet = Instantiate(
-            name.Contains("EnemyL") ? bulletA : bulletB,
-            transform.position,
+            bulletType,
+            transform.position + offsetModifier,
             Quaternion.identity
         );
 
         bullet.GetComponent<Rigidbody2D>().AddForce(
-            (player.transform.position - transform.position).normalized * 10,
+            (player.transform.position - (
+                transform.position + offsetModifier
+            )).normalized * 4,
             ForceMode2D.Impulse
         );
-
-        curFireRate = 0;
     }
 
     private void Reload()
