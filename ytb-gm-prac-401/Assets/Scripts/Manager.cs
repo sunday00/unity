@@ -48,6 +48,7 @@ public class Manager : MonoBehaviour
 
     private void RespawnAct()
     {
+        player.GetComponent<PlayerHit>().isHit = false;
         player.transform.position = Vector3.down * 3;
         player.gameObject.SetActive(true);
     }

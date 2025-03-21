@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerHit : MonoBehaviour
 {
     public Manager manager;
+    public bool isHit;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -10,6 +11,9 @@ public class PlayerHit : MonoBehaviour
         {
             if (manager.life > 0)
             {
+                if (isHit) return;
+                isHit = true;
+
                 UpdateLifeIcon(-1);
                 manager.RespawnPlayer();
             }
