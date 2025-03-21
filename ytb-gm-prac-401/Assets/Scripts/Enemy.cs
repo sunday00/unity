@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public Manager manager;
+
     public float speed;
     public int health;
+    public int score;
     public Sprite[] sprites;
 
     private Rigidbody2D rb;
@@ -45,7 +48,11 @@ public class Enemy : MonoBehaviour
         sr.sprite = sprites[1];
         Invoke("ReturnSprite", 0.2f);
 
-        if (health <= 0) Destroy(gameObject);
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+            manager.score += score;
+        }
     }
 
     private void ReturnSprite()

@@ -183,8 +183,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ae2d3ce14aa415bba4819c16408510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   speed: 3
   health: 3
+  score: 5
   sprites:
   - {fileID: 8414478535512612329, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
   - {fileID: 4326287474489854147, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
