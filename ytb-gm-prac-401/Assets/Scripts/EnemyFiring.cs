@@ -9,6 +9,7 @@ public class EnemyFiring : MonoBehaviour
     public Bullet bulletB;
 
     public Player player;
+    public ObjectManager objectManager;
 
     private void Update()
     {
@@ -23,24 +24,29 @@ public class EnemyFiring : MonoBehaviour
 
         if (name.Contains("EnemyL"))
         {
-            SpawnBullets(bulletB, Vector3.right * 0.3f);
-            SpawnBullets(bulletB, Vector3.left * 0.3f);
+            SpawnBullets("enemyBulletB", Vector3.right * 0.3f);
+            SpawnBullets("enemyBulletB", Vector3.left * 0.3f);
         }
         else
         {
-            SpawnBullets(bulletA, Vector3.zero);
+            SpawnBullets("enemyBulletA", Vector3.zero);
         }
 
         curFireRate = 0;
     }
 
-    private void SpawnBullets(Bullet bulletType, Vector3 offsetModifier)
+    private void SpawnBullets(string bulletName, Vector3 offsetModifier)
     {
-        var bullet = Instantiate(
-            bulletType,
-            transform.position + offsetModifier,
-            Quaternion.identity
-        );
+        // var bullet = Instantiate(
+        //     bulletType,
+        //     transform.position + offsetModifier,
+        //     Quaternion.identity
+        // );
+
+        var bullet = objectManager.MakeObject(bulletName);
+        bullet.transform.position = transform.position + offsetModifier;
+        bullet.transform.rotation = Quaternion.identity;
+
 
         bullet.GetComponent<Rigidbody2D>().AddForce(
             (player.transform.position - (

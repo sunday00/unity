@@ -185,16 +185,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
   speed: 3
+  initialHealth: 3
   health: 3
   score: 5
   sprites:
   - {fileID: 8414478535512612329, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
   - {fileID: 4326287474489854147, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
-  items:
-  - {fileID: 1555558147998448287, guid: 5e08493b78e374e0e8ce967209c08c53, type: 3}
-  - {fileID: 2600692004065465190, guid: fa086e686dbe547bdbbbe9faa65c27d8, type: 3}
-  - {fileID: 1531246940615827063, guid: 1b142c148d3f24d64aac8aacf0bccd34, type: 3}
-  - {fileID: 8306279620211388570, guid: 4fc83279ae2114b428a5f27ad51abee5, type: 3}
 --- !u!114 &-7728710595429445616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,3 +208,4 @@ MonoBehaviour:
   bulletA: {fileID: -8228589193620843941, guid: badb856a6262c4ad686285cc60e15baa, type: 3}
   bulletB: {fileID: -8228589193620843941, guid: 2c0b075b64e84461d827b36ad1d6ca15, type: 3}
   player: {fileID: 0}
+  objectManager: {fileID: 0}

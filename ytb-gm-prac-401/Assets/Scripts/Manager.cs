@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -5,7 +6,6 @@ using Random = UnityEngine.Random;
 
 public class Manager : MonoBehaviour
 {
-    public GameObject[] Enemies;
     public GameObject[] EnemySpwanPoints;
 
     public Player player;
@@ -20,8 +20,15 @@ public class Manager : MonoBehaviour
     public Image[] lifes;
     public GameObject gameOverPanel;
 
+    public ObjectManager objectManager;
+
+    // public GameObject[] Enemies;
+    private string[] enemies;
+
     private void Awake()
     {
+        enemies = new[] { "enemyL", "enemyM", "enemyS" };
+
         player.GetComponent<PlayerFiring>().curBullet.bulletCount = 1;
         player.GetComponent<PlayerFiring>().subBullet.bulletCount = 1;
     }
@@ -38,13 +45,21 @@ public class Manager : MonoBehaviour
     {
         curEnemySpawnDelay = 0;
         maxEnemySpawnDelay = Random.Range(0.5f, 3f);
-        var enemyIndex = Random.Range(0, Enemies.Length);
+        var enemyIndex = Random.Range(0, enemies.Length);
         var enemyPoint = EnemySpwanPoints[Random.Range(0, EnemySpwanPoints.Length)];
 
-        var enemyObj = Instantiate(Enemies[enemyIndex], enemyPoint.transform.position, enemyPoint.transform.rotation);
+        // var enemyObj = Instantiate(Enemies[enemyIndex], enemyPoint.transform.position, enemyPoint.transform.rotation);
+        var enemyObj = objectManager.MakeObject(enemies[enemyIndex]);
+
+        if (enemyObj.IsUnityNull()) return;
+        enemyObj.transform.position = enemyPoint.transform.position;
+        enemyObj.transform.rotation = enemyPoint.transform.rotation;
+
         enemyObj.GetComponent<Enemy>().manager = this;
+        enemyObj.GetComponent<Enemy>().health = enemyObj.GetComponent<Enemy>().initialHealth;
         enemyObj.GetComponent<Enemy>().SetVelocity(enemyPoint.name);
         enemyObj.GetComponent<Enemy>().GetComponent<EnemyFiring>().player = player;
+        enemyObj.GetComponent<Enemy>().GetComponent<EnemyFiring>().objectManager = objectManager;
     }
 
     public void RespawnPlayer()

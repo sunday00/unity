@@ -26,7 +26,8 @@ public class PlayerItem : MonoBehaviour
         else if (other.name.Contains("Power")) DoItemPower();
         else if (other.name.Contains("Life")) DoItemLife();
 
-        Destroy(other.gameObject);
+        // Destroy(other.gameObject);
+        other.gameObject.SetActive(false);
     }
 
     private void DoItemBomb()
@@ -47,7 +48,8 @@ public class PlayerItem : MonoBehaviour
         {
             if (enemies[i].name.Contains("EnemyBullet"))
             {
-                Destroy(enemies[i]);
+                // Destroy(enemies[i]);
+                enemies[i].SetActive(false);
                 continue;
             }
 

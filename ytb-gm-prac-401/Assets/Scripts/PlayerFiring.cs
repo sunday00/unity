@@ -9,6 +9,8 @@ public class PlayerFiring : MonoBehaviour
     public Bullet curBullet;
     public Bullet subBullet;
 
+    public ObjectManager objectManager;
+
     private PlayerItem pItem;
 
     private void Awake()
@@ -30,8 +32,10 @@ public class PlayerFiring : MonoBehaviour
         if (curFireRate < maxFireRate) return;
 
         // center fire
-        var bullet = Instantiate(curBullet, transform.position, Quaternion.identity);
-        // var bullet = Instantiate(bulletA, transform.position, transform.rotation);
+        // var bullet = Instantiate(curBullet, transform.position, Quaternion.identity);
+        var bullet = objectManager.MakeObject(curBullet.name);
+        bullet.transform.position = transform.position;
+        bullet.transform.rotation = Quaternion.identity;
         bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 10, ForceMode2D.Impulse);
 
         // sub fire
@@ -40,7 +44,10 @@ public class PlayerFiring : MonoBehaviour
         {
             if (i.Equals(0)) continue;
 
-            var bulletSide = Instantiate(curBullet, transform.position, Quaternion.Euler(0, 0, (float)(30 * -i)));
+            // var bulletSide = Instantiate(curBullet, transform.position, Quaternion.Euler(0, 0, (float)(30 * -i)));
+            var bulletSide = objectManager.MakeObject(curBullet.name);
+            bulletSide.transform.position = transform.position;
+            bulletSide.transform.rotation = Quaternion.Euler(0, 0, (float)(30 * -i));
             bulletSide.GetComponent<Rigidbody2D>()
                 .AddForce(new Vector2((float)i * 0.5f, 1).normalized * 10, ForceMode2D.Impulse);
         }

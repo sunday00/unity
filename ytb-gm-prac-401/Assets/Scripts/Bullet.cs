@@ -9,7 +9,9 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.name.Equals("BulletBorder")) Destroy(gameObject);
+        if (other.name.Equals("BulletBorder"))
+            // Destroy(gameObject);
+            gameObject.SetActive(false);
     }
 
     public float GetBulletSpeed()

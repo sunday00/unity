@@ -5,17 +5,21 @@ public class Enemy : MonoBehaviour
     public Manager manager;
 
     public float speed;
+    public int initialHealth;
     public int health;
     public int score;
     public Sprite[] sprites;
 
-    public Item[] items;
+    // public Item[] items;
+    private string[] items;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
     private void Awake()
     {
+        items = new[] { "itemPower", "itemCoin", "itemBomb", "itemLife" };
+
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
     }
@@ -24,14 +28,16 @@ public class Enemy : MonoBehaviour
     {
         if (other.name == "BulletBorder")
         {
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            gameObject.SetActive(false);
             return;
         }
 
         if (other.tag.Equals("Bullet"))
         {
             OnHit(other.gameObject.GetComponent<Bullet>().dmg);
-            Destroy(other.gameObject);
+            // Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
 
@@ -63,9 +69,17 @@ public class Enemy : MonoBehaviour
     private void DestroyedByPlayer()
     {
         var ran = Random.Range(0, 10);
-        if (ran <= 3) Instantiate(items[ran], transform.position, Quaternion.identity);
+        if (ran <= 3)
+        {
+            // Instantiate(items[ran], transform.position, Quaternion.identity);
+            var item = manager.objectManager.MakeObject(items[ran]);
+            item.transform.position = transform.position;
+            item.transform.rotation = Quaternion.identity;
+            item.GetComponent<Rigidbody2D>().linearVelocity = Vector2.down * 2;
+        }
 
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        gameObject.SetActive(false);
         manager.score += score;
     }
 }
