@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private Dictionary<string, bool> _blockedPos;
 
     private float _h;
+    private SpriteRenderer _spriteRenderer;
     private float _v;
 
     private void Awake()
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
         };
 
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -76,5 +78,10 @@ public class Player : MonoBehaviour
     private void AwayFromBorder(Collider2D other)
     {
         _blockedPos[other.gameObject.name] = false;
+    }
+
+    public void SetSpriteOpacity(float opacity)
+    {
+        _spriteRenderer.color = new Color(1, 1, 1, opacity);
     }
 }

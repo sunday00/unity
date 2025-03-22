@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     public int score;
     public Sprite[] sprites;
 
+    public Item[] items;
+
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
@@ -42,21 +44,28 @@ public class Enemy : MonoBehaviour
         rb.linearVelocity = new Vector2(x, -1 * speed);
     }
 
-    private void OnHit(int damage)
+    public void OnHit(int damage)
     {
+        if (health <= 0) return;
+
         health -= damage;
         sr.sprite = sprites[1];
         Invoke("ReturnSprite", 0.2f);
 
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-            manager.score += score;
-        }
+        if (health <= 0) DestroyedByPlayer();
     }
 
     private void ReturnSprite()
     {
         sr.sprite = sprites[0];
+    }
+
+    private void DestroyedByPlayer()
+    {
+        var ran = Random.Range(0, 10);
+        if (ran <= 3) Instantiate(items[ran], transform.position, Quaternion.identity);
+
+        Destroy(gameObject);
+        manager.score += score;
     }
 }

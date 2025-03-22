@@ -9,9 +9,17 @@ public class PlayerFiring : MonoBehaviour
     public Bullet curBullet;
     public Bullet subBullet;
 
+    private PlayerItem pItem;
+
+    private void Awake()
+    {
+        pItem = GetComponent<PlayerItem>();
+    }
+
     private void Update()
     {
         if (Input.GetButtonDown("Fire2")) SwitchWeapon();
+        if (Input.GetButtonDown("Fire3")) pItem.EnableBoom();
         Fire();
         Reload();
     }

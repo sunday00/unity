@@ -26,12 +26,14 @@ public class PlayerHit : MonoBehaviour
         }
     }
 
-    private void UpdateLifeIcon(int amount)
+    public void UpdateLifeIcon(int amount)
     {
         manager.life += amount;
 
-        for (var i = 0; i <= manager.life; i++)
+        for (var i = 0; i < manager.lifes.Length; i++)
         {
+            manager.lifes[i].color = new Color(1, 1, 1, 1);
+
             if (i < manager.life) continue;
 
             manager.lifes[i].color = new Color(0, 0, 0, 0);
