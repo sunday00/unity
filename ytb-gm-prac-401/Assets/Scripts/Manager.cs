@@ -56,7 +56,6 @@ public class Manager : MonoBehaviour
         enemyObj.transform.rotation = enemyPoint.transform.rotation;
 
         enemyObj.GetComponent<Enemy>().manager = this;
-        enemyObj.GetComponent<Enemy>().health = enemyObj.GetComponent<Enemy>().initialHealth;
         enemyObj.GetComponent<Enemy>().SetVelocity(enemyPoint.name);
         enemyObj.GetComponent<Enemy>().GetComponent<EnemyFiring>().player = player;
         enemyObj.GetComponent<Enemy>().GetComponent<EnemyFiring>().objectManager = objectManager;

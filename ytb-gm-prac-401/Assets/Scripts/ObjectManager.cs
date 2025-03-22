@@ -100,4 +100,9 @@ public class ObjectManager : MonoBehaviour
 
         return null;
     }
+
+    public GameObject[][] GetEnemiesObjects()
+    {
+        return new[] { enemyLs, enemyMs, enemySs, enemyBulletAs, enemyBulletBs };
+    }
 }

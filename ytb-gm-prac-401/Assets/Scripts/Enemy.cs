@@ -24,6 +24,11 @@ public class Enemy : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
+    private void OnEnable()
+    {
+        health = initialHealth;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.name == "BulletBorder")
@@ -75,7 +80,6 @@ public class Enemy : MonoBehaviour
             var item = manager.objectManager.MakeObject(items[ran]);
             item.transform.position = transform.position;
             item.transform.rotation = Quaternion.identity;
-            item.GetComponent<Rigidbody2D>().linearVelocity = Vector2.down * 2;
         }
 
         // Destroy(gameObject);

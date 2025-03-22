@@ -10,6 +10,8 @@ public class PlayerItem : MonoBehaviour
     public Text boomCountText;
     public GameObject boom;
 
+    public ObjectManager objectManager;
+
     private void Update()
     {
         boomCountText.text = boomCount.ToString();
@@ -43,20 +45,28 @@ public class PlayerItem : MonoBehaviour
         boomCount--;
         boom.SetActive(true);
 
-        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        for (var i = 0; i < enemies.Length; i++)
+        // var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var enemiesGroup = objectManager.GetEnemiesObjects();
+        foreach (var enemisGroup in enemiesGroup) DestroyEnemies(enemisGroup);
+
+        Invoke("DisableBoom", 2f);
+    }
+
+    private void DestroyEnemies(GameObject[] enemies)
+    {
+        // for (var i = 0; i < enemies.Length; i++)
+        foreach (var enemy in enemies)
         {
-            if (enemies[i].name.Contains("EnemyBullet"))
+            if (!enemy.activeSelf) continue;
+            if (enemy.name.Contains("EnemyBullet"))
             {
-                // Destroy(enemies[i]);
-                enemies[i].SetActive(false);
+                // Destroy(enemy);
+                enemy.SetActive(false);
                 continue;
             }
 
-            enemies[i].GetComponent<Enemy>().OnHit(1000);
+            enemy.GetComponent<Enemy>().OnHit(1000);
         }
-
-        Invoke("DisableBoom", 2f);
     }
 
     private void DisableBoom()
