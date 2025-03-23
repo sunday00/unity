@@ -67,10 +67,21 @@ public class EnemySpawn : MonoBehaviour
         enemyObj.transform.position = enemyPoint.transform.position;
         enemyObj.transform.rotation = enemyPoint.transform.rotation;
 
-        enemyObj.GetComponent<Enemy>().manager = _manager;
-        enemyObj.GetComponent<Enemy>().SetVelocity(enemyPoint.name);
-        enemyObj.GetComponent<Enemy>().GetComponent<EnemyFiring>().player = _player;
-        enemyObj.GetComponent<Enemy>().GetComponent<EnemyFiring>().objectManager = _manager.objectManager;
+        if (spawn.type.Equals("B"))
+        {
+            enemyObj.GetComponent<BossHit>().manager = _manager;
+            enemyObj.GetComponent<Enemy>().SetVelocity(enemyPoint.name);
+            enemyObj.GetComponent<Enemy>().GetComponent<BossFiring>().player = _player;
+            enemyObj.GetComponent<Enemy>().GetComponent<BossFiring>().objectManager = _manager.objectManager;
+        }
+        else
+        {
+            enemyObj.GetComponent<EnemyHit>().manager = _manager;
+            enemyObj.GetComponent<Enemy>().SetVelocity(enemyPoint.name);
+            enemyObj.GetComponent<Enemy>().GetComponent<EnemyFiring>().player = _player;
+            enemyObj.GetComponent<Enemy>().GetComponent<EnemyFiring>().objectManager = _manager.objectManager;
+        }
+
 
         _spawnIndex++;
         if (_spawns.Count > _spawnIndex) _nextEnemySpawnDelay = _spawns[_spawnIndex].delay;

@@ -68,7 +68,10 @@ public class PlayerItem : MonoBehaviour
                 continue;
             }
 
-            enemy.GetComponent<Enemy>().OnHit(1000);
+            if (enemy.name.Contains("Boss"))
+                enemy.GetComponent<BossHit>().OnHit(300);
+            else
+                enemy.GetComponent<EnemyHit>().OnHit(300);
         }
     }
 

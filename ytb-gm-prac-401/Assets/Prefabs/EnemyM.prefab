@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7678306355735134999}
   - component: {fileID: 2813554638109658185}
   - component: {fileID: -4106615917433958399}
+  - component: {fileID: 7645994548297645552}
   m_Layer: 11
   m_Name: EnemyM
   m_TagString: Enemy
@@ -183,14 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ae2d3ce14aa415bba4819c16408510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
   speed: 2
-  initialHealth: 10
-  health: 5
-  score: 10
-  sprites:
-  - {fileID: -1147401495359466748, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
-  - {fileID: -7844560889915226194, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
 --- !u!114 &-4106615917433958399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,3 +203,22 @@ MonoBehaviour:
   bulletB: {fileID: -8228589193620843941, guid: 2c0b075b64e84461d827b36ad1d6ca15, type: 3}
   player: {fileID: 0}
   objectManager: {fileID: 0}
+--- !u!114 &7645994548297645552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573716167992955541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fa1749496ed4fdbaa8d940f1c118ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  health: 5
+  initialHealth: 5
+  sprites:
+  - {fileID: -1147401495359466748, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+  - {fileID: -7844560889915226194, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+  score: 0

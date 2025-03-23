@@ -1982,6 +1982,7 @@ MonoBehaviour:
   enemyL: {fileID: 8074908514470262467, guid: 90e53e7b4a51944cf81880c02b8979c9, type: 3}
   enemyM: {fileID: 1573716167992955541, guid: 46cac70f1249c43d39373909724f62bf, type: 3}
   enemyS: {fileID: 8879702694449798695, guid: 66baa0e3a5f80440c96cebc514bc2a02, type: 3}
+  boss: {fileID: 3783860491620995067, guid: 979ac9592603c49ab997ddcdd65a3827, type: 3}
   itemBomb: {fileID: 8783489129327241536, guid: 1b142c148d3f24d64aac8aacf0bccd34, type: 3}
   itemCoin: {fileID: 5068261804653730359, guid: 5e08493b78e374e0e8ce967209c08c53, type: 3}
   itemLife: {fileID: 6372448808744770803, guid: 4fc83279ae2114b428a5f27ad51abee5, type: 3}
@@ -1989,6 +1990,8 @@ MonoBehaviour:
   playerBulletA: {fileID: 2775284477091301203, guid: 6ac403b17f36b421fbac5ed375a16efb, type: 3}
   playerBulletB: {fileID: 4697278120766390204, guid: a1c623e27ae0f4d06bc4787ad32d13b7, type: 3}
   followerBulletA: {fileID: 2775284477091301203, guid: d3d46069ec0364069a0cfb4517da5e58, type: 3}
+  bossBulletA: {fileID: 4697278120766390204, guid: 745ab3e81e81545729a3dae3e8aee6c6, type: 3}
+  bossBulletB: {fileID: 4697278120766390204, guid: 471f9fd2ad009497d91743e9bf292f0a, type: 3}
 --- !u!1 &625224377
 GameObject:
   m_ObjectHideFlags: 0

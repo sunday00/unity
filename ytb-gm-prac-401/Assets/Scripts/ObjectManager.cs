@@ -10,6 +10,7 @@ public class ObjectManager : MonoBehaviour
     public GameObject enemyL;
     public GameObject enemyM;
     public GameObject enemyS;
+    public GameObject boss;
 
     public GameObject itemBomb;
     public GameObject itemCoin;
@@ -20,6 +21,12 @@ public class ObjectManager : MonoBehaviour
     public GameObject playerBulletB;
     public GameObject followerBulletA;
 
+    public GameObject bossBulletA;
+    public GameObject bossBulletB;
+
+    private GameObject[] bossBulletAs;
+    private GameObject[] bossBulletBs;
+    private GameObject[] bosses;
 
     private GameObject[] enemyBulletAs;
     private GameObject[] enemyBulletBs;
@@ -51,11 +58,15 @@ public class ObjectManager : MonoBehaviour
         enemyLs = new GameObject[10];
         enemyMs = new GameObject[10];
         enemySs = new GameObject[20];
+        bosses = new GameObject[1];
 
         itemPowers = new GameObject[20];
         itemCoins = new GameObject[20];
         itemBombs = new GameObject[20];
         itemLifes = new GameObject[20];
+
+        bossBulletAs = new GameObject[100];
+        bossBulletBs = new GameObject[100];
 
         objectLists = new Dictionary<string, (GameObject, GameObject[])>
         {
@@ -67,10 +78,13 @@ public class ObjectManager : MonoBehaviour
             { "enemyL", (enemyL, enemyLs) },
             { "enemyM", (enemyM, enemyMs) },
             { "enemyS", (enemyS, enemySs) },
+            { "enemyB", (boss, bosses) },
             { "itemPower", (itemPower, itemPowers) },
             { "itemCoin", (itemCoin, itemCoins) },
             { "itemBomb", (itemBomb, itemBombs) },
-            { "itemLife", (itemLife, itemLifes) }
+            { "itemLife", (itemLife, itemLifes) },
+            { "bossBulletA", (bossBulletA, bossBulletAs) },
+            { "bossBulletB", (bossBulletB, bossBulletBs) }
         };
 
         Generate();
@@ -107,6 +121,6 @@ public class ObjectManager : MonoBehaviour
 
     public GameObject[][] GetEnemiesObjects()
     {
-        return new[] { enemyLs, enemyMs, enemySs, enemyBulletAs, enemyBulletBs };
+        return new[] { enemyLs, enemyMs, enemySs, bosses, enemyBulletAs, enemyBulletBs };
     }
 }
