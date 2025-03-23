@@ -2441,6 +2441,7 @@ MonoBehaviour:
   boomCount: 3
   boomCountText: {fileID: 251199631}
   boom: {fileID: 1968225142}
+  objectManager: {fileID: 618799186}
 --- !u!1 &1080335332
 GameObject:
   m_ObjectHideFlags: 0
@@ -3784,6 +3785,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1864769181}
   - component: {fileID: 1864769182}
+  - component: {fileID: 1864769183}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -3844,6 +3846,30 @@ MonoBehaviour:
   - {fileID: 1196675951}
   gameOverPanel: {fileID: 445958586}
   objectManager: {fileID: 618799186}
+--- !u!114 &1864769183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864769180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e67cf3e37ada4e6a86e83170a41d16e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnemySpawnDelay: 0
+  curEnemySpawnDelay: 0.1
+  EnemySpwanPoints:
+  - {fileID: 2005989248}
+  - {fileID: 1808448841}
+  - {fileID: 228974578}
+  - {fileID: 1723279029}
+  - {fileID: 1687095601}
+  - {fileID: 371650046}
+  - {fileID: 371650046}
+  - {fileID: 542924455}
+  - {fileID: 625224377}
 --- !u!1 &1928411578
 GameObject:
   m_ObjectHideFlags: 0
