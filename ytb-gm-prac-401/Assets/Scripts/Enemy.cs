@@ -11,6 +11,11 @@ public class Enemy : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        if (transform.position.y <= 3f) _rb.linearVelocity = Vector2.zero;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.name == "BulletBorder") gameObject.SetActive(false);
@@ -23,5 +28,10 @@ public class Enemy : MonoBehaviour
 
         var x = n.Equals("PointLeft") ? 1 : n.Equals("PointRight") ? -1 : 0;
         _rb.linearVelocity = new Vector2(x, -1 * speed);
+    }
+
+    public void SetBossVelocity()
+    {
+        _rb.linearVelocity = Vector2.down * speed;
     }
 }

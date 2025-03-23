@@ -70,7 +70,7 @@ public class EnemySpawn : MonoBehaviour
         if (spawn.type.Equals("B"))
         {
             enemyObj.GetComponent<BossHit>().manager = _manager;
-            enemyObj.GetComponent<Enemy>().SetVelocity(enemyPoint.name);
+            enemyObj.GetComponent<Enemy>().SetBossVelocity();
             enemyObj.GetComponent<Enemy>().GetComponent<BossFiring>().player = _player;
             enemyObj.GetComponent<Enemy>().GetComponent<BossFiring>().objectManager = _manager.objectManager;
         }
