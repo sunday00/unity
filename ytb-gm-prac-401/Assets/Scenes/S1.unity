@@ -3824,21 +3824,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7316d4daa91f84094a190d3a141a06f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemySpwanPoints:
-  - {fileID: 2005989248}
-  - {fileID: 1808448841}
-  - {fileID: 228974578}
-  - {fileID: 1723279029}
-  - {fileID: 1687095601}
-  - {fileID: 371650046}
-  - {fileID: 371650046}
-  - {fileID: 542924455}
-  - {fileID: 625224377}
   player: {fileID: 1018219993}
   life: 3
   score: 0
-  maxEnemySpawnDelay: 0
-  curEnemySpawnDelay: 0.1
   scoreText: {fileID: 114553477}
   lifes:
   - {fileID: 2106865764}
@@ -3858,16 +3846,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67cf3e37ada4e6a86e83170a41d16e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemySpawnDelay: 0
-  curEnemySpawnDelay: 0.1
-  EnemySpwanPoints:
+  enemySpwanPoints:
   - {fileID: 2005989248}
   - {fileID: 1808448841}
   - {fileID: 228974578}
   - {fileID: 1723279029}
   - {fileID: 1687095601}
   - {fileID: 371650046}
-  - {fileID: 371650046}
+  - {fileID: 1201491574}
   - {fileID: 542924455}
   - {fileID: 625224377}
 --- !u!1 &1928411578
