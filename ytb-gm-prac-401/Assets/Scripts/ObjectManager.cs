@@ -18,6 +18,7 @@ public class ObjectManager : MonoBehaviour
 
     public GameObject playerBulletA;
     public GameObject playerBulletB;
+    public GameObject followerBulletA;
 
 
     private GameObject[] enemyBulletAs;
@@ -27,6 +28,7 @@ public class ObjectManager : MonoBehaviour
     private GameObject[] enemyLs;
     private GameObject[] enemyMs;
     private GameObject[] enemySs;
+    private GameObject[] followerBulletAs;
 
     private GameObject[] itemBombs;
     private GameObject[] itemCoins;
@@ -44,6 +46,7 @@ public class ObjectManager : MonoBehaviour
         enemyBulletBs = new GameObject[100];
         playerBulletAs = new GameObject[100];
         playerBulletBs = new GameObject[100];
+        followerBulletAs = new GameObject[100];
 
         enemyLs = new GameObject[10];
         enemyMs = new GameObject[10];
@@ -60,6 +63,7 @@ public class ObjectManager : MonoBehaviour
             { "enemyBulletB", (enemyBulletB, enemyBulletBs) },
             { "PlayerBulletA", (playerBulletA, playerBulletAs) },
             { "PlayerBulletB", (playerBulletB, playerBulletBs) },
+            { "FollowerBulletA", (followerBulletA, followerBulletAs) },
             { "enemyL", (enemyL, enemyLs) },
             { "enemyM", (enemyM, enemyMs) },
             { "enemyS", (enemyS, enemySs) },

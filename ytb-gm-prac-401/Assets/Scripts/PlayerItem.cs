@@ -12,6 +12,9 @@ public class PlayerItem : MonoBehaviour
 
     public ObjectManager objectManager;
 
+    public GameObject[] followers;
+
+
     private void Update()
     {
         boomCountText.text = boomCount.ToString();
@@ -83,8 +86,20 @@ public class PlayerItem : MonoBehaviour
     private void DoItemPower()
     {
         var cur = player.GetComponent<PlayerFiring>().curBullet;
-        if (cur.bulletCount >= 7) manager.score += 500;
-        else cur.bulletCount += 2;
+        if (cur.bulletCount >= 7)
+        {
+            manager.score += 500;
+            foreach (var follower in followers)
+                if (!follower.activeSelf)
+                {
+                    follower.SetActive(true);
+                    break;
+                }
+        }
+        else
+        {
+            cur.bulletCount += 2;
+        }
     }
 
     private void DoItemLife()

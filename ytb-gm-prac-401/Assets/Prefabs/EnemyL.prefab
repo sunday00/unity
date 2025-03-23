@@ -178,7 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
   speed: 1
-  initialHealth: 15
+  initialHealth: 20
   health: 15
   score: 20
   sprites:

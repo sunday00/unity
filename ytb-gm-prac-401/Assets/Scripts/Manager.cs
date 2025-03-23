@@ -32,6 +32,7 @@ public class Manager : MonoBehaviour
         Invoke("RespawnActFull", 3f);
         player.GetComponent<PlayerFiring>().curBullet.bulletCount = 1;
         player.GetComponent<PlayerFiring>().subBullet.bulletCount = 1;
+        foreach (var follower in player.GetComponent<PlayerItem>().followers) follower.SetActive(false);
     }
 
     private void RespawnActHalf()
