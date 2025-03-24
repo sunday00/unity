@@ -65,8 +65,8 @@ public class ObjectManager : MonoBehaviour
         itemBombs = new GameObject[20];
         itemLifes = new GameObject[20];
 
-        bossBulletAs = new GameObject[100];
-        bossBulletBs = new GameObject[100];
+        bossBulletAs = new GameObject[200];
+        bossBulletBs = new GameObject[200];
 
         objectLists = new Dictionary<string, (GameObject, GameObject[])>
         {
@@ -121,6 +121,6 @@ public class ObjectManager : MonoBehaviour
 
     public GameObject[][] GetEnemiesObjects()
     {
-        return new[] { enemyLs, enemyMs, enemySs, bosses, enemyBulletAs, enemyBulletBs };
+        return new[] { enemyLs, enemyMs, enemySs, bosses, enemyBulletAs, enemyBulletBs, bossBulletAs, enemyBulletBs };
     }
 }

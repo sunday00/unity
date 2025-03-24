@@ -62,7 +62,11 @@ public class EnemySpawn : MonoBehaviour
         var spawn = _spawns[_spawnIndex];
         var enemyPoint = enemySpwanPoints[spawn.point];
 
-        if (spawn.type.Equals("E")) return;
+        if (spawn.type.Equals("E"))
+        {
+            _spawnIndex++;
+            return;
+        }
 
         var enemyObj = _manager.objectManager.MakeObject("enemy" + spawn.type);
 

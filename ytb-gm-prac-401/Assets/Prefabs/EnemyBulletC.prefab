@@ -169,3 +169,4 @@ MonoBehaviour:
   bulletSpeed: 0.3
   bulletCount: 3
   dmg: 3
+  isRotate: 0
