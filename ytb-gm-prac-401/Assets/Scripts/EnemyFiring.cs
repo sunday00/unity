@@ -37,12 +37,6 @@ public class EnemyFiring : MonoBehaviour
 
     private void SpawnBullets(string bulletName, Vector3 offsetModifier)
     {
-        // var bullet = Instantiate(
-        //     bulletType,
-        //     transform.position + offsetModifier,
-        //     Quaternion.identity
-        // );
-
         var bullet = objectManager.MakeObject(bulletName);
         bullet.transform.position = transform.position + offsetModifier;
         bullet.transform.rotation = Quaternion.identity;

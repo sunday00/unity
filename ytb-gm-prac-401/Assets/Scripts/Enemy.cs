@@ -10,12 +10,6 @@ public class Enemy : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
-
-    private void Update()
-    {
-        if (transform.position.y <= 3f) _rb.linearVelocity = Vector2.zero;
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.name == "BulletBorder") gameObject.SetActive(false);

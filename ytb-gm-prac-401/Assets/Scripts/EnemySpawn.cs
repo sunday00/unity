@@ -61,6 +61,9 @@ public class EnemySpawn : MonoBehaviour
         _curEnemySpawnDelay = 0;
         var spawn = _spawns[_spawnIndex];
         var enemyPoint = enemySpwanPoints[spawn.point];
+
+        if (spawn.type.Equals("E")) return;
+
         var enemyObj = _manager.objectManager.MakeObject("enemy" + spawn.type);
 
         if (enemyObj.IsUnityNull()) return;
@@ -81,7 +84,6 @@ public class EnemySpawn : MonoBehaviour
             enemyObj.GetComponent<Enemy>().GetComponent<EnemyFiring>().player = _player;
             enemyObj.GetComponent<Enemy>().GetComponent<EnemyFiring>().objectManager = _manager.objectManager;
         }
-
 
         _spawnIndex++;
         if (_spawns.Count > _spawnIndex) _nextEnemySpawnDelay = _spawns[_spawnIndex].delay;
