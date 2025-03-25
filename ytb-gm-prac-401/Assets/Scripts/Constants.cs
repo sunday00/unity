@@ -1,6 +1,5 @@
-using UnityEngine;
-
-public class Constants : MonoBehaviour
+public static class Constants
 {
-    public string playerAniInputH = "inputH";
+    public static string PlayerAniInputH = "inputH";
+    public static string EffectExplosionTrigger = "OnExplosion";
 }

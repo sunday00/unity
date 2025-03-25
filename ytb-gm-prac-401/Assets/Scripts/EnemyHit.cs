@@ -6,6 +6,7 @@ public class EnemyHit : MonoBehaviour
 
     public int health;
     public int initialHealth;
+    public float hitSize;
 
     public Sprite[] sprites;
 
@@ -60,6 +61,7 @@ public class EnemyHit : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+        manager.CallExplosion(transform.position, hitSize);
         manager.score += score;
     }
 }

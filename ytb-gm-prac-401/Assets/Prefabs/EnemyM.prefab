@@ -218,6 +218,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   health: 5
   initialHealth: 5
+  hitSize: 1
   sprites:
   - {fileID: -1147401495359466748, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
   - {fileID: -7844560889915226194, guid: 138040323294fd440a3a823e5d70ad01, type: 3}

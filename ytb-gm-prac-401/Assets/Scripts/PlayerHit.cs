@@ -15,6 +15,8 @@ public class PlayerHit : MonoBehaviour
                 isHit = true;
 
                 UpdateLifeIcon(-1);
+                manager.CallExplosion(transform.position, 1f);
+
                 manager.RespawnPlayer();
             }
             else

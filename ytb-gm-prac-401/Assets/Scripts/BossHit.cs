@@ -6,6 +6,7 @@ public class BossHit : MonoBehaviour
 
     public int health;
     public int initialHealth;
+    public float hitSize;
 
     public int score;
 
@@ -58,7 +59,9 @@ public class BossHit : MonoBehaviour
             item.transform.rotation = Quaternion.identity;
         }
 
+
         gameObject.SetActive(false);
+        manager.CallExplosion(transform.position, 3f);
         manager.score += score;
     }
 }

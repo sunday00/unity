@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Constants constants;
-
     public float s;
 
     private Animator _animator;
@@ -65,7 +63,7 @@ public class Player : MonoBehaviour
         _h = Input.GetAxisRaw("Horizontal");
         _v = Input.GetAxisRaw("Vertical");
 
-        _animator.SetInteger(constants.playerAniInputH, (int)_h);
+        _animator.SetInteger(Constants.PlayerAniInputH, (int)_h);
 
         if ((_v > 0 && _blockedPos["Top"]) || (_v < 0 && _blockedPos["Bottom"])) _v = 0;
         if ((_h < 0 && _blockedPos["Left"]) || (_h > 0 && _blockedPos["Right"])) _h = 0;

@@ -26,6 +26,12 @@ public class Manager : MonoBehaviour
         scoreText.text = string.Format("{0:n0}", score);
     }
 
+    public void CallExplosion(Vector3 position, float size)
+    {
+        var exp = objectManager.MakeObject("explosion");
+        exp.GetComponent<Explosion>().StartExplosion(position, size);
+    }
+
     public void RespawnPlayer()
     {
         Invoke("RespawnActHalf", 1.5f);

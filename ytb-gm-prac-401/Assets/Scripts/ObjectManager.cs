@@ -24,6 +24,8 @@ public class ObjectManager : MonoBehaviour
     public GameObject bossBulletA;
     public GameObject bossBulletB;
 
+    public GameObject explosion;
+
     private GameObject[] bossBulletAs;
     private GameObject[] bossBulletBs;
     private GameObject[] bosses;
@@ -35,6 +37,8 @@ public class ObjectManager : MonoBehaviour
     private GameObject[] enemyLs;
     private GameObject[] enemyMs;
     private GameObject[] enemySs;
+
+    private GameObject[] explosions;
     private GameObject[] followerBulletAs;
 
     private GameObject[] itemBombs;
@@ -68,6 +72,8 @@ public class ObjectManager : MonoBehaviour
         bossBulletAs = new GameObject[200];
         bossBulletBs = new GameObject[200];
 
+        explosions = new GameObject[200];
+
         objectLists = new Dictionary<string, (GameObject, GameObject[])>
         {
             { "enemyBulletA", (enemyBulletA, enemyBulletAs) },
@@ -84,7 +90,8 @@ public class ObjectManager : MonoBehaviour
             { "itemBomb", (itemBomb, itemBombs) },
             { "itemLife", (itemLife, itemLifes) },
             { "bossBulletA", (bossBulletA, bossBulletAs) },
-            { "bossBulletB", (bossBulletB, bossBulletBs) }
+            { "bossBulletB", (bossBulletB, bossBulletBs) },
+            { "explosion", (explosion, explosions) }
         };
 
         Generate();
