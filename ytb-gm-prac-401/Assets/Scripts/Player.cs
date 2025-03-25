@@ -29,10 +29,6 @@ public class Player : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Start()
-    {
-    }
-
     private void Update()
     {
         Move();
@@ -40,6 +36,12 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+    }
+
+    private void OnEnable()
+    {
+        _spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        Invoke("SetEnableFull", 1.5f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -50,6 +52,12 @@ public class Player : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag.Equals("Border")) AwayFromBorder(other);
+    }
+
+    private void SetEnableFull()
+    {
+        _spriteRenderer.color = new Color(1, 1, 1, 1);
+        GetComponent<PlayerHit>().isHit = false;
     }
 
     private void Move()
@@ -78,10 +86,5 @@ public class Player : MonoBehaviour
     private void AwayFromBorder(Collider2D other)
     {
         _blockedPos[other.gameObject.name] = false;
-    }
-
-    public void SetSpriteOpacity(float opacity)
-    {
-        _spriteRenderer.color = new Color(1, 1, 1, opacity);
     }
 }
