@@ -14,7 +14,7 @@ public class BossFiring : MonoBehaviour
         {
             _start = true;
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-            Invoke("FireAround", 2f);
+            Invoke("FireForward", 2f);
         }
     }
 
