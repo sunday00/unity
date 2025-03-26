@@ -48,10 +48,22 @@ public class PlayerFiring : MonoBehaviour
 
             // var bulletSide = Instantiate(curBullet, transform.position, Quaternion.Euler(0, 0, (float)(30 * -i)));
             var bulletSide = objectManager.MakeObject(curBullet.name);
-            bulletSide.transform.position = transform.position;
-            bulletSide.transform.rotation = Quaternion.Euler(0, 0, (float)(30 * -i));
-            bulletSide.GetComponent<Rigidbody2D>()
-                .AddForce(new Vector2((float)i * 0.5f, 1).normalized * 10, ForceMode2D.Impulse);
+
+            if (curBullet.name.Equals("PlayerBulletA"))
+            {
+                bulletSide.transform.position =
+                    new Vector2(transform.position.x + (float)(i * 0.2f), transform.position.y);
+                bulletSide.transform.rotation = Quaternion.identity;
+                bulletSide.GetComponent<Rigidbody2D>()
+                    .AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+            }
+            else
+            {
+                bulletSide.transform.position = transform.position;
+                bulletSide.transform.rotation = Quaternion.Euler(0, 0, (float)(30 * -i));
+                bulletSide.GetComponent<Rigidbody2D>()
+                    .AddForce(new Vector2((float)i * 0.5f, 1).normalized * 10, ForceMode2D.Impulse);
+            }
         }
 
         curFireRate = 0;
