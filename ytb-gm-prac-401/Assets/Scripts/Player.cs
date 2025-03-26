@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     private Dictionary<string, bool> _blockedPos;
 
     private float _h;
+
+    private bool _isJoyPoint;
+    private Vector2 _joyVector;
     private SpriteRenderer _spriteRenderer;
     private float _v;
 
@@ -60,8 +63,8 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        _h = Input.GetAxisRaw("Horizontal");
-        _v = Input.GetAxisRaw("Vertical");
+        _h = Input.GetAxisRaw("Horizontal") + (_isJoyPoint ? _joyVector.x : 0);
+        _v = Input.GetAxisRaw("Vertical") + (_isJoyPoint ? _joyVector.y : 0);
 
         _animator.SetInteger(Constants.PlayerAniInputH, (int)_h);
 
@@ -74,6 +77,24 @@ public class Player : MonoBehaviour
         var targetPos = new Vector3(_h * velocity, _v * velocity, 0);
 
         transform.position = currentPos + targetPos;
+    }
+
+    public void JoyPanel(string type)
+    {
+        var h = 0f;
+        var v = 0f;
+
+        if (type.Contains("u")) v = 1f;
+        if (type.Contains("b")) v = -1f;
+        if (type.Contains("l")) h = -1f;
+        if (type.Contains("r")) h = 1f;
+
+        _joyVector = new Vector2(h, v);
+    }
+
+    public void JoyActive(bool active)
+    {
+        _isJoyPoint = active;
     }
 
     private void BlockByBorder(Collider2D other)

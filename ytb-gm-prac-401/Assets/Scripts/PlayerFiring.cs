@@ -11,6 +11,8 @@ public class PlayerFiring : MonoBehaviour
 
     public ObjectManager objectManager;
 
+    private bool _setFromUI;
+
     private PlayerItem pItem;
 
     private void Awake()
@@ -28,7 +30,7 @@ public class PlayerFiring : MonoBehaviour
 
     private void Fire()
     {
-        if (!Input.GetButton("Fire1")) return;
+        if (!Input.GetButton("Fire1") && !_setFromUI) return;
         if (curFireRate < maxFireRate) return;
 
         // center fire
@@ -55,7 +57,12 @@ public class PlayerFiring : MonoBehaviour
         curFireRate = 0;
     }
 
-    private void SwitchWeapon()
+    public void SetFromUI(bool active)
+    {
+        _setFromUI = active;
+    }
+
+    public void SwitchWeapon()
     {
         var _ = curBullet;
         curBullet = subBullet;
