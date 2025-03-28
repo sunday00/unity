@@ -6,6 +6,8 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
     public GameObject[] enemySpwanPoints;
+
+    public int _stage;
     private float _curEnemySpawnDelay;
 
     private Manager _manager;
@@ -20,8 +22,7 @@ public class EnemySpawn : MonoBehaviour
         _manager = GetComponent<Manager>();
         _player = _manager.player;
         _spawns = new List<Spawn>();
-
-        ReadSpawnFile();
+        StageStart();
     }
 
     private void Update()
@@ -30,10 +31,20 @@ public class EnemySpawn : MonoBehaviour
         if (_curEnemySpawnDelay >= _nextEnemySpawnDelay && _spawns.Count > _spawnIndex) SpawnEnemy();
     }
 
+    public void StageStart()
+    {
+        ReadSpawnFile();
+    }
+
+    public void EndStage()
+    {
+        _spawnIndex++;
+    }
+
     private void ReadSpawnFile()
     {
         _spawns.Clear();
-        var textAsset = Resources.Load<TextAsset>("Stage0");
+        var textAsset = Resources.Load<TextAsset>("Stage" + _stage);
         var reader = new StringReader(textAsset.text);
 
         while (!reader.IsUnityNull())
