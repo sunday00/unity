@@ -10,6 +10,8 @@ public class BossHit : MonoBehaviour
 
     public int score;
 
+    public bool isBoss;
+
     private Animator _animator;
     private string[] _items;
 
@@ -63,5 +65,9 @@ public class BossHit : MonoBehaviour
         gameObject.SetActive(false);
         manager.CallExplosion(transform.position, 3f);
         manager.score += score;
+        GetComponent<BossFiring>()._start = false;
+
+        var spawner = manager.GetComponent<EnemySpawn>();
+        if (isBoss) spawner.EndStage();
     }
 }

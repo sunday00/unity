@@ -6,7 +6,7 @@ public class BossFiring : MonoBehaviour
     public ObjectManager objectManager;
 
     private int _shotCount;
-    private bool _start;
+    public bool _start;
 
     private void Update()
     {

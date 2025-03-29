@@ -7,7 +7,12 @@ public class EnemySpawn : MonoBehaviour
 {
     public GameObject[] enemySpwanPoints;
 
+    public Animator sAnimator;
+    public Animator eAnimator;
+    public Animator fAnimator;
+
     public int _stage;
+
     private float _curEnemySpawnDelay;
 
     private Manager _manager;
@@ -33,12 +38,28 @@ public class EnemySpawn : MonoBehaviour
 
     public void StageStart()
     {
+        sAnimator.SetTrigger("On");
         ReadSpawnFile();
+
+        fAnimator.SetTrigger("In");
     }
 
     public void EndStage()
     {
-        _spawnIndex++;
+        eAnimator.SetTrigger("On");
+        _stage++;
+
+        if (_stage > 2)
+        {
+            _manager.gameOverPanel.SetActive(true);
+            return;
+        }
+
+        _player.transform.position = new Vector3(0, -3f, 0);
+
+        fAnimator.SetTrigger("Out");
+
+        Invoke("StageStart", 2);
     }
 
     private void ReadSpawnFile()
@@ -56,6 +77,9 @@ public class EnemySpawn : MonoBehaviour
             var properties = line.Split(',');
             var spawn = new Spawn();
             spawn.delay = float.Parse(properties[0]);
+
+            if (spawn.delay.Equals(-99)) spawn.isStageBoss = true;
+
             spawn.type = properties[1];
             spawn.point = int.Parse(properties[2]);
 
@@ -88,6 +112,7 @@ public class EnemySpawn : MonoBehaviour
         if (spawn.type.Equals("B"))
         {
             enemyObj.GetComponent<BossHit>().manager = _manager;
+            enemyObj.GetComponent<BossHit>().isBoss = spawn.isStageBoss;
             enemyObj.GetComponent<Enemy>().SetBossVelocity();
             enemyObj.GetComponent<Enemy>().GetComponent<BossFiring>().player = _player;
             enemyObj.GetComponent<Enemy>().GetComponent<BossFiring>().objectManager = _manager.objectManager;
@@ -95,6 +120,7 @@ public class EnemySpawn : MonoBehaviour
         else
         {
             enemyObj.GetComponent<EnemyHit>().manager = _manager;
+            enemyObj.GetComponent<EnemyHit>().isBoss = spawn.isStageBoss;
             enemyObj.GetComponent<Enemy>().SetVelocity(enemyPoint.name);
             enemyObj.GetComponent<Enemy>().GetComponent<EnemyFiring>().player = _player;
             enemyObj.GetComponent<Enemy>().GetComponent<EnemyFiring>().objectManager = _manager.objectManager;

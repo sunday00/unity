@@ -11,6 +11,8 @@ public class EnemyHit : MonoBehaviour
     public Sprite[] sprites;
 
     public int score;
+
+    public bool isBoss;
     private string[] _items;
     private SpriteRenderer _sr;
 
@@ -63,5 +65,8 @@ public class EnemyHit : MonoBehaviour
         gameObject.SetActive(false);
         manager.CallExplosion(transform.position, hitSize);
         manager.score += score;
+
+        var spawner = manager.GetComponent<EnemySpawn>();
+        if (isBoss) spawner.EndStage();
     }
 }

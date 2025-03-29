@@ -237,8 +237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
-  health: 1000
-  initialHealth: 1000
+  health: 500
+  initialHealth: 500
   hitSize: 3
   score: 1000
 --- !u!114 &1404315602570089504
