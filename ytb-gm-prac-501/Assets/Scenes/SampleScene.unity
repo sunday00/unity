@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTarget: {fileID: 1473004720}
-  moveOffset: {x: 0, y: 21, z: -11}
+  moveOffset: {x: 0, y: 25, z: -13}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
