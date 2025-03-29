@@ -4,18 +4,36 @@ namespace Ducks.Player
 {
     public class PlayerMove : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        public float speed;
+
+        private Animator _animator;
+        private float _axisDh;
+        private float _axisDv;
+        private Vector3 _axisMove;
+
+        private void Awake()
         {
-        
+            _animator = GetComponentInChildren<Animator>();
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Start()
         {
-        
+        }
+
+        private void Update()
+        {
+            _axisDh = Input.GetAxisRaw("Horizontal");
+            _axisDv = Input.GetAxisRaw("Vertical");
+            var isRun = Input.GetButton("Run");
+
+            _axisMove = new Vector3(_axisDh, 0, _axisDv).normalized;
+
+            transform.position += _axisMove * speed * (isRun ? 1 : 0.5f) * Time.deltaTime;
+
+            _animator.SetBool("IsWalk", !_axisMove.Equals(Vector3.zero));
+            _animator.SetBool("IsRun", isRun);
+
+            transform.LookAt(transform.position + _axisMove);
         }
     }
-
 }
-
