@@ -13,6 +13,7 @@ namespace Ducks.Player
 
         private Rigidbody _compRigidbody;
 
+        private bool _stateIsDodging;
         private bool _stateIsJumping;
 
         private void Awake()
@@ -27,6 +28,7 @@ namespace Ducks.Player
             Move(isRun);
             Turn();
             Jump(isJump);
+            Dodge(isJump);
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -34,14 +36,17 @@ namespace Ducks.Player
             if (collision.gameObject.tag.Equals("Floor"))
             {
                 _stateIsJumping = false;
-                _animator.SetBool("IsJump", false);
+                _animator.SetBool(Constants.isJump, false);
             }
         }
 
         private bool[] GetInput()
         {
-            _axisDh = Input.GetAxisRaw("Horizontal");
-            _axisDv = Input.GetAxisRaw("Vertical");
+            if (!_stateIsDodging)
+            {
+                _axisDh = Input.GetAxisRaw("Horizontal");
+                _axisDv = Input.GetAxisRaw("Vertical");
+            }
 
             return new[]
             {
@@ -67,14 +72,40 @@ namespace Ducks.Player
 
         private void Jump(bool isJump)
         {
+            if (!_axisMove.Equals(Vector3.zero)) return;
+
+            if (_stateIsDodging) return;
+
             if (isJump && !_stateIsJumping)
             {
                 _stateIsJumping = true;
                 _compRigidbody.AddForce(Vector3.up * 20, ForceMode.Impulse);
 
-                _animator.SetBool("IsJump", true);
-                _animator.SetTrigger("DoJump");
+                _animator.SetBool(Constants.isJump, true);
+                _animator.SetTrigger(Constants.doJump);
             }
+        }
+
+        private void Dodge(bool isJump)
+        {
+            if (_axisMove.Equals(Vector3.zero)) return;
+
+            if (_stateIsDodging) return;
+
+            if (isJump && !_stateIsJumping)
+            {
+                _stateIsDodging = true;
+                speed *= 2;
+                _animator.SetBool(Constants.doDodge, true);
+
+                Invoke("DodgeFin", 0.5f);
+            }
+        }
+
+        private void DodgeFin()
+        {
+            speed /= 2;
+            _stateIsDodging = false;
         }
     }
 }
