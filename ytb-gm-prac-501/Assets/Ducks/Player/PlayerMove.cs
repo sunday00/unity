@@ -16,6 +16,8 @@ namespace Ducks.Player
         private bool _stateIsDodging;
         private bool _stateIsJumping;
 
+        public bool IsActing => _stateIsDodging || _stateIsJumping;
+
         private void Awake()
         {
             _animator = GetComponentInChildren<Animator>();
