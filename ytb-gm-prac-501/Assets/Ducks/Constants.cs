@@ -1,11 +1,20 @@
 namespace Ducks
 {
-    public class Constants
+    public static class Constants
     {
-        public static string isWalk = "IsWalk";
-        public static string isRun = "IsRun";
-        public static string isJump = "IsJump";
-        public static string doJump = "DoJump";
-        public static string doDodge = "DoDodge";
+        public enum Type
+        {
+            Ammo,
+            Coin,
+            Grenade,
+            Heart,
+            Weapon
+        }
+
+        public static readonly string IsWalk = "IsWalk";
+        public static readonly string IsRun = "IsRun";
+        public static readonly string IsJump = "IsJump";
+        public static readonly string DoJump = "DoJump";
+        public static readonly string DoDodge = "DoDodge";
     }
 }

@@ -36,7 +36,7 @@ namespace Ducks.Player
             if (collision.gameObject.tag.Equals("Floor"))
             {
                 _stateIsJumping = false;
-                _animator.SetBool(Constants.isJump, false);
+                _animator.SetBool(Constants.IsJump, false);
             }
         }
 
@@ -61,8 +61,8 @@ namespace Ducks.Player
 
             transform.position += _axisMove * speed * (isRun ? 1 : 0.5f) * Time.deltaTime;
 
-            _animator.SetBool(Constants.isWalk, !_axisMove.Equals(Vector3.zero));
-            _animator.SetBool(Constants.isRun, isRun);
+            _animator.SetBool(Constants.IsWalk, !_axisMove.Equals(Vector3.zero));
+            _animator.SetBool(Constants.IsRun, isRun);
         }
 
         private void Turn()
@@ -81,8 +81,8 @@ namespace Ducks.Player
                 _stateIsJumping = true;
                 _compRigidbody.AddForce(Vector3.up * 20, ForceMode.Impulse);
 
-                _animator.SetBool(Constants.isJump, true);
-                _animator.SetTrigger(Constants.doJump);
+                _animator.SetBool(Constants.IsJump, true);
+                _animator.SetTrigger(Constants.DoJump);
             }
         }
 
@@ -96,7 +96,7 @@ namespace Ducks.Player
             {
                 _stateIsDodging = true;
                 speed *= 2;
-                _animator.SetBool(Constants.doDodge, true);
+                _animator.SetBool(Constants.DoDodge, true);
 
                 Invoke("DodgeFin", 0.5f);
             }
