@@ -42,9 +42,12 @@ namespace Ducks.Player
         {
             if (idx.Equals(0) || idx > equippables.Count - 1) return;
 
+            var candidate = equippables[idx];
+            if (!Inventory.ContainsKey(equippables[idx].name) || Inventory[equippables[idx].name] <= 0) return;
+
             foreach (var equip in equippables) equip.SetActive(false);
 
-            equipped = equippables[idx];
+            equipped = candidate;
             equippables[idx].SetActive(true);
         }
 
