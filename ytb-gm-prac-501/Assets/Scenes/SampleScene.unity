@@ -298,7 +298,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1348174882345252545, guid: c2ec4bfd1a6491c49a0c34b8dc3a7639, type: 3}
       propertyPath: m_Name
-      value: WeaponHammerEquip
+      value: WeaponHammer
       objectReference: {fileID: 0}
     - target: {fileID: 1348174882345252545, guid: c2ec4bfd1a6491c49a0c34b8dc3a7639, type: 3}
       propertyPath: m_IsActive
@@ -886,7 +886,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1509416925549156319, guid: a2e051660762cbe4494c17a095a95e10, type: 3}
       propertyPath: m_Name
-      value: WeaponHandGunEquip
+      value: WeaponHandgun
       objectReference: {fileID: 0}
     - target: {fileID: 1509416925549156319, guid: a2e051660762cbe4494c17a095a95e10, type: 3}
       propertyPath: m_IsActive
@@ -1765,6 +1765,7 @@ MonoBehaviour:
   - {fileID: 1885138422}
   - {fileID: 265986627}
   - {fileID: 714629646}
+  equipped: {fileID: 0}
 --- !u!114 &1473004722
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ namespace Ducks.Player
     public class PlayerItem : MonoBehaviour
     {
         public List<GameObject> equippables;
+        public GameObject equipped;
         private GameObject _nearObject;
         private PlayerManager _playerManager;
 
@@ -43,6 +44,7 @@ namespace Ducks.Player
 
             foreach (var equip in equippables) equip.SetActive(false);
 
+            equipped = equippables[idx];
             equippables[idx].SetActive(true);
         }
 
