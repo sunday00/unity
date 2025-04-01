@@ -8,6 +8,7 @@ namespace Ducks.Player
     {
         public List<GameObject> equippables;
         public GameObject equipped;
+        private Animator _animator;
         private GameObject _nearObject;
         private PlayerManager _playerManager;
 
@@ -15,6 +16,7 @@ namespace Ducks.Player
 
         private void Awake()
         {
+            _animator = GetComponentInChildren<Animator>();
             _playerManager = gameObject.GetComponent<PlayerManager>();
             Inventory = new Dictionary<string, int>();
         }
@@ -43,11 +45,16 @@ namespace Ducks.Player
             if (idx.Equals(0) || idx > equippables.Count - 1) return;
 
             var candidate = equippables[idx];
+            if (!equipped.IsUnityNull() && equipped.name.Equals(candidate.name)) return;
+
             if (!Inventory.ContainsKey(equippables[idx].name) || Inventory[equippables[idx].name] <= 0) return;
 
             foreach (var equip in equippables) equip.SetActive(false);
 
+            _playerManager.PlayerMove.BlinkEquipState();
+
             equipped = candidate;
+            _animator.SetTrigger(Constants.DoEquip);
             equippables[idx].SetActive(true);
         }
 

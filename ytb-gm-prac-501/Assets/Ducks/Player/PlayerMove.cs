@@ -15,9 +15,10 @@ namespace Ducks.Player
         private PlayerManager _playerManager;
 
         private bool _stateIsDodging;
+        private bool _stateIsEquipping;
         private bool _stateIsJumping;
 
-        public bool IsActing => _stateIsDodging || _stateIsJumping;
+        public bool IsActing => _stateIsDodging || _stateIsJumping || _stateIsEquipping;
 
         private void Awake()
         {
@@ -48,7 +49,7 @@ namespace Ducks.Player
 
         private bool[] GetInput()
         {
-            if (!_stateIsDodging)
+            if (!_stateIsDodging && !_stateIsEquipping)
             {
                 _axisDh = Input.GetAxisRaw("Horizontal");
                 _axisDv = Input.GetAxisRaw("Vertical");
@@ -80,9 +81,9 @@ namespace Ducks.Player
         {
             if (!_axisMove.Equals(Vector3.zero)) return;
 
-            if (_stateIsDodging) return;
+            if (IsActing) return;
 
-            if (isJump && !_stateIsJumping)
+            if (isJump)
             {
                 _stateIsJumping = true;
                 _compRigidbody.AddForce(Vector3.up * 20, ForceMode.Impulse);
@@ -96,9 +97,9 @@ namespace Ducks.Player
         {
             if (_axisMove.Equals(Vector3.zero)) return;
 
-            if (_stateIsDodging) return;
+            if (IsActing) return;
 
-            if (isJump && !_stateIsJumping)
+            if (isJump)
             {
                 _stateIsDodging = true;
                 speed *= 2;
@@ -112,6 +113,12 @@ namespace Ducks.Player
         {
             speed /= 2;
             _stateIsDodging = false;
+        }
+
+        public void BlinkEquipState()
+        {
+            _stateIsEquipping = !_stateIsEquipping;
+            Invoke("BlinkEquipState", 0.4f);
         }
     }
 }
