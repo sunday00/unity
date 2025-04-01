@@ -6,21 +6,25 @@ namespace Ducks.Player
 {
     public class PlayerItem : MonoBehaviour
     {
-        private Dictionary<string, int> _inventory;
+        public List<GameObject> equippables;
         private GameObject _nearObject;
         private PlayerManager _playerManager;
+
+        public Dictionary<string, int> Inventory { get; private set; }
 
         private void Awake()
         {
             _playerManager = gameObject.GetComponent<PlayerManager>();
-            _inventory = new Dictionary<string, int>();
+            Inventory = new Dictionary<string, int>();
         }
 
         private void Update()
         {
             Interact(Input.GetButtonDown("Interact"));
 
-            // foreach (var item in _inventory) print(item.Key + ":" + item.Value);
+            var equip = GetEquipInput();
+
+            Equip(equip);
         }
 
         private void OnTriggerExit(Collider other)
@@ -33,6 +37,24 @@ namespace Ducks.Player
             if (other.CompareTag("Weapon")) _nearObject = other.gameObject;
         }
 
+        private void Equip(int idx)
+        {
+            if (idx.Equals(0) || idx > equippables.Count - 1) return;
+
+            foreach (var equip in equippables) equip.SetActive(false);
+
+            equippables[idx].SetActive(true);
+        }
+
+        private int GetEquipInput()
+        {
+            for (var i = 0; i <= 9; i++)
+                if (Input.GetButtonDown("Equip" + i))
+                    return i;
+
+            return 0;
+        }
+
 
         private void Interact(bool interact)
         {
@@ -42,10 +64,10 @@ namespace Ducks.Player
             {
                 if (_nearObject.CompareTag("Weapon"))
                 {
-                    if (_inventory.ContainsKey(_nearObject.name) && _inventory[_nearObject.name] > 0)
-                        _inventory[_nearObject.name] += 1;
+                    if (Inventory.ContainsKey(_nearObject.name) && Inventory[_nearObject.name] > 0)
+                        Inventory[_nearObject.name] += 1;
                     else
-                        _inventory.Add(_nearObject.name, 1);
+                        Inventory.Add(_nearObject.name, 1);
                 }
 
                 Destroy(_nearObject);

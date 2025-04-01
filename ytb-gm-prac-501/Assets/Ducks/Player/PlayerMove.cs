@@ -12,6 +12,7 @@ namespace Ducks.Player
         private Vector3 _axisMove;
 
         private Rigidbody _compRigidbody;
+        private PlayerManager _playerManager;
 
         private bool _stateIsDodging;
         private bool _stateIsJumping;
@@ -20,6 +21,7 @@ namespace Ducks.Player
 
         private void Awake()
         {
+            _playerManager = gameObject.GetComponent<PlayerManager>();
             _animator = GetComponentInChildren<Animator>();
             _compRigidbody = GetComponent<Rigidbody>();
         }
@@ -31,6 +33,8 @@ namespace Ducks.Player
             Turn();
             Jump(isJump);
             Dodge(isJump);
+
+            // foreach (var item in _playerManager.PlayerItem.Inventory) print(item.Key + ":" + item.Value);
         }
 
         private void OnCollisionEnter(Collision collision)
