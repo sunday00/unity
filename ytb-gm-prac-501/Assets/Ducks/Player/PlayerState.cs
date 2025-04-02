@@ -15,6 +15,8 @@ namespace Ducks.Player
         public int maxCoin;
         public int maxGrenades;
 
+        public GameObject[] equippedGrenades;
+
         private PlayerManager _playerManager;
 
         private void Awake()
@@ -36,7 +38,7 @@ namespace Ducks.Player
                         curCoin = curCoin + item.value >= maxCoin ? maxCoin : curCoin + item.value;
                         break;
                     case Constants.Type.Grenade:
-                        curGrenades = curGrenades + item.value >= maxGrenades ? maxGrenades : curGrenades + item.value;
+                        GettingGrenade(item);
                         break;
                     case Constants.Type.Heart:
                         curHealth = curHealth + item.value >= maxHealth ? maxHealth : curHealth + item.value;
@@ -45,6 +47,12 @@ namespace Ducks.Player
 
                 Destroy(other.gameObject);
             }
+        }
+
+        private void GettingGrenade(ItemReact item)
+        {
+            curGrenades = curGrenades + item.value >= maxGrenades ? maxGrenades : curGrenades + item.value;
+            equippedGrenades[curGrenades - 1].gameObject.SetActive(true);
         }
     }
 }
