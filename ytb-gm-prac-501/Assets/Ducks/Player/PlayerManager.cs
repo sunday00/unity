@@ -6,11 +6,13 @@ namespace Ducks.Player
     {
         public PlayerItem PlayerItem;
         public PlayerMove PlayerMove;
+        public PlayerState PlayerState;
 
         public void Awake()
         {
             PlayerItem = GetComponent<PlayerItem>();
             PlayerMove = GetComponent<PlayerMove>();
+            PlayerState = GetComponent<PlayerState>();
         }
     }
 }
