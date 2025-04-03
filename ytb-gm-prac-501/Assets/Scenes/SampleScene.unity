@@ -384,7 +384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1348174882345252545, guid: c2ec4bfd1a6491c49a0c34b8dc3a7639, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1348174882345252545, guid: c2ec4bfd1a6491c49a0c34b8dc3a7639, type: 3}
       propertyPath: m_TagString
@@ -504,6 +504,7 @@ MonoBehaviour:
   rate: 0.4
   meleeArea: {fileID: 265986628}
   trailEffect: {fileID: 1970249153}
+  playerManager: {fileID: 1473004722}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,6 +1294,7 @@ MonoBehaviour:
   rate: 0
   meleeArea: {fileID: 0}
   trailEffect: {fileID: 0}
+  playerManager: {fileID: 1473004722}
 --- !u!1 &762036727
 GameObject:
   m_ObjectHideFlags: 0
@@ -12267,6 +12269,7 @@ MonoBehaviour:
   PlayerItem: {fileID: 0}
   PlayerMove: {fileID: 0}
   PlayerState: {fileID: 0}
+  PlayerWeapon: {fileID: 0}
 --- !u!114 &1473004723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17761,6 +17764,7 @@ MonoBehaviour:
   rate: 0
   meleeArea: {fileID: 0}
   trailEffect: {fileID: 0}
+  playerManager: {fileID: 1473004722}
 --- !u!1001 &1942513444
 PrefabInstance:
   m_ObjectHideFlags: 0

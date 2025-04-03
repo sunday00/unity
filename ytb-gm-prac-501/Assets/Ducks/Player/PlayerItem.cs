@@ -54,6 +54,7 @@ namespace Ducks.Player
             _playerManager.PlayerMove.BlinkEquipState();
 
             equipped = candidate;
+
             _animator.SetTrigger(Constants.DoEquip);
             equippables[idx].SetActive(true);
         }

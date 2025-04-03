@@ -6,7 +6,6 @@ namespace Ducks.Player
     {
         public float speed;
 
-        private Animator _animator;
         private float _axisDh;
         private float _axisDv;
         private Vector3 _axisMove;
@@ -20,10 +19,12 @@ namespace Ducks.Player
 
         public bool IsActing => _stateIsDodging || _stateIsJumping || _stateIsEquipping;
 
+        public Animator GetAnimator { get; private set; }
+
         private void Awake()
         {
             _playerManager = gameObject.GetComponent<PlayerManager>();
-            _animator = GetComponentInChildren<Animator>();
+            GetAnimator = GetComponentInChildren<Animator>();
             _compRigidbody = GetComponent<Rigidbody>();
         }
 
@@ -43,7 +44,7 @@ namespace Ducks.Player
             if (collision.gameObject.tag.Equals("Floor"))
             {
                 _stateIsJumping = false;
-                _animator.SetBool(Constants.IsJump, false);
+                GetAnimator.SetBool(Constants.IsJump, false);
             }
         }
 
@@ -68,8 +69,8 @@ namespace Ducks.Player
 
             transform.position += _axisMove * speed * (isRun ? 1 : 0.5f) * Time.deltaTime;
 
-            _animator.SetBool(Constants.IsWalk, !_axisMove.Equals(Vector3.zero));
-            _animator.SetBool(Constants.IsRun, isRun);
+            GetAnimator.SetBool(Constants.IsWalk, !_axisMove.Equals(Vector3.zero));
+            GetAnimator.SetBool(Constants.IsRun, isRun);
         }
 
         private void Turn()
@@ -88,8 +89,8 @@ namespace Ducks.Player
                 _stateIsJumping = true;
                 _compRigidbody.AddForce(Vector3.up * 20, ForceMode.Impulse);
 
-                _animator.SetBool(Constants.IsJump, true);
-                _animator.SetTrigger(Constants.DoJump);
+                GetAnimator.SetBool(Constants.IsJump, true);
+                GetAnimator.SetTrigger(Constants.DoJump);
             }
         }
 
@@ -103,7 +104,7 @@ namespace Ducks.Player
             {
                 _stateIsDodging = true;
                 speed *= 2;
-                _animator.SetBool(Constants.DoDodge, true);
+                GetAnimator.SetBool(Constants.DoDodge, true);
 
                 Invoke("DodgeFin", 0.5f);
             }
