@@ -37,6 +37,8 @@ namespace Ducks.Player
                     StopCoroutine("Swing");
                     StartCoroutine("Swing");
                     break;
+                case Constants.WeaponType.Range:
+                    break;
             }
         }
 
