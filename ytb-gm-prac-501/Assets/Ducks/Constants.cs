@@ -2,13 +2,19 @@ namespace Ducks
 {
     public static class Constants
     {
-        public enum Type
+        public enum ItemType
         {
             Ammo,
             Coin,
             Grenade,
             Heart,
             Weapon
+        }
+
+        public enum WeaponType
+        {
+            Melee,
+            Range
         }
 
         public static readonly string IsWalk = "IsWalk";

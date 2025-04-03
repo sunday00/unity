@@ -4,7 +4,7 @@ namespace Ducks.Interactival.Items
 {
     public class ItemReact : MonoBehaviour
     {
-        public Constants.Type type;
+        public Constants.ItemType type;
 
         public int value;
 

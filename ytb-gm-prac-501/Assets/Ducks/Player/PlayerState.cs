@@ -31,16 +31,16 @@ namespace Ducks.Player
                 var item = other.GetComponent<ItemReact>();
                 switch (item.type)
                 {
-                    case Constants.Type.Ammo:
+                    case Constants.ItemType.Ammo:
                         curAmmo = curAmmo + item.value >= maxAmmo ? maxAmmo : curAmmo + item.value;
                         break;
-                    case Constants.Type.Coin:
+                    case Constants.ItemType.Coin:
                         curCoin = curCoin + item.value >= maxCoin ? maxCoin : curCoin + item.value;
                         break;
-                    case Constants.Type.Grenade:
+                    case Constants.ItemType.Grenade:
                         GettingGrenade(item);
                         break;
-                    case Constants.Type.Heart:
+                    case Constants.ItemType.Heart:
                         curHealth = curHealth + item.value >= maxHealth ? maxHealth : curHealth + item.value;
                         break;
                 }
