@@ -30,6 +30,11 @@ namespace Ducks.Player
             Equip(equip);
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            print(other.gameObject.name);
+        }
+
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Weapon")) _nearObject = null;
