@@ -38,6 +38,8 @@ namespace Ducks.Player
                     StartCoroutine("Swing");
                     break;
                 case Constants.WeaponType.Range:
+                    StopCoroutine("Shot");
+                    StartCoroutine("Shot");
                     break;
             }
         }
@@ -47,7 +49,24 @@ namespace Ducks.Player
             yield return new WaitForSeconds(0.1f);
             meleeArea.enabled = true;
             trailEffect.enabled = true;
-            _animator.SetTrigger("DoSwing");
+            _animator.SetTrigger(Constants.DoSwing);
+            _fireDelay = 0;
+
+            yield return new WaitForSeconds(0.3f);
+            meleeArea.enabled = false;
+
+            yield return new WaitForSeconds(0.3f);
+            trailEffect.enabled = false;
+
+            yield break;
+        }
+
+        private IEnumerator Shot()
+        {
+            yield return new WaitForSeconds(0.1f);
+            meleeArea.enabled = true;
+            trailEffect.enabled = true;
+            _animator.SetTrigger(Constants.DoShot);
             _fireDelay = 0;
 
             yield return new WaitForSeconds(0.3f);
