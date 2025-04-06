@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Ducks.Player
 {
@@ -16,15 +17,26 @@ namespace Ducks.Player
         public GameObject bulletCase;
         public Transform bulletCasePos;
 
+        public int ammoMax;
+        public int ammoCur;
+
         private Animator _animator;
+
 
         public void Awake()
         {
             _animator = playerManager.PlayerMove.GetAnimator;
         }
 
+        private void Update()
+        {
+            var isReload = Input.GetButton("Reload");
+            Reload(isReload);
+        }
+
         public void StartRoutine()
         {
+            ammoCur--;
             StopCoroutine("Action");
             StartCoroutine("Action");
         }
@@ -46,6 +58,17 @@ namespace Ducks.Player
             insBulletCaseRb.AddTorque(Vector3.up * 10, ForceMode.Impulse);
 
             yield break;
+        }
+
+        private void Reload(bool isReload)
+        {
+            if (!isReload) return;
+
+            if (playerManager.PlayerState.curAmmo <= 0) return;
+
+            if (playerManager.PlayerMove.IsActing) return;
+
+            _animator.SetTrigger(Constants.DoReload);
         }
     }
 }

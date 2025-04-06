@@ -25,5 +25,6 @@ namespace Ducks
         public static readonly string DoEquip = "DoEquip";
         public static readonly string DoSwing = "DoSwing";
         public static readonly string DoShot = "DoShot";
+        public static readonly string DoReload = "DoReload";
     }
 }
