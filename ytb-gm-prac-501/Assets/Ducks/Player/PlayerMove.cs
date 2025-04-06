@@ -5,6 +5,7 @@ namespace Ducks.Player
     public class PlayerMove : MonoBehaviour
     {
         public float speed;
+        public Camera MainCamera;
 
         private float _axisDh;
         private float _axisDv;
@@ -30,9 +31,9 @@ namespace Ducks.Player
 
         private void Update()
         {
-            var (isRun, isJump) = GetInput();
+            var (isRun, isJump, mouseDown) = GetInput();
             Move(isRun);
-            Turn();
+            Turn(mouseDown);
             Jump(isJump);
             Dodge(isJump);
 
@@ -59,7 +60,8 @@ namespace Ducks.Player
             return new[]
             {
                 Input.GetButton("Run"),
-                Input.GetButtonDown("Jump")
+                Input.GetButtonDown("Jump"),
+                Input.GetMouseButton(0)
             };
         }
 
@@ -73,9 +75,21 @@ namespace Ducks.Player
             GetAnimator.SetBool(Constants.IsRun, isRun);
         }
 
-        private void Turn()
+        private void Turn(bool isMouse)
         {
+            // Keyboard
             transform.LookAt(transform.position + _axisMove);
+
+            // mouse
+            if (!isMouse) return;
+            var ray = MainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                var nv = hit.point - transform.position;
+                nv.y = 0;
+                transform.LookAt(transform.position + nv);
+            }
         }
 
         private void Jump(bool isJump)
