@@ -1333,6 +1333,8 @@ MonoBehaviour:
   bulletPos: {fileID: 1134009832}
   bulletCase: {fileID: 3041809916423191504, guid: bb14a647a4c6747eab7e277e6a50cee9, type: 3}
   bulletCasePos: {fileID: 917258777}
+  ammoMax: 30
+  ammoCur: 30
 --- !u!1 &762036727
 GameObject:
   m_ObjectHideFlags: 0
@@ -12389,7 +12391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1519b755f660b47ab8f5953b6f2041ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curAmmo: 0
+  curAmmo: 30
   curHealth: 100
   curCoin: 0
   curGrenades: 0

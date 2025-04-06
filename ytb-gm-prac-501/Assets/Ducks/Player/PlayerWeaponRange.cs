@@ -36,6 +36,8 @@ namespace Ducks.Player
 
         public void StartRoutine()
         {
+            if (ammoCur <= 0) return;
+
             ammoCur--;
             StopCoroutine("Action");
             StartCoroutine("Action");
@@ -69,6 +71,10 @@ namespace Ducks.Player
             if (playerManager.PlayerMove.IsActing) return;
 
             _animator.SetTrigger(Constants.DoReload);
+
+            var reloadAmmo = playerManager.PlayerState.curAmmo < ammoMax ? playerManager.PlayerState.curAmmo : ammoMax;
+            ammoCur = reloadAmmo;
+            playerManager.PlayerState.curAmmo -= reloadAmmo;
         }
     }
 }
