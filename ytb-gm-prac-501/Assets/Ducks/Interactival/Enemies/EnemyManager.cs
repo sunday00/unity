@@ -35,11 +35,13 @@ namespace Ducks.Interactival.Enemies
                 default: return;
             }
 
-            StartCoroutine(OnDamageTaken());
+            var nuckBack = (transform.position - other.transform.position).normalized;
+
+            StartCoroutine(OnDamageTaken(nuckBack));
             curHealth -= damage;
         }
 
-        private IEnumerator OnDamageTaken()
+        private IEnumerator OnDamageTaken(Vector3 nuckBack)
         {
             var mat = GetComponent<MeshRenderer>().material;
             var originalColor = mat.color;
@@ -51,6 +53,8 @@ namespace Ducks.Interactival.Enemies
             if (curHealth > 0)
             {
                 mat.color = originalColor;
+                _rb.AddForce((nuckBack + Vector3.up) * 5f, ForceMode.Impulse);
+                // _rb.AddForce(nuckBack * 0.0000001f, ForceMode.Impulse);
             }
             else
             {
