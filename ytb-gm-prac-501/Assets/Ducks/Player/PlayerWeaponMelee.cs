@@ -31,7 +31,7 @@ namespace Ducks.Player
             trailEffect.enabled = true;
             _animator.SetTrigger(Constants.DoSwing);
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(1f);
             meleeArea.enabled = false;
 
             yield return new WaitForSeconds(0.3f);

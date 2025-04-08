@@ -5,13 +5,15 @@ namespace Ducks.Player
     public class PlayerMove : MonoBehaviour
     {
         public float speed;
-        public Camera MainCamera;
+        public Camera mainCamera;
 
         private float _axisDh;
         private float _axisDv;
         private Vector3 _axisMove;
 
         private Rigidbody _compRigidbody;
+
+        private bool _isTouchWall;
         private PlayerManager _playerManager;
 
         private bool _stateIsDodging;
@@ -40,6 +42,12 @@ namespace Ducks.Player
             // foreach (var item in _playerManager.PlayerItem.Inventory) print(item.Key + ":" + item.Value);
         }
 
+        private void FixedUpdate()
+        {
+            PreventAutoRotate();
+            PreventPassWall();
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.tag.Equals("Floor"))
@@ -47,6 +55,26 @@ namespace Ducks.Player
                 _stateIsJumping = false;
                 GetAnimator.SetBool(Constants.IsJump, false);
             }
+        }
+
+        private void PreventAutoRotate()
+        {
+            _compRigidbody.angularVelocity = Vector3.zero;
+        }
+
+        private void PreventPassWall()
+        {
+            _isTouchWall = Physics.Raycast(
+                transform.position,
+                transform.forward,
+                3,
+                LayerMask.GetMask("Wall")
+            ) || Physics.Raycast(
+                transform.position,
+                transform.forward * -1,
+                3,
+                LayerMask.GetMask("Wall")
+            );
         }
 
         private bool[] GetInput()
@@ -69,7 +97,8 @@ namespace Ducks.Player
         {
             _axisMove = new Vector3(_axisDh, 0, _axisDv).normalized;
 
-            transform.position += _axisMove * speed * (isRun ? 1 : 0.5f) * Time.deltaTime;
+            if (!_isTouchWall)
+                transform.position += _axisMove * speed * (isRun ? 1 : 0.5f) * Time.deltaTime;
 
             GetAnimator.SetBool(Constants.IsWalk, !_axisMove.Equals(Vector3.zero));
             GetAnimator.SetBool(Constants.IsRun, isRun);
@@ -82,7 +111,7 @@ namespace Ducks.Player
 
             // mouse
             if (!isMouse) return;
-            var ray = MainCamera.ScreenPointToRay(Input.mousePosition);
+            var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {

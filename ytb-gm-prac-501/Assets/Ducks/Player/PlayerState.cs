@@ -17,11 +17,8 @@ namespace Ducks.Player
 
         public GameObject[] equippedGrenades;
 
-        private PlayerManager _playerManager;
-
         private void Awake()
         {
-            _playerManager = gameObject.GetComponent<PlayerManager>();
         }
 
         private void OnTriggerEnter(Collider other)
