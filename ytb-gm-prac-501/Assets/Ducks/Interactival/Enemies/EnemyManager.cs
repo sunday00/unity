@@ -12,6 +12,7 @@ namespace Ducks.Interactival.Enemies
 
         private BoxCollider _boxCollider;
 
+        private MeshRenderer _mr;
         private Color _originalColor;
         private Rigidbody _rb;
 
@@ -19,7 +20,8 @@ namespace Ducks.Interactival.Enemies
         {
             _rb = GetComponent<Rigidbody>();
             _boxCollider = GetComponent<BoxCollider>();
-            _originalColor = GetComponent<MeshRenderer>().material.color;
+            _mr = GetComponentInChildren<MeshRenderer>();
+            _originalColor = _mr.material.color;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -55,15 +57,13 @@ namespace Ducks.Interactival.Enemies
 
         private IEnumerator OnDamageTaken(Vector3 nuckBack, bool isGrenade = false)
         {
-            var mat = GetComponent<MeshRenderer>().material;
-
-            mat.color = Color.red;
+            _mr.material.color = Color.red;
 
             yield return new WaitForSeconds(0.1f);
 
             if (curHealth > 0)
             {
-                mat.color = _originalColor;
+                _mr.material.color = _originalColor;
                 _rb.AddForce((nuckBack + Vector3.up) * 5f, ForceMode.Impulse);
                 // _rb.AddForce(nuckBack * 0.0000001f, ForceMode.Impulse);
 
@@ -75,7 +75,7 @@ namespace Ducks.Interactival.Enemies
             }
             else
             {
-                mat.color = Color.gray;
+                _mr.material.color = Color.gray;
                 gameObject.layer = 15;
 
                 Destroy(gameObject, 4f);
