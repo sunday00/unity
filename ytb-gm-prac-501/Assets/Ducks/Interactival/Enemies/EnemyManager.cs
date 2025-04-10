@@ -11,12 +11,15 @@ namespace Ducks.Interactival.Enemies
         public int curHealth;
 
         private BoxCollider _boxCollider;
+
+        private Color _originalColor;
         private Rigidbody _rb;
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
             _boxCollider = GetComponent<BoxCollider>();
+            _originalColor = GetComponent<MeshRenderer>().material.color;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -41,10 +44,18 @@ namespace Ducks.Interactival.Enemies
             curHealth -= damage;
         }
 
-        private IEnumerator OnDamageTaken(Vector3 nuckBack)
+        public void HitByGrenade(Vector3 pos)
+        {
+            curHealth -= 80;
+            StartCoroutine(OnDamageTaken(
+                (transform.position - pos).normalized * 25,
+                true)
+            );
+        }
+
+        private IEnumerator OnDamageTaken(Vector3 nuckBack, bool isGrenade = false)
         {
             var mat = GetComponent<MeshRenderer>().material;
-            var originalColor = mat.color;
 
             mat.color = Color.red;
 
@@ -52,14 +63,21 @@ namespace Ducks.Interactival.Enemies
 
             if (curHealth > 0)
             {
-                mat.color = originalColor;
+                mat.color = _originalColor;
                 _rb.AddForce((nuckBack + Vector3.up) * 5f, ForceMode.Impulse);
                 // _rb.AddForce(nuckBack * 0.0000001f, ForceMode.Impulse);
+
+                if (isGrenade)
+                {
+                    _rb.freezeRotation = false;
+                    _rb.AddTorque((nuckBack + Vector3.up) * 25f, ForceMode.Impulse);
+                }
             }
             else
             {
                 mat.color = Color.gray;
                 gameObject.layer = 15;
+
                 Destroy(gameObject, 4f);
             }
         }

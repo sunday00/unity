@@ -1,4 +1,5 @@
 using System.Collections;
+using Ducks.Interactival.Enemies;
 using UnityEngine;
 
 namespace Ducks.Interactival.Items
@@ -23,6 +24,18 @@ namespace Ducks.Interactival.Items
 
             meshObj.SetActive(false);
             effectObj.SetActive(true);
+
+            var rayHits = Physics.SphereCastAll(
+                transform.position,
+                15,
+                Vector3.up,
+                0f,
+                LayerMask.GetMask("Enemy")
+            );
+
+            foreach (var hit in rayHits) hit.transform.GetComponent<EnemyManager>().HitByGrenade(transform.position);
+
+            Destroy(gameObject, 5);
         }
     }
 }
