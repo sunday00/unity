@@ -12,12 +12,15 @@ namespace Ducks.Interactival.Enemies
 
         private BoxCollider _boxCollider;
 
+        private EnemyManager _manager;
+
         private MeshRenderer _mr;
         private Color _originalColor;
         private Rigidbody _rb;
 
         private void Awake()
         {
+            _manager = GetComponent<EnemyManager>();
             _rb = GetComponent<Rigidbody>();
             _boxCollider = GetComponent<BoxCollider>();
             _mr = GetComponentInChildren<MeshRenderer>();
@@ -77,6 +80,13 @@ namespace Ducks.Interactival.Enemies
             {
                 _mr.material.color = Color.gray;
                 gameObject.layer = 15;
+
+                if (!_manager.EnemyMove.isTest)
+                {
+                    _manager.animator.SetTrigger("DoDie");
+                    _manager.EnemyMove.SetChase(false);
+                    _manager.EnemyMove.SetNav(false);
+                }
 
                 Destroy(gameObject, 4f);
             }
