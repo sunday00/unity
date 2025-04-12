@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +8,9 @@ namespace Ducks.Interactival.Enemies
     {
         public Transform target;
         public bool isTest;
+
+        public BoxCollider meleeArea;
+        public bool isAttacking;
 
         private bool _isChase;
 
@@ -28,7 +32,32 @@ namespace Ducks.Interactival.Enemies
 
             if (!_isChase) return;
 
+            if (!_nav.enabled) return;
+
+            // if (!_nav.isStopped) return;
+
             _nav.SetDestination(target.position);
+        }
+
+        private void FixedUpdate()
+        {
+            Targeting();
+        }
+
+        private void Targeting()
+        {
+            var targetRadius = 1.5f;
+            var targetRange = 3f;
+
+            var hit = Physics.SphereCastAll(
+                transform.position,
+                targetRadius,
+                transform.forward,
+                targetRange,
+                LayerMask.GetMask("Player")
+            );
+
+            if (hit.Length > 0 && !isAttacking) StartCoroutine(Attacking());
         }
 
         private void Chase()
@@ -45,6 +74,24 @@ namespace Ducks.Interactival.Enemies
         public void SetNav(bool active)
         {
             _nav.enabled = active;
+        }
+
+        private IEnumerator Attacking()
+        {
+            _isChase = false;
+            isAttacking = true;
+            _manager.animator.SetBool("IsAttack", true);
+
+            yield return new WaitForSeconds(0.2f);
+            meleeArea.enabled = true;
+
+            yield return new WaitForSeconds(1f);
+            meleeArea.enabled = false;
+
+            _manager.animator.SetBool("IsAttack", false);
+
+            _isChase = true;
+            isAttacking = false;
         }
     }
 }
