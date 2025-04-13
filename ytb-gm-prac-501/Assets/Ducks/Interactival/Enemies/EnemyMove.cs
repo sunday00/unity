@@ -10,6 +10,8 @@ namespace Ducks.Interactival.Enemies
         public bool isTest;
 
         public BoxCollider meleeArea;
+        public GameObject missile;
+
         public bool isAttacking;
 
         private bool _isChase;
@@ -64,8 +66,8 @@ namespace Ducks.Interactival.Enemies
                     targetRange = 15f;
                     break;
                 case Constants.EnemyType.C:
-                    targetRadius = 1.5f;
-                    targetRange = 3f;
+                    targetRadius = 0.5f;
+                    targetRange = 25f;
                     break;
             }
 
@@ -124,6 +126,14 @@ namespace Ducks.Interactival.Enemies
 
                     break;
                 case Constants.EnemyType.C:
+                    yield return new WaitForSeconds(0.5f);
+
+                    var missilePeb = Instantiate(missile, transform.position, transform.rotation);
+                    var missileRb = missilePeb.GetComponent<Rigidbody>();
+                    missileRb.linearVelocity = missilePeb.transform.forward * 30f;
+
+                    yield return new WaitForSeconds(0.5f);
+
                     break;
             }
 
