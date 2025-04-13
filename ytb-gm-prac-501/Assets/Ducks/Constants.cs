@@ -2,6 +2,13 @@ namespace Ducks
 {
     public static class Constants
     {
+        public enum EnemyType
+        {
+            A,
+            B,
+            C
+        }
+
         public enum ItemType
         {
             Ammo,

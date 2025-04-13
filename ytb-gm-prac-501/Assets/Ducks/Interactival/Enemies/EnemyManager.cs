@@ -4,6 +4,8 @@ namespace Ducks.Interactival.Enemies
 {
     public class EnemyManager : MonoBehaviour
     {
+        public Constants.EnemyType Type;
+
         public EnemyDamage EnemyDamage;
         public EnemyMove EnemyMove;
 
