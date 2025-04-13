@@ -55,6 +55,8 @@ namespace Ducks.Player
                 var bullet = other.GetComponent<BulletAction>();
                 curHealth -= bullet.damage;
 
+                if (other.name.Contains("Missile")) Destroy(other.gameObject);
+
                 if (_onDamage) return;
 
                 StartCoroutine(OnDamageTaken());
