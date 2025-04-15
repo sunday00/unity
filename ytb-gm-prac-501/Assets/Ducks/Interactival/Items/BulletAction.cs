@@ -6,7 +6,7 @@ namespace Ducks.Interactival.Items
     {
         public int damage;
 
-        private void OnCollisionEnter(Collision other)
+        protected void OnCollisionEnter(Collision other)
         {
             switch (other.gameObject.tag)
             {
