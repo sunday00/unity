@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 namespace Ducks.Interactival.Enemies
 {
-    public class EnemyMove : MonoBehaviour
+    public class EnemyMove : MonoBehaviour, IEnemyMove
     {
         public Transform target;
         public bool isTest;
@@ -48,6 +48,21 @@ namespace Ducks.Interactival.Enemies
             Targeting();
         }
 
+        public bool GetIsTest()
+        {
+            return isTest;
+        }
+
+        public void SetChase(bool isChase)
+        {
+            _isChase = isChase;
+        }
+
+        public void SetNav(bool active)
+        {
+            _nav.enabled = active;
+        }
+
         private void Targeting()
         {
             if (isTest) return;
@@ -86,16 +101,6 @@ namespace Ducks.Interactival.Enemies
         {
             _isChase = true;
             _manager.animator.SetBool(Constants.IsWalk, true);
-        }
-
-        public void SetChase(bool isChase)
-        {
-            _isChase = isChase;
-        }
-
-        public void SetNav(bool active)
-        {
-            _nav.enabled = active;
         }
 
         private IEnumerator Attacking()

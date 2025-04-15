@@ -6,7 +6,8 @@ namespace Ducks
         {
             A,
             B,
-            C
+            C,
+            Boss
         }
 
         public enum ItemType

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Ducks.Interactival.Enemies
 {
-    public class EnemyDamage : MonoBehaviour, IEnemyDamage
+    public class BossDamage : MonoBehaviour, IEnemyDamage
     {
         public int maxHealth;
         public int curHealth;
@@ -43,7 +43,7 @@ namespace Ducks.Interactival.Enemies
                 default: return;
             }
 
-            var nuckBack = (transform.position - other.transform.position).normalized;
+            var nuckBack = Vector3.zero;
 
             StartCoroutine(OnDamageTaken(nuckBack));
             curHealth -= damage;
@@ -51,16 +51,16 @@ namespace Ducks.Interactival.Enemies
 
         public void HitByGrenade(Vector3 pos)
         {
-            curHealth -= 80;
+            curHealth -= 60;
             StartCoroutine(OnDamageTaken(
-                (transform.position - pos).normalized * 25,
+                (transform.position - pos).normalized * 5,
                 true)
             );
         }
 
         private IEnumerator OnDamageTaken(Vector3 nuckBack, bool isGrenade = false)
         {
-            _mr.material.color = Color.red;
+            _mr.material.color = Color.green;
 
             yield return new WaitForSeconds(0.1f);
 
@@ -73,7 +73,7 @@ namespace Ducks.Interactival.Enemies
                 if (isGrenade)
                 {
                     _rb.freezeRotation = false;
-                    _rb.AddTorque((nuckBack + Vector3.up) * 25f, ForceMode.Impulse);
+                    _rb.AddTorque((nuckBack + Vector3.up) * 5f, ForceMode.Impulse);
                 }
             }
             else
@@ -81,12 +81,9 @@ namespace Ducks.Interactival.Enemies
                 _mr.material.color = Color.gray;
                 gameObject.layer = 15;
 
-                if (!_manager.EnemyMove.GetIsTest())
-                {
-                    _manager.animator.SetTrigger("DoDie");
-                    _manager.EnemyMove.SetChase(false);
-                    _manager.EnemyMove.SetNav(false);
-                }
+                _manager.animator.SetTrigger("DoDie");
+                _manager.EnemyMove.SetChase(false);
+                _manager.EnemyMove.SetNav(false);
 
                 Destroy(gameObject, 4f);
             }

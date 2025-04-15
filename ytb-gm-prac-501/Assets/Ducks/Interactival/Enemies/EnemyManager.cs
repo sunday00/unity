@@ -6,15 +6,15 @@ namespace Ducks.Interactival.Enemies
     {
         public Constants.EnemyType Type;
 
-        public EnemyDamage EnemyDamage;
-        public EnemyMove EnemyMove;
-
         public Animator animator;
+
+        public IEnemyDamage EnemyDamage;
+        public IEnemyMove EnemyMove;
 
         private void Awake()
         {
-            EnemyDamage = GetComponent<EnemyDamage>();
-            EnemyMove = GetComponent<EnemyMove>();
+            EnemyDamage = GetComponent<IEnemyDamage>();
+            EnemyMove = GetComponent<IEnemyMove>();
 
             animator = GetComponentInChildren<Animator>();
         }

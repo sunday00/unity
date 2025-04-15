@@ -33,7 +33,7 @@ namespace Ducks.Interactival.Items
                 LayerMask.GetMask("Enemy")
             );
 
-            foreach (var hit in rayHits) hit.transform.GetComponent<EnemyDamage>().HitByGrenade(transform.position);
+            foreach (var hit in rayHits) hit.transform.GetComponent<IEnemyDamage>().HitByGrenade(transform.position);
 
             Destroy(gameObject, 5);
         }
