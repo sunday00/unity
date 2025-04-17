@@ -1789,8 +1789,8 @@ Transform:
   m_GameObject: {fileID: 595664833}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.4, y: 1.5, z: -20.4}
-  m_LocalScale: {x: 5, y: 15, z: 15}
+  m_LocalPosition: {x: -20.4, y: 15, z: -20.4}
+  m_LocalScale: {x: 5, y: 40.8, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 683639369}
@@ -1992,8 +1992,8 @@ Transform:
   m_GameObject: {fileID: 614886609}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 55}
-  m_LocalScale: {x: 100, y: 15, z: 10}
+  m_LocalPosition: {x: 0, y: 15, z: 55}
+  m_LocalScale: {x: 100, y: 40.8, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 683639369}
@@ -3094,8 +3094,8 @@ Transform:
   m_GameObject: {fileID: 986886051}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 15, z: 110}
+  m_LocalPosition: {x: 55, y: 15, z: 0}
+  m_LocalScale: {x: 10, y: 40.8, z: 110}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 683639369}
@@ -3230,8 +3230,8 @@ Transform:
   m_GameObject: {fileID: 1063821712}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -55}
-  m_LocalScale: {x: 100, y: 15, z: 10}
+  m_LocalPosition: {x: 0, y: 15, z: -55}
+  m_LocalScale: {x: 100, y: 40.8, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 683639369}
@@ -14643,8 +14643,8 @@ Transform:
   m_GameObject: {fileID: 1497898301}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -55, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 15, z: 110}
+  m_LocalPosition: {x: -55, y: 15, z: 0}
+  m_LocalScale: {x: 10, y: 40.8, z: 110}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 683639369}
@@ -20113,10 +20113,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca36eab5a8f94ebdb1eebaadb718918f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  meleeArea: {fileID: 0}
-  missile: {fileID: 0}
+  target: {fileID: 1473004720}
+  meleeArea: {fileID: 1714877471}
   isAttacking: 0
+  bulletBox: {fileID: 5346448724862905476, guid: 90ff1f14c7c744606a521a1a1c2b1473, type: 3}
+  missile: {fileID: 7122559858347293826, guid: 666bbb681f255497c851e4ae93b2b3f8, type: 3}
+  missilePortA: {fileID: 2014622130}
+  missilePortB: {fileID: 1549912391}
 --- !u!114 &1860748001
 MonoBehaviour:
   m_ObjectHideFlags: 0

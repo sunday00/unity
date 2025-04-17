@@ -8,15 +8,23 @@ namespace Ducks.Interactival.Enemies
     {
         public Transform target;
         public BoxCollider meleeArea;
-        public GameObject missile;
 
         public bool isAttacking;
+
+        public GameObject bulletBox;
+        public GameObject missile;
+        public Transform missilePortA;
+        public Transform missilePortB;
 
         private bool _isChase;
 
         private EnemyManager _manager;
         private NavMeshAgent _nav;
         private Rigidbody _rb;
+        private bool isLook;
+
+        private Vector3 lookVec;
+        private Vector3 tauntVec;
 
         private void Awake()
         {
@@ -25,20 +33,29 @@ namespace Ducks.Interactival.Enemies
             _rb = GetComponent<Rigidbody>();
         }
 
+        private void Start()
+        {
+            isLook = true;
+        }
+
         private void Update()
         {
-            if (!_isChase) return;
+            if (isLook)
+            {
+                lookVec = new Vector3(
+                    Input.GetAxisRaw("Horizontal"),
+                    0,
+                    Input.GetAxisRaw("Vertical")
+                ) * 5f;
 
-            if (!_nav.enabled) return;
-
-            // if (!_nav.isStopped) return;
-
-            // _nav.SetDestination(target.position);
+                transform.LookAt(target.position + lookVec);
+            }
         }
 
         private void FixedUpdate()
         {
         }
+
 
         public void SetChase(bool isChase)
         {

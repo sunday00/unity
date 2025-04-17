@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using Ducks.Interactival.Items;
 using Ducks.Player;
 using UnityEngine;
@@ -14,8 +15,8 @@ namespace Ducks.Interactival.Enemies
 
         private EnemyManager _manager;
 
-        private MeshRenderer _mr;
-        private Color _originalColor;
+        private MeshRenderer[] _mrs;
+        private Color[] _originalColors = { };
         private Rigidbody _rb;
 
         private void Awake()
@@ -23,8 +24,8 @@ namespace Ducks.Interactival.Enemies
             _manager = GetComponent<EnemyManager>();
             _rb = GetComponent<Rigidbody>();
             _boxCollider = GetComponent<BoxCollider>();
-            _mr = GetComponentInChildren<MeshRenderer>();
-            _originalColor = _mr.material.color;
+            _mrs = GetComponentsInChildren<MeshRenderer>();
+            foreach (var mr in _mrs) _originalColors = _originalColors.Append(mr.material.color).ToArray();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -60,13 +61,14 @@ namespace Ducks.Interactival.Enemies
 
         private IEnumerator OnDamageTaken(Vector3 nuckBack, bool isGrenade = false)
         {
-            _mr.material.color = Color.green;
+            foreach (var mr in _mrs) mr.material.color = Color.green;
 
             yield return new WaitForSeconds(0.1f);
 
             if (curHealth > 0)
             {
-                _mr.material.color = _originalColor;
+                for (var i = 0; i < _mrs.Length; i++) _mrs[i].material.color = _originalColors[i];
+
                 _rb.AddForce((nuckBack + Vector3.up) * 5f, ForceMode.Impulse);
                 // _rb.AddForce(nuckBack * 0.0000001f, ForceMode.Impulse);
 
@@ -78,7 +80,8 @@ namespace Ducks.Interactival.Enemies
             }
             else
             {
-                _mr.material.color = Color.gray;
+                foreach (var mr in _mrs) mr.material.color = Color.gray;
+
                 gameObject.layer = 15;
 
                 _manager.animator.SetTrigger("DoDie");
