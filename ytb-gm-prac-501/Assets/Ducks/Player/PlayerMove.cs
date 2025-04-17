@@ -72,7 +72,7 @@ namespace Ducks.Player
             ) || Physics.Raycast(
                 transform.position,
                 transform.forward * -1,
-                3,
+                1.5f,
                 LayerMask.GetMask("Wall")
             );
         }
