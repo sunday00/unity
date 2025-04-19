@@ -31,11 +31,8 @@ namespace Ducks.Interactival.Enemies
             _manager = GetComponent<EnemyManager>();
             _nav = GetComponent<NavMeshAgent>();
             _rb = GetComponent<Rigidbody>();
-        }
 
-        private void Start()
-        {
-            isLook = true;
+            StartCoroutine(Think());
         }
 
         private void Update()
@@ -70,6 +67,51 @@ namespace Ducks.Interactival.Enemies
         public bool GetIsTest()
         {
             return false;
+        }
+
+        private IEnumerator Think()
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            var ranAction = Random.Range(0, 5);
+            switch (ranAction)
+            {
+                case 0:
+                case 1:
+                    StartCoroutine(MissileShot());
+                    break;
+                case 2:
+                case 3:
+                    StartCoroutine(RockShot());
+                    break;
+                case 4:
+                    StartCoroutine(Taunt());
+                    break;
+            }
+
+            IEnumerator MissileShot()
+            {
+                _manager.animator.SetTrigger("DoShot");
+                yield return new WaitForSeconds(2.5f);
+
+                StartCoroutine(Think());
+            }
+
+            IEnumerator RockShot()
+            {
+                _manager.animator.SetTrigger("DoBigShot");
+                yield return new WaitForSeconds(3f);
+
+                StartCoroutine(Think());
+            }
+
+            IEnumerator Taunt()
+            {
+                _manager.animator.SetTrigger("DoTaunt");
+                yield return new WaitForSeconds(3f);
+
+                StartCoroutine(Think());
+            }
         }
 
         private IEnumerator Attacking()
