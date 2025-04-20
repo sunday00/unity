@@ -20,9 +20,11 @@ namespace Ducks.Player
         private MeshRenderer[] _meshes;
 
         private bool _onDamage;
+        private PlayerManager _playerManager;
 
         private void Awake()
         {
+            _playerManager = gameObject.GetComponent<PlayerManager>();
             _meshes = GetComponentsInChildren<MeshRenderer>();
         }
 
@@ -56,6 +58,12 @@ namespace Ducks.Player
                 curHealth -= bullet.damage;
 
                 if (other.name.Contains("Missile") || other.name.Contains("BossRock")) Destroy(other.gameObject);
+                if (other.name.Equals("BossMeleeArea"))
+                {
+                    var rb = GetComponent<Rigidbody>();
+                    rb.AddForce(transform.forward * -25, ForceMode.Impulse);
+                    rb.linearVelocity = Vector3.zero;
+                }
 
                 if (_onDamage) return;
 

@@ -11,7 +11,7 @@ namespace Ducks.Interactival.Items
             switch (other.gameObject.tag)
             {
                 case "Floor":
-                    if (gameObject.name.Equals("BossRock")) return;
+                    if (gameObject.name.Contains("BossRock")) return;
 
                     Destroy(gameObject, 3);
                     break;

@@ -59,6 +59,11 @@ namespace Ducks.Interactival.Enemies
             );
         }
 
+        public int GetHealth()
+        {
+            return curHealth;
+        }
+
         private IEnumerator OnDamageTaken(Vector3 nuckBack, bool isGrenade = false)
         {
             foreach (var mr in _mrs) mr.material.color = Color.green;

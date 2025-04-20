@@ -1,4 +1,5 @@
 using Ducks.Interactival.Items;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,6 +17,8 @@ namespace Ducks.Interactival.Enemies
 
         private void Update()
         {
+            if (target.IsUnityNull()) return;
+
             _nav.SetDestination(target.position);
         }
     }

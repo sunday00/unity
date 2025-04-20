@@ -49,6 +49,11 @@ namespace Ducks.Interactival.Enemies
             curHealth -= damage;
         }
 
+        public int GetHealth()
+        {
+            return curHealth;
+        }
+
         public void HitByGrenade(Vector3 pos)
         {
             curHealth -= 80;

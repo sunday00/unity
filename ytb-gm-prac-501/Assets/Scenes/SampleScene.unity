@@ -320,10 +320,10 @@ PrefabInstance:
       addedObject: {fileID: 115848078}
     - targetCorrespondingSourceObject: {fileID: 7988094277207216310, guid: 83dab506297948d4d8d34c4fe12431ee, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 115848077}
+      addedObject: {fileID: 115848076}
     - targetCorrespondingSourceObject: {fileID: 7988094277207216310, guid: 83dab506297948d4d8d34c4fe12431ee, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 115848076}
+      addedObject: {fileID: 115848077}
     - targetCorrespondingSourceObject: {fileID: 7988094277207216310, guid: 83dab506297948d4d8d34c4fe12431ee, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1860748001}
@@ -14775,7 +14775,7 @@ Transform:
   m_GameObject: {fileID: 1549912390}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 6.25, z: 2.5}
+  m_LocalPosition: {x: -1.5, y: 2.2, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14974,8 +14974,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1714877470}
   - component: {fileID: 1714877471}
+  - component: {fileID: 1714877472}
   m_Layer: 16
-  m_Name: MeleeArea
+  m_Name: BossMeleeArea
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15017,6 +15018,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.5, y: 0.5, z: 2.5}
   m_Center: {x: 0, y: 0.4, z: 0.05}
+--- !u!114 &1714877472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714877469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81397e5d41d8246c8a81fae6d51fcd6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
 --- !u!1 &1736958619 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7209417620919649187, guid: 10653eccf6b69fd47938a227b4bf3863, type: 3}
@@ -20100,7 +20114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 450
-  curHealth: 450
+  curHealth: 10
 --- !u!114 &1860748000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20120,6 +20134,7 @@ MonoBehaviour:
   missile: {fileID: 7122559858347293826, guid: 666bbb681f255497c851e4ae93b2b3f8, type: 3}
   missilePortA: {fileID: 2014622130}
   missilePortB: {fileID: 1549912391}
+  isLook: 0
 --- !u!114 &1860748001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20524,7 +20539,7 @@ Transform:
   m_GameObject: {fileID: 2014622129}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 6.25, z: 2.5}
+  m_LocalPosition: {x: 1.5, y: 2.2, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

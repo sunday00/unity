@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,13 +16,13 @@ namespace Ducks.Interactival.Enemies
         public GameObject missile;
         public Transform missilePortA;
         public Transform missilePortB;
+        public bool isLook;
 
         private bool _isChase;
 
         private EnemyManager _manager;
         private NavMeshAgent _nav;
         private Rigidbody _rb;
-        private bool isLook;
 
         private Vector3 lookVec;
         private Vector3 tauntVec;
@@ -32,11 +33,19 @@ namespace Ducks.Interactival.Enemies
             _nav = GetComponent<NavMeshAgent>();
             _rb = GetComponent<Rigidbody>();
 
+            _nav.isStopped = true;
             StartCoroutine(Think());
         }
 
         private void Update()
         {
+            if (!_manager.EnemyDamage.IsUnityNull() && _manager.EnemyDamage.GetHealth() <= 0)
+            {
+                isLook = false;
+                StopAllCoroutines();
+                return;
+            }
+
             if (isLook)
             {
                 lookVec = new Vector3(
@@ -46,6 +55,10 @@ namespace Ducks.Interactival.Enemies
                 ) * 5f;
 
                 transform.LookAt(target.position + lookVec);
+            }
+            else
+            {
+                _nav.SetDestination(tauntVec);
             }
         }
 
@@ -71,7 +84,7 @@ namespace Ducks.Interactival.Enemies
 
         private IEnumerator Think()
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(2f);
 
             var ranAction = Random.Range(0, 5);
             switch (ranAction)
@@ -92,23 +105,56 @@ namespace Ducks.Interactival.Enemies
             IEnumerator MissileShot()
             {
                 _manager.animator.SetTrigger("DoShot");
-                yield return new WaitForSeconds(2.5f);
+                yield return new WaitForSeconds(0.2f);
+                GenerateMissile(missilePortA.position, missilePortA.rotation);
 
+                yield return new WaitForSeconds(0.3f);
+                GenerateMissile(missilePortB.position, missilePortB.rotation);
+
+                yield return new WaitForSeconds(2f);
                 StartCoroutine(Think());
+            }
+
+            void GenerateMissile(Vector3 position, Quaternion rotation)
+            {
+                var m = Instantiate(missile, position, rotation);
+                var ma = m.GetComponent<BossBullet>();
+                ma.target = target;
             }
 
             IEnumerator RockShot()
             {
+                isLook = false;
                 _manager.animator.SetTrigger("DoBigShot");
+
+                Instantiate(bulletBox, transform.position, transform.rotation);
+
                 yield return new WaitForSeconds(3f);
 
+                isLook = true;
                 StartCoroutine(Think());
             }
 
             IEnumerator Taunt()
             {
+                tauntVec = target.position + lookVec;
+                isLook = false;
+                _nav.isStopped = false;
+
+                gameObject.GetComponent<BoxCollider>().enabled = false;
+
                 _manager.animator.SetTrigger("DoTaunt");
-                yield return new WaitForSeconds(3f);
+
+                yield return new WaitForSeconds(1.5f);
+                meleeArea.enabled = true;
+
+                yield return new WaitForSeconds(0.5f);
+                meleeArea.enabled = false;
+
+                yield return new WaitForSeconds(1f);
+                _nav.isStopped = true;
+                isLook = true;
+                gameObject.GetComponent<BoxCollider>().enabled = true;
 
                 StartCoroutine(Think());
             }
