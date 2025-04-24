@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ducks.Interactival.Shop;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -32,12 +33,23 @@ namespace Ducks.Player
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Weapon")) _nearObject = null;
+            if (other.CompareTag("Weapon"))
+            {
+                _nearObject = null;
+                return;
+            }
+
+            if (other.CompareTag("Shop"))
+            {
+                var shop = other.GetComponent<Shop>();
+                shop.Exit();
+                _nearObject = null;
+            }
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.CompareTag("Weapon")) _nearObject = other.gameObject;
+            if (other.CompareTag("Weapon") || other.CompareTag("Shop")) _nearObject = other.gameObject;
         }
 
         private void Equip(int idx)
@@ -74,17 +86,27 @@ namespace Ducks.Player
             if (_playerManager.PlayerMove.IsActing) return;
 
             if (interact && !_nearObject.IsUnityNull())
-            {
-                if (_nearObject.CompareTag("Weapon"))
+                switch (_nearObject.tag)
                 {
-                    if (Inventory.ContainsKey(_nearObject.name) && Inventory[_nearObject.name] > 0)
-                        Inventory[_nearObject.name] += 1;
-                    else
-                        Inventory.Add(_nearObject.name, 1);
-                }
+                    case "Weapon":
+                    {
+                        if (Inventory.ContainsKey(_nearObject.name) && Inventory[_nearObject.name] > 0)
+                            Inventory[_nearObject.name] += 1;
+                        else
+                            Inventory.Add(_nearObject.name, 1);
 
-                Destroy(_nearObject);
-            }
+                        Destroy(_nearObject);
+
+                        break;
+                    }
+
+                    case "Shop":
+                    {
+                        var shop = _nearObject.GetComponent<Shop>();
+                        shop.Enter(_playerManager);
+                        break;
+                    }
+                }
         }
     }
 }
