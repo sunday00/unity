@@ -5129,6 +5129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   value: 30
+  price: 500
 --- !u!4 &4570223367172356155 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f2e3ebad01f2bd743994f155d90d178c, type: 3}

@@ -16,6 +16,7 @@ namespace Ducks.Player
         public int maxCoin;
         public int maxGrenades;
 
+
         public GameObject[] equippedGrenades;
         private MeshRenderer[] _meshes;
 
