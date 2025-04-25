@@ -44,5 +44,21 @@ namespace Ducks
 
         public RectTransform bossHealthGroup;
         public RectTransform bossHealthBar;
+
+        private void Awake()
+        {
+            maxScoreText.text = string.Format("{0:N0}", PlayerPrefs.GetInt("maxScore"));
+        }
+
+        public void GameStart()
+        {
+            menuCam.SetActive(false);
+            mainCam.SetActive(true);
+
+            menuPanel.SetActive(false);
+            mainPanel.SetActive(true);
+
+            playerManager.gameObject.SetActive(true);
+        }
     }
 }
