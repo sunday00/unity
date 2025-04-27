@@ -62,6 +62,11 @@ namespace Ducks.Player
             yield break;
         }
 
+        public Constants.WeaponType GeWeaponType()
+        {
+            return Constants.WeaponType.Range;
+        }
+
         private void Reload(bool isReload)
         {
             if (!isReload) return;
@@ -75,6 +80,11 @@ namespace Ducks.Player
             var reloadAmmo = playerManager.PlayerState.curAmmo < ammoMax ? playerManager.PlayerState.curAmmo : ammoMax;
             ammoCur = reloadAmmo;
             playerManager.PlayerState.curAmmo -= reloadAmmo;
+        }
+
+        public int GetCurrentAmmo()
+        {
+            return ammoCur;
         }
     }
 }

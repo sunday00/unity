@@ -9,16 +9,16 @@ namespace Ducks.Player
         public float rate;
 
         public PlayerManager playerManager;
-        
+
         private Animator _animator;
 
         private float _fireDelay;
-        private IPlayerWeapon _weaponSubManager;
+        public IPlayerWeapon WeaponSubManager;
 
         public void Awake()
         {
             _animator = playerManager.PlayerMove.GetAnimator;
-            _weaponSubManager = type.Equals(Constants.WeaponType.Melee)
+            WeaponSubManager = type.Equals(Constants.WeaponType.Melee)
                 ? GetComponent<PlayerWeaponMelee>()
                 : GetComponent<PlayerWeaponRange>();
         }
@@ -31,7 +31,7 @@ namespace Ducks.Player
 
         public void Use()
         {
-            _weaponSubManager.StartRoutine();
+            WeaponSubManager.StartRoutine();
         }
 
 

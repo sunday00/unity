@@ -254,6 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 3
   animator: {fileID: 0}
+  score: 300
 --- !u!114 &8203967579583303719
 MonoBehaviour:
   m_ObjectHideFlags: 0

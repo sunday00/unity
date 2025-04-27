@@ -39,5 +39,15 @@ namespace Ducks.Player
 
             yield break;
         }
+
+        public Constants.WeaponType GeWeaponType()
+        {
+            return Constants.WeaponType.Melee;
+        }
+
+        public int GetCurrentAmmo()
+        {
+            return 0;
+        }
     }
 }

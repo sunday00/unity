@@ -93,6 +93,7 @@ namespace Ducks.Interactival.Enemies
                     _manager.EnemyMove.SetNav(false);
                 }
 
+                _manager.playerManager.PlayerState.score += _manager.score;
                 Destroy(gameObject, 4f);
             }
         }

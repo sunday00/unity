@@ -1,3 +1,5 @@
+using Ducks.Player;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Ducks.Interactival.Enemies
@@ -8,6 +10,11 @@ namespace Ducks.Interactival.Enemies
 
         public Animator animator;
 
+        public int score;
+
+        public GameObject player;
+        public PlayerManager playerManager;
+
         public IEnemyDamage EnemyDamage;
         public IEnemyMove EnemyMove;
 
@@ -17,6 +24,12 @@ namespace Ducks.Interactival.Enemies
             EnemyMove = GetComponent<IEnemyMove>();
 
             animator = GetComponentInChildren<Animator>();
+
+            player = GameObject.FindGameObjectWithTag("Player");
+
+            if (player.IsUnityNull()) return;
+
+            playerManager = player.GetComponent<PlayerManager>();
         }
     }
 }

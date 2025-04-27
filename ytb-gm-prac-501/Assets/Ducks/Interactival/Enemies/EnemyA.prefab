@@ -123,6 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 0
   animator: {fileID: 0}
+  score: 100
+  player: {fileID: 0}
 --- !u!114 &7230062863831337018
 MonoBehaviour:
   m_ObjectHideFlags: 0

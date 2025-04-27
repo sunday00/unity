@@ -144,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 2
   animator: {fileID: 0}
+  score: 150
 --- !u!114 &6793693384666473638
 MonoBehaviour:
   m_ObjectHideFlags: 0

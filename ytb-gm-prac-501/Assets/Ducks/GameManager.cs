@@ -1,5 +1,6 @@
 using Ducks.Interactival.Enemies;
 using Ducks.Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,6 +49,26 @@ namespace Ducks
         private void Awake()
         {
             maxScoreText.text = string.Format("{0:N0}", PlayerPrefs.GetInt("maxScore"));
+        }
+
+        private void LateUpdate()
+        {
+            if (!playerManager.gameObject.activeSelf) return;
+
+            scoreText.text = string.Format("{0:N0}", playerManager.PlayerState.score);
+            playerHealthText.text = playerManager.PlayerState.curHealth + "/" + playerManager.PlayerState.maxHealth;
+            playerCoinText.text = string.Format("{0:N0}", playerManager.PlayerState.curCoin);
+
+            if (!playerManager.PlayerItem.equipped.IsUnityNull())
+            {
+                var equipped = playerManager.PlayerItem.equipped.GetComponent<PlayerWeapon>();
+
+                if (equipped.WeaponSubManager.GeWeaponType().Equals(Constants.WeaponType.Range))
+                    playerAmmoText.text = equipped.WeaponSubManager.GetCurrentAmmo() + " / " +
+                                          playerManager.PlayerState.curAmmo;
+                else
+                    playerAmmoText.text = " - / " + playerManager.PlayerState.curAmmo;
+            }
         }
 
         public void GameStart()

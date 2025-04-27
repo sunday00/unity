@@ -6,6 +6,10 @@ namespace Ducks.Player
     {
         public void StartRoutine();
 
+        public Constants.WeaponType GeWeaponType();
+
         public IEnumerator Action();
+
+        public int GetCurrentAmmo();
     }
 }
