@@ -151,7 +151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6765113598456867462
 Transform:
   m_ObjectHideFlags: 0
@@ -255,6 +255,8 @@ MonoBehaviour:
   Type: 3
   animator: {fileID: 0}
   score: 300
+  player: {fileID: 0}
+  playerManager: {fileID: 0}
 --- !u!114 &8203967579583303719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 450
-  curHealth: 10
+  curHealth: 200
 --- !u!195 &4248893033150875042
 NavMeshAgent:
   m_ObjectHideFlags: 0

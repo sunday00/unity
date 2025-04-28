@@ -34,12 +34,17 @@ namespace Ducks.Interactival.Enemies
             _rb = GetComponent<Rigidbody>();
 
             _nav.isStopped = true;
+
             StartCoroutine(Think());
         }
 
         private void Update()
         {
-            if (!_manager.EnemyDamage.IsUnityNull() && _manager.EnemyDamage.GetHealth() <= 0)
+            if (!GameObject.FindGameObjectWithTag("Player").IsUnityNull() && target.IsUnityNull())
+                target = GameObject.FindGameObjectWithTag("Player").transform;
+
+
+            if (!_manager.EnemyDamage.IsUnityNull() && _manager.EnemyDamage.GetCurHealth() <= 0)
             {
                 isLook = false;
                 StopAllCoroutines();

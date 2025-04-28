@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using Ducks.Interactival.Items;
 using Ducks.Player;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Ducks.Interactival.Enemies
@@ -26,6 +27,12 @@ namespace Ducks.Interactival.Enemies
             _boxCollider = GetComponent<BoxCollider>();
             _mrs = GetComponentsInChildren<MeshRenderer>();
             foreach (var mr in _mrs) _originalColors = _originalColors.Append(mr.material.color).ToArray();
+        }
+
+        private void Update()
+        {
+            if (!GameObject.FindGameObjectWithTag("Player").IsUnityNull() && _manager.playerManager.IsUnityNull())
+                _manager.playerManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -59,9 +66,14 @@ namespace Ducks.Interactival.Enemies
             );
         }
 
-        public int GetHealth()
+        public int GetCurHealth()
         {
             return curHealth;
+        }
+
+        public int GetMaxHealth()
+        {
+            return maxHealth;
         }
 
         private IEnumerator OnDamageTaken(Vector3 nuckBack, bool isGrenade = false)

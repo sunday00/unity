@@ -15,12 +15,13 @@ namespace Ducks.Interactival.Enemies
         public GameObject player;
         public PlayerManager playerManager;
 
+        public GameManager gameManager;
+
         public IEnemyDamage EnemyDamage;
         public IEnemyMove EnemyMove;
 
         private void Awake()
         {
-            EnemyDamage = GetComponent<IEnemyDamage>();
             EnemyMove = GetComponent<IEnemyMove>();
 
             animator = GetComponentInChildren<Animator>();

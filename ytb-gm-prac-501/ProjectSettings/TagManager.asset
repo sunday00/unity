@@ -14,6 +14,7 @@ TagManager:
   - Bullet
   - EnemyBullet
   - Shop
+  - GameManager
   layers:
   - Default
   - TransparentFX

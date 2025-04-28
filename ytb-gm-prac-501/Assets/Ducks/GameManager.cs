@@ -46,9 +46,18 @@ namespace Ducks
         public RectTransform bossHealthGroup;
         public RectTransform bossHealthBar;
 
+        public BossDamage bossDamage;
+
         private void Awake()
         {
             maxScoreText.text = string.Format("{0:N0}", PlayerPrefs.GetInt("maxScore"));
+        }
+
+        private void Update()
+        {
+            if (!isBattle) return;
+
+            playTime += Time.deltaTime;
         }
 
         private void LateUpdate()
@@ -56,6 +65,14 @@ namespace Ducks
             if (!playerManager.gameObject.activeSelf) return;
 
             scoreText.text = string.Format("{0:N0}", playerManager.PlayerState.score);
+            stageText.text = "Stage " + stage;
+
+            var t = GetTimeFormat();
+            playtimeText.text =
+                string.Format("{0:00}", t[0]) + ":" +
+                string.Format("{0:00}", t[1]) + ":" +
+                string.Format("{0:00}", t[2]);
+
             playerHealthText.text = playerManager.PlayerState.curHealth + "/" + playerManager.PlayerState.maxHealth;
             playerCoinText.text = string.Format("{0:N0}", playerManager.PlayerState.curCoin);
 
@@ -84,6 +101,13 @@ namespace Ducks
 
             weaponGImg.color = new Color(1, 1, 1,
                 playerManager.PlayerState.curGrenades > 0 ? 1 : 0);
+
+            enemyAText.text = enemyCntA.ToString();
+            enemyBText.text = enemyCntB.ToString();
+            enemyCText.text = enemyCntC.ToString();
+
+            bossHealthBar.localScale =
+                new Vector3((float)bossDamage.curHealth / bossDamage.maxHealth, 1, 1);
         }
 
         public void GameStart()
@@ -95,6 +119,17 @@ namespace Ducks
             mainPanel.SetActive(true);
 
             playerManager.gameObject.SetActive(true);
+
+            isBattle = true;
+        }
+
+        private int[] GetTimeFormat()
+        {
+            var hour = (int)playTime / 3600;
+            var minute = (int)((playTime - hour * 3600) / 60);
+            var second = (int)(playTime % 60);
+
+            return new[] { hour, minute, second };
         }
     }
 }

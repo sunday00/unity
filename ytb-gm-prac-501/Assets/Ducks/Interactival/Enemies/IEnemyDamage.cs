@@ -6,6 +6,8 @@ namespace Ducks.Interactival.Enemies
     {
         public void HitByGrenade(Vector3 pos);
 
-        public int GetHealth();
+        public int GetCurHealth();
+
+        public int GetMaxHealth();
     }
 }

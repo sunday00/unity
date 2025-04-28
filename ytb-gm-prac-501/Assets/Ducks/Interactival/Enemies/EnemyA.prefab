@@ -22,7 +22,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4594755111847672620
 Transform:
   m_ObjectHideFlags: 0
@@ -125,6 +125,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   score: 100
   player: {fileID: 0}
+  playerManager: {fileID: 0}
 --- !u!114 &7230062863831337018
 MonoBehaviour:
   m_ObjectHideFlags: 0
