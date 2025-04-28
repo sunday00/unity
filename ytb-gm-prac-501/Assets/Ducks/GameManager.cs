@@ -69,6 +69,21 @@ namespace Ducks
                 else
                     playerAmmoText.text = " - / " + playerManager.PlayerState.curAmmo;
             }
+
+            weapon1Img.color = new Color(1, 1, 1,
+                playerManager.PlayerItem.Inventory.ContainsKey("WeaponHammer") &&
+                playerManager.PlayerItem.Inventory["WeaponHammer"] > 0
+                    ? 1
+                    : 0);
+
+            weapon2Img.color = new Color(1, 1, 1,
+                playerManager.PlayerItem.Inventory.ContainsKey("WeaponHandgun") &&
+                playerManager.PlayerItem.Inventory["WeaponHandgun"] > 0
+                    ? 1
+                    : 0);
+
+            weaponGImg.color = new Color(1, 1, 1,
+                playerManager.PlayerState.curGrenades > 0 ? 1 : 0);
         }
 
         public void GameStart()
