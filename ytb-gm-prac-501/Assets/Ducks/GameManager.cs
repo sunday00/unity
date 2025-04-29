@@ -131,5 +131,13 @@ namespace Ducks
 
             return new[] { hour, minute, second };
         }
+
+        public void StageStart()
+        {
+        }
+        
+        public void StageEnd()
+        {
+        }
     }
 }
