@@ -24,8 +24,9 @@ namespace Duck.Player
             var leftBorder = -3.9f + transform.localScale.x / 2f;
             var rightBorder = 3.9f - transform.localScale.x / 2f;
 
-            mousePosition.x = mousePosition.x < leftBorder ? leftBorder :
-                mousePosition.x > rightBorder ? rightBorder : mousePosition.x;
+            if (mousePosition.x < leftBorder) mousePosition.x = leftBorder;
+            if (mousePosition.x > rightBorder) mousePosition.x = rightBorder;
+
             mousePosition.y = 8f;
 
             transform.position = Vector2.Lerp(transform.position, mousePosition, 0.2f);
