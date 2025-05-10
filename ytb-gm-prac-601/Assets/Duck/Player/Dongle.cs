@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Duck.Player
@@ -12,6 +13,7 @@ namespace Duck.Player
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
+            if (mainCamera.IsUnityNull()) mainCamera = Camera.main;
         }
 
         private void Update()
