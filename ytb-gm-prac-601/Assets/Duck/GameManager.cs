@@ -1,17 +1,29 @@
+using Duck.Player;
 using UnityEngine;
 
 namespace Duck
 {
     public class GameManager : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        private void Start()
+        public Dongle lastDongle;
+
+
+        private void GetDongle()
         {
         }
 
-        // Update is called once per frame
-        private void Update()
+        private void NextDongle()
         {
+        }
+
+        public void TouchDown()
+        {
+            lastDongle.Drag();
+        }
+
+        public void TouchUp()
+        {
+            lastDongle.Drop();
         }
     }
 }
