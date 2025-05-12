@@ -1,3 +1,4 @@
+using System.Collections;
 using Duck.Player;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -23,6 +24,11 @@ namespace Duck
         private void NextDongle()
         {
             lastDongle = GetDongle();
+        }
+
+        private IEnumerator WaitNext()
+        {
+            yield return null;
         }
 
         public void TouchDown()
