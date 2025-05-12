@@ -24,11 +24,17 @@ namespace Duck
         private void NextDongle()
         {
             lastDongle = GetDongle();
+
+            StartCoroutine(WaitNext());
         }
 
         private IEnumerator WaitNext()
         {
-            yield return null;
+            while (!lastDongle.IsUnityNull()) yield return null;
+
+            yield return new WaitForSeconds(2.5f);
+
+            NextDongle();
         }
 
         public void TouchDown()
