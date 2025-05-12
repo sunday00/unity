@@ -34,7 +34,7 @@ namespace Duck
 
             yield return new WaitForSeconds(2.5f);
 
-            NextDongle();
+            NextDongle(); 
         }
 
         public void TouchDown()
