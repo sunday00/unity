@@ -2,6 +2,7 @@ using System.Collections;
 using Duck.Player;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Duck
 {
@@ -10,6 +11,11 @@ namespace Duck
         public Dongle lastDongle;
         public GameObject donglePrefab;
         public Transform dongleGroup;
+
+        private void Awake()
+        {
+            Application.targetFrameRate = 60;
+        }
 
         private void Start()
         {
