@@ -24,6 +24,8 @@ namespace Duck
         private void NextDongle()
         {
             lastDongle = GetDongle();
+            lastDongle.level = Random.Range(0, 8);
+            lastDongle.gameObject.SetActive(true);
 
             StartCoroutine(WaitNext());
         }
@@ -34,7 +36,7 @@ namespace Duck
 
             yield return new WaitForSeconds(2.5f);
 
-            NextDongle(); 
+            NextDongle();
         }
 
         public void TouchDown()

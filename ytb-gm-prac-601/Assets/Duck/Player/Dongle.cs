@@ -7,12 +7,15 @@ namespace Duck.Player
     {
         public Camera mainCamera;
         public bool isDrag;
-        private Rigidbody2D _rb;
+        public int level;
 
+        private Animator _anim;
+        private Rigidbody2D _rb;
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
+            _anim = GetComponent<Animator>();
             if (mainCamera.IsUnityNull()) mainCamera = Camera.main;
         }
 
@@ -32,6 +35,11 @@ namespace Duck.Player
             mousePosition.y = 8f;
 
             transform.position = Vector2.Lerp(transform.position, mousePosition, 0.2f);
+        }
+
+        private void OnEnable()
+        {
+            _anim.SetInteger("Level", level);
         }
 
         public void Drag()
