@@ -9,6 +9,8 @@ namespace Duck.Player
         public bool isDrag;
         public int level;
 
+        public bool isMerge;
+
         private Animator _anim;
         private Rigidbody2D _rb;
 
@@ -40,6 +42,34 @@ namespace Duck.Player
         private void OnEnable()
         {
             _anim.SetInteger("Level", level);
+        }
+
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            if (collision.gameObject.tag != "Dongle") return;
+
+            var other = collision.gameObject.GetComponent<Dongle>();
+
+            if (level != other.level) return;
+
+            if (isMerge) return;
+
+            if (other.isMerge) return;
+
+            if (level >= 7) return;
+
+            var meX = transform.position.x;
+            var meY = transform.position.y;
+            var otherX = other.transform.position.x;
+            var otherY = other.transform.position.y;
+
+            if (meY < otherY || (meY.Equals(otherY) && meX > otherX)) other.Hide();
+        }
+
+        public void Hide()
+        {
+            isMerge = true;
+            _rb.simulated = false;
         }
 
         public void Drag()
