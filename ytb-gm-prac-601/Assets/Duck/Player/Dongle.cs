@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,12 +13,14 @@ namespace Duck.Player
         public bool isMerge;
 
         private Animator _anim;
+        private CircleCollider2D _collider;
         private Rigidbody2D _rb;
 
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
             _anim = GetComponent<Animator>();
+            _collider = GetComponent<CircleCollider2D>();
             if (mainCamera.IsUnityNull()) mainCamera = Camera.main;
         }
 
@@ -63,13 +66,33 @@ namespace Duck.Player
             var otherX = other.transform.position.x;
             var otherY = other.transform.position.y;
 
-            if (meY < otherY || (meY.Equals(otherY) && meX > otherX)) other.Hide();
+            if (meY < otherY || (meY.Equals(otherY) && meX > otherX)) other.Hide(transform.position);
         }
 
-        public void Hide()
+        public void Hide(Vector2 targetPos)
         {
             isMerge = true;
             _rb.simulated = false;
+            _collider.enabled = false;
+
+            StartCoroutine(HideRoutine(targetPos));
+        }
+
+        private IEnumerator HideRoutine(Vector2 targetPos)
+        {
+            var frameCount = 0;
+
+            while (frameCount < 20)
+            {
+                frameCount++;
+                transform.position = Vector2.Lerp(transform.position, targetPos, 0.2f);
+
+                yield return null;
+            }
+
+            isMerge = false;
+            // TODO: why not destroy?
+            gameObject.SetActive(false);
         }
 
         public void Drag()

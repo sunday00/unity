@@ -30,7 +30,9 @@ namespace Duck
         private void NextDongle()
         {
             lastDongle = GetDongle();
-            lastDongle.level = Random.Range(0, 8);
+            // lastDongle.level = Random.Range(0, 8);
+            // INFO: dev
+            lastDongle.level = Random.Range(0, 2);
             lastDongle.gameObject.SetActive(true);
 
             StartCoroutine(WaitNext());
