@@ -66,7 +66,12 @@ namespace Duck.Player
             var otherX = other.transform.position.x;
             var otherY = other.transform.position.y;
 
-            if (meY < otherY || (meY.Equals(otherY) && meX > otherX)) other.Hide(transform.position);
+            if (meY < otherY || (meY.Equals(otherY) && meX > otherX))
+            {
+                other.Hide(transform.position);
+
+                LevelUp();
+            }
         }
 
         public void Hide(Vector2 targetPos)
@@ -93,6 +98,27 @@ namespace Duck.Player
             isMerge = false;
             // TODO: why not destroy?
             gameObject.SetActive(false);
+        }
+
+        private void LevelUp()
+        {
+            isMerge = true;
+            _rb.linearVelocity = Vector2.zero;
+            _rb.angularVelocity = 0;
+
+            StartCoroutine(LevelUpRoutine());
+        }
+
+        private IEnumerator LevelUpRoutine()
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            _anim.SetInteger("Level", level + 1);
+
+            yield return new WaitForSeconds(0.1f);
+            level++;
+
+            isMerge = false;
         }
 
         public void Drag()
