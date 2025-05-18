@@ -6,6 +6,8 @@ namespace Duck.Player
 {
     public class Dongle : MonoBehaviour
     {
+        public GameManager Manager;
+
         public Camera mainCamera;
         public bool isDrag;
         public int level;
@@ -111,12 +113,14 @@ namespace Duck.Player
 
         private IEnumerator LevelUpRoutine()
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
 
             _anim.SetInteger("Level", level + 1);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
             level++;
+
+            Manager.maxLevel = Mathf.Max(level, Manager.maxLevel);
 
             isMerge = false;
         }

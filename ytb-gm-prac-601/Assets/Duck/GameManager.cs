@@ -12,6 +12,8 @@ namespace Duck
         public GameObject donglePrefab;
         public Transform dongleGroup;
 
+        public int maxLevel = 2;
+
         private void Awake()
         {
             Application.targetFrameRate = 60;
@@ -30,9 +32,10 @@ namespace Duck
         private void NextDongle()
         {
             lastDongle = GetDongle();
+            lastDongle.Manager = this;
             // lastDongle.level = Random.Range(0, 8);
             // INFO: dev
-            lastDongle.level = Random.Range(0, 2);
+            lastDongle.level = Random.Range(0, maxLevel);
             lastDongle.gameObject.SetActive(true);
 
             StartCoroutine(WaitNext());
