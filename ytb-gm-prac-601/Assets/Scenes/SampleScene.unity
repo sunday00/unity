@@ -419,6 +419,7 @@ MonoBehaviour:
   lastDongle: {fileID: 0}
   donglePrefab: {fileID: 1580971963795277533, guid: aac3eef278ba64d3599d3d4d5481d436, type: 3}
   dongleGroup: {fileID: 772796845}
+  maxLevel: 0
 --- !u!4 &259984983
 Transform:
   m_ObjectHideFlags: 0
@@ -1013,7 +1014,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 8, z: -10}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
