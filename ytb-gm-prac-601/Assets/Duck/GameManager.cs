@@ -12,7 +12,12 @@ namespace Duck
         public GameObject donglePrefab;
         public Transform dongleGroup;
 
+        public GameObject effectPrefab;
+        public Transform effectGroup;
+
         public int maxLevel = 2;
+
+        public int score;
 
         private void Awake()
         {
@@ -26,7 +31,15 @@ namespace Duck
 
         private Dongle GetDongle()
         {
-            return Instantiate(donglePrefab, dongleGroup).GetComponent<Dongle>();
+            var effectObject = Instantiate(effectPrefab, effectGroup);
+            var effect = effectObject.GetComponent<ParticleSystem>();
+
+            var dongleObject = Instantiate(donglePrefab, dongleGroup);
+            var dongle = dongleObject.GetComponent<Dongle>();
+
+            dongle.effect = effect;
+
+            return dongle;
         }
 
         private void NextDongle()

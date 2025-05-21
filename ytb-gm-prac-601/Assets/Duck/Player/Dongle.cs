@@ -8,6 +8,8 @@ namespace Duck.Player
     {
         public GameManager Manager;
 
+        public ParticleSystem effect;
+
         public Camera mainCamera;
         public bool isDrag;
         public int level;
@@ -97,6 +99,8 @@ namespace Duck.Player
                 yield return null;
             }
 
+            Manager.score += (int)Mathf.Pow(2, level);
+
             isMerge = false;
             // TODO: why not destroy?
             gameObject.SetActive(false);
@@ -117,12 +121,21 @@ namespace Duck.Player
 
             _anim.SetInteger("Level", level + 1);
 
+            EffectPlay();
+
             yield return new WaitForSeconds(0.05f);
             level++;
 
             Manager.maxLevel = Mathf.Max(level, Manager.maxLevel);
 
             isMerge = false;
+        }
+
+        private void EffectPlay()
+        {
+            effect.transform.position = transform.position;
+            effect.transform.localScale = transform.localScale;
+            effect.Play();
         }
 
         public void Drag()
