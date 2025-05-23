@@ -20,11 +20,16 @@ namespace Duck.Player
         private CircleCollider2D _collider;
         private Rigidbody2D _rb;
 
+        private float deadTime;
+        private SpriteRenderer sprite;
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
             _anim = GetComponent<Animator>();
             _collider = GetComponent<CircleCollider2D>();
+            sprite = GetComponent<SpriteRenderer>();
+
             if (mainCamera.IsUnityNull()) mainCamera = Camera.main;
         }
 
@@ -75,6 +80,18 @@ namespace Duck.Player
                 other.Hide(transform.position);
 
                 LevelUp();
+            }
+        }
+
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            if (other.tag.Equals("Finish"))
+            {
+                deadTime += Time.deltaTime;
+
+                if (deadTime > 2) sprite.color = new Color(0.9f, 0.2f, 0.2f, 0.9f);
+
+                if (deadTime > 5) Manager.GameOver();
             }
         }
 

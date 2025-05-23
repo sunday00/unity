@@ -77,5 +77,10 @@ namespace Duck
             lastDongle.Drop();
             lastDongle = null;
         }
+
+        public void GameOver()
+        {
+            print("GameOver");
+        }
     }
 }
