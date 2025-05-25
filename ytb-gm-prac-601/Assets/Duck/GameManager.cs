@@ -19,6 +19,8 @@ namespace Duck
 
         public int score;
 
+        public bool isOver;
+
         private void Awake()
         {
             Application.targetFrameRate = 60;
@@ -80,6 +82,9 @@ namespace Duck
 
         public void GameOver()
         {
+            if (isOver) return;
+
+            isOver = true;
             print("GameOver");
         }
     }

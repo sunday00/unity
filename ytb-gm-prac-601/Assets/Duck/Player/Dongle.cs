@@ -83,6 +83,17 @@ namespace Duck.Player
             }
         }
 
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.tag.Equals("Finish"))
+            {
+                deadTime = 0;
+
+                sprite.color = Color.white;
+                
+            }
+        }
+
         private void OnTriggerStay2D(Collider2D other)
         {
             if (other.tag.Equals("Finish"))
