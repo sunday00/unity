@@ -15,17 +15,17 @@ namespace Duck.Player
         public int level;
 
         public bool isMerge;
+        public Rigidbody2D rb;
 
         private Animator _anim;
         private CircleCollider2D _collider;
-        private Rigidbody2D _rb;
 
         private float deadTime;
         private SpriteRenderer sprite;
 
         private void Awake()
         {
-            _rb = GetComponent<Rigidbody2D>();
+            rb = GetComponent<Rigidbody2D>();
             _anim = GetComponent<Animator>();
             _collider = GetComponent<CircleCollider2D>();
             sprite = GetComponent<SpriteRenderer>();
@@ -90,7 +90,6 @@ namespace Duck.Player
                 deadTime = 0;
 
                 sprite.color = Color.white;
-                
             }
         }
 
@@ -109,7 +108,7 @@ namespace Duck.Player
         public void Hide(Vector2 targetPos)
         {
             isMerge = true;
-            _rb.simulated = false;
+            rb.simulated = false;
             _collider.enabled = false;
 
             StartCoroutine(HideRoutine(targetPos));
@@ -122,7 +121,17 @@ namespace Duck.Player
             while (frameCount < 20)
             {
                 frameCount++;
-                transform.position = Vector2.Lerp(transform.position, targetPos, 0.2f);
+
+                if (targetPos == Vector2.up * 100)
+                {
+                    EffectPlay();
+                    transform.localScale = Vector2.Lerp(transform.localScale, Vector2.zero, 0.2f);
+                }
+                else
+                {
+                    transform.position = Vector2.Lerp(transform.position, targetPos, 0.2f);
+                }
+
 
                 yield return null;
             }
@@ -137,8 +146,8 @@ namespace Duck.Player
         private void LevelUp()
         {
             isMerge = true;
-            _rb.linearVelocity = Vector2.zero;
-            _rb.angularVelocity = 0;
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0;
 
             StartCoroutine(LevelUpRoutine());
         }
@@ -174,7 +183,7 @@ namespace Duck.Player
         public void Drop()
         {
             isDrag = false;
-            _rb.simulated = true;
+            rb.simulated = true;
         }
     }
 }

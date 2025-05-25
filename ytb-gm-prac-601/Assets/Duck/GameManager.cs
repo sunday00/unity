@@ -46,6 +46,8 @@ namespace Duck
 
         private void NextDongle()
         {
+            if (isOver) return;
+
             lastDongle = GetDongle();
             lastDongle.Manager = this;
             // lastDongle.level = Random.Range(0, 8);
@@ -85,7 +87,22 @@ namespace Duck
             if (isOver) return;
 
             isOver = true;
-            print("GameOver");
+            // print("GameOver");
+
+            StartCoroutine(GameOverRoutine());
+        }
+
+        private IEnumerator GameOverRoutine()
+        {
+            var dongles = FindObjectsByType<Dongle>(FindObjectsSortMode.None);
+
+            foreach (var dongle in dongles) dongle.rb.simulated = false;
+
+            foreach (var dongle in dongles)
+            {
+                dongle.Hide(Vector2.up * 100);
+                yield return new WaitForSeconds(0.2f);
+            }
         }
     }
 }
