@@ -17,6 +17,8 @@ namespace Duck.Player
         public bool isMerge;
         public Rigidbody2D rb;
 
+        public bool isAttach;
+
         private Animator _anim;
         private CircleCollider2D _collider;
 
@@ -54,6 +56,11 @@ namespace Duck.Player
         private void OnEnable()
         {
             _anim.SetInteger("Level", level);
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            StartCoroutine(AttachRoutine());
         }
 
         private void OnCollisionStay2D(Collision2D collision)
@@ -103,6 +110,17 @@ namespace Duck.Player
 
                 if (deadTime > 5) Manager.GameOver();
             }
+        }
+
+        private IEnumerator AttachRoutine()
+        {
+            if (isAttach) yield break;
+
+            isAttach = true;
+            Manager.SfxPlay(GameManager.Sfx.Attach);
+            yield return new WaitForSeconds(0.2f);
+
+            isAttach = false;
         }
 
         public void Hide(Vector2 targetPos)
@@ -159,6 +177,7 @@ namespace Duck.Player
             _anim.SetInteger("Level", level + 1);
 
             EffectPlay();
+            Manager.SfxPlay(GameManager.Sfx.LevelUp);
 
             yield return new WaitForSeconds(0.05f);
             level++;

@@ -8,6 +8,15 @@ namespace Duck
 {
     public class GameManager : MonoBehaviour
     {
+        public enum Sfx
+        {
+            LevelUp,
+            Next,
+            Attach,
+            Button,
+            Over
+        }
+
         public Dongle lastDongle;
         public GameObject donglePrefab;
         public Transform dongleGroup;
@@ -21,6 +30,11 @@ namespace Duck
 
         public bool isOver;
 
+        public AudioSource bgmPlayer;
+        public AudioSource[] sfxPlayers;
+        public int sfxCursor;
+        public AudioClip[] sfxClips;
+
         private void Awake()
         {
             Application.targetFrameRate = 60;
@@ -28,6 +42,7 @@ namespace Duck
 
         private void Start()
         {
+            bgmPlayer.Play();
             NextDongle();
         }
 
@@ -55,6 +70,7 @@ namespace Duck
             lastDongle.level = Random.Range(0, maxLevel);
             lastDongle.gameObject.SetActive(true);
 
+            SfxPlay(Sfx.Next);
             StartCoroutine(WaitNext());
         }
 
@@ -103,6 +119,35 @@ namespace Duck
                 dongle.Hide(Vector2.up * 100);
                 yield return new WaitForSeconds(0.2f);
             }
+
+            yield return new WaitForSeconds(1f);
+
+            SfxPlay(Sfx.Over);
+        }
+
+        public void SfxPlay(Sfx type)
+        {
+            switch (type)
+            {
+                case Sfx.LevelUp:
+                    sfxPlayers[sfxCursor].clip = sfxClips[Random.Range(0, 3)];
+                    break;
+                case Sfx.Next:
+                    sfxPlayers[sfxCursor].clip = sfxClips[3];
+                    break;
+                case Sfx.Attach:
+                    sfxPlayers[sfxCursor].clip = sfxClips[4];
+                    break;
+                case Sfx.Button:
+                    sfxPlayers[sfxCursor].clip = sfxClips[5];
+                    break;
+                case Sfx.Over:
+                    sfxPlayers[sfxCursor].clip = sfxClips[6];
+                    break;
+            }
+
+            sfxPlayers[sfxCursor].Play();
+            sfxCursor = (sfxCursor + 1) % sfxPlayers.Length;
         }
     }
 }
