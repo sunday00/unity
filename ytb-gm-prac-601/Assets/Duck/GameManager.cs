@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Duck.Player;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -35,9 +36,20 @@ namespace Duck
         public int sfxCursor;
         public AudioClip[] sfxClips;
 
+        public List<Dongle> dongles;
+        public List<ParticleSystem> particles;
+
+        [Range(1, 30)] public int poolSize;
+        public int poolCursor;
+
         private void Awake()
         {
             Application.targetFrameRate = 60;
+
+            dongles = new List<Dongle>();
+            particles = new List<ParticleSystem>();
+
+            for (var i = 0; i < poolSize; i++) MakeDongle();
         }
 
         private void Start()
@@ -46,17 +58,28 @@ namespace Duck
             NextDongle();
         }
 
-        private Dongle GetDongle()
+        private Dongle MakeDongle()
         {
             var effectObject = Instantiate(effectPrefab, effectGroup);
+            effectObject.name = "Effect " + particles.Count;
             var effect = effectObject.GetComponent<ParticleSystem>();
+            particles.Add(effect);
 
             var dongleObject = Instantiate(donglePrefab, dongleGroup);
+            dongleObject.name = "Dongle " + dongles.Count;
             var dongle = dongleObject.GetComponent<Dongle>();
 
+            dongle.Manager = this;
             dongle.effect = effect;
 
+            dongles.Add(dongle);
+
             return dongle;
+        }
+
+        private Dongle GetDongle()
+        {
+            return null;
         }
 
         private void NextDongle()
@@ -64,7 +87,6 @@ namespace Duck
             if (isOver) return;
 
             lastDongle = GetDongle();
-            lastDongle.Manager = this;
             // lastDongle.level = Random.Range(0, 8);
             // INFO: dev
             lastDongle.level = Random.Range(0, maxLevel);
