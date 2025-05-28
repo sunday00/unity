@@ -58,6 +58,23 @@ namespace Duck.Player
             _anim.SetInteger("Level", level);
         }
 
+        private void OnDisable()
+        {
+            level = 0;
+            isDrag = false;
+            isMerge = false;
+            isAttach = false;
+
+            transform.localPosition = Vector2.zero;
+            transform.localRotation = Quaternion.identity;
+            transform.localScale = Vector3.zero;
+
+            rb.simulated = false;
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0;
+            _collider.enabled = true;
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             StartCoroutine(AttachRoutine());

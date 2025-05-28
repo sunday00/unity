@@ -79,7 +79,13 @@ namespace Duck
 
         private Dongle GetDongle()
         {
-            return null;
+            for (var index = 0; index < dongles.Count; index++)
+            {
+                poolCursor = (poolCursor + 1) % dongles.Count;
+                if (!dongles[poolCursor].gameObject.activeSelf) return dongles[poolCursor];
+            }
+
+            return MakeDongle();
         }
 
         private void NextDongle()
@@ -90,6 +96,7 @@ namespace Duck
             // lastDongle.level = Random.Range(0, 8);
             // INFO: dev
             lastDongle.level = Random.Range(0, maxLevel);
+            lastDongle.transform.localPosition = new Vector3(0, 0, 10);
             lastDongle.gameObject.SetActive(true);
 
             SfxPlay(Sfx.Next);
