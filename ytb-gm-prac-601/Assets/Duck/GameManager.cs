@@ -50,6 +50,8 @@ namespace Duck
         [Header("---[UI]")] //
         public Text scoreText;
 
+        public Text maxScoreText;
+
         private void Awake()
         {
             Application.targetFrameRate = 60;
@@ -58,12 +60,19 @@ namespace Duck
             particles = new List<ParticleSystem>();
 
             for (var i = 0; i < poolSize; i++) MakeDongle();
+
+            maxScoreText.text = PlayerPrefs.HasKey("MaxScore") ? PlayerPrefs.GetInt("MaxScore").ToString() : "0";
         }
 
         private void Start()
         {
             bgmPlayer.Play();
             NextDongle();
+        }
+
+        private void LateUpdate()
+        {
+            scoreText.text = score.ToString();
         }
 
         private Dongle MakeDongle()
@@ -159,6 +168,8 @@ namespace Duck
 
             yield return new WaitForSeconds(1f);
 
+            var maxScore = PlayerPrefs.HasKey("MaxScore") ? PlayerPrefs.GetInt("MaxScore") : 0;
+            PlayerPrefs.SetInt("MaxScore", Mathf.Max(maxScore, score));
             SfxPlay(Sfx.Over);
         }
 
