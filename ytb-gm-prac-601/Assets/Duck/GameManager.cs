@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Duck.Player;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Duck
@@ -18,29 +19,36 @@ namespace Duck
             Over
         }
 
+        [Header("---[core]")] //
+        public int score;
+
+        public int maxLevel = 7;
+        public bool isOver;
+
+        [Header("---[object pooling]")] //
         public Dongle lastDongle;
+
         public GameObject donglePrefab;
         public Transform dongleGroup;
 
         public GameObject effectPrefab;
         public Transform effectGroup;
 
-        public int maxLevel = 2;
-
-        public int score;
-
-        public bool isOver;
-
-        public AudioSource bgmPlayer;
-        public AudioSource[] sfxPlayers;
-        public int sfxCursor;
-        public AudioClip[] sfxClips;
-
         public List<Dongle> dongles;
         public List<ParticleSystem> particles;
 
         [Range(1, 30)] public int poolSize;
         public int poolCursor;
+
+        [Header("---[Audio]")] //
+        public AudioSource bgmPlayer;
+
+        public AudioSource[] sfxPlayers;
+        public int sfxCursor;
+        public AudioClip[] sfxClips;
+
+        [Header("---[UI]")] //
+        public Text scoreText;
 
         private void Awake()
         {
