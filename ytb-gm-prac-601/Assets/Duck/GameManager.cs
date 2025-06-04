@@ -53,6 +53,11 @@ namespace Duck
 
         public Text maxScoreText;
 
+        [Header("---[Start]")] //
+        public GameObject startGroup;
+
+        public GameObject walls;
+
         [Header("---[End]")] //
         public GameObject endGroup;
 
@@ -76,15 +81,29 @@ namespace Duck
             StartCoroutine(ResetRoutine());
         }
 
-        private void Start()
+        private void Update()
         {
-            bgmPlayer.Play();
-            NextDongle();
+            if (Input.GetButtonDown("Cancel")) Application.Quit();
         }
 
         private void LateUpdate()
         {
             scoreText.text = score.ToString();
+        }
+
+        public void GameStart()
+        {
+            walls.SetActive(true);
+            scoreText.gameObject.SetActive(true);
+            maxScoreText.gameObject.SetActive(true);
+
+            startGroup.SetActive(false);
+
+            bgmPlayer.Play();
+            SfxPlay(Sfx.Button);
+
+            Invoke("NextDongle", 1.5f);
+            // NextDongle();
         }
 
         private Dongle MakeDongle()
