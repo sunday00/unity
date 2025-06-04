@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Duck.Player;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -52,6 +53,11 @@ namespace Duck
 
         public Text maxScoreText;
 
+        [Header("---[End]")] //
+        public GameObject endGroup;
+
+        public Text subScoreText;
+
         private void Awake()
         {
             Application.targetFrameRate = 60;
@@ -62,6 +68,12 @@ namespace Duck
             for (var i = 0; i < poolSize; i++) MakeDongle();
 
             maxScoreText.text = PlayerPrefs.HasKey("MaxScore") ? PlayerPrefs.GetInt("MaxScore").ToString() : "0";
+        }
+
+        public void Reset()
+        {
+            SfxPlay(Sfx.Button);
+            StartCoroutine(ResetRoutine());
         }
 
         private void Start()
@@ -156,11 +168,11 @@ namespace Duck
 
         private IEnumerator GameOverRoutine()
         {
-            var dongles = FindObjectsByType<Dongle>(FindObjectsSortMode.None);
+            var localDongles = FindObjectsByType<Dongle>(FindObjectsSortMode.None);
 
-            foreach (var dongle in dongles) dongle.rb.simulated = false;
+            foreach (var dongle in localDongles) dongle.rb.simulated = false;
 
-            foreach (var dongle in dongles)
+            foreach (var dongle in localDongles)
             {
                 dongle.Hide(Vector2.up * 100);
                 yield return new WaitForSeconds(0.2f);
@@ -170,7 +182,19 @@ namespace Duck
 
             var maxScore = PlayerPrefs.HasKey("MaxScore") ? PlayerPrefs.GetInt("MaxScore") : 0;
             PlayerPrefs.SetInt("MaxScore", Mathf.Max(maxScore, score));
+
+            subScoreText.text = "score: " + score;
+            endGroup.SetActive(true);
+
+            bgmPlayer.Stop();
             SfxPlay(Sfx.Over);
+        }
+
+        private IEnumerator ResetRoutine()
+        {
+            yield return new WaitForSeconds(1f);
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("Main");
         }
 
         public void SfxPlay(Sfx type)
