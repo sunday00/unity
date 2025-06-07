@@ -6,29 +6,34 @@ namespace Ducks.Player
     public class Player : MonoBehaviour
     {
         public float speed = 3f;
+        private Animator _animator;
         private Vector2 _inputVec;
         private Rigidbody2D _rigid;
+        private SpriteRenderer _spriter;
 
         private void Awake()
         {
             _rigid = GetComponent<Rigidbody2D>();
+            _spriter = GetComponent<SpriteRenderer>();
+            _animator = GetComponent<Animator>();
             speed = 3f;
         }
 
         private void Update()
         {
-            // _inputVec.x = Input.GetAxisRaw("Horizontal");
-            // _inputVec.y = Input.GetAxisRaw("Vertical");
         }
 
         private void FixedUpdate()
         {
-            // _rigid.AddForce(_inputVec);
-            // _rigid.linearVelocity = _inputVec;
-            // var nextVec = _inputVec.normalized * speed * Time.fixedDeltaTime;
             var nextVec = _inputVec * speed * Time.fixedDeltaTime;
 
             _rigid.MovePosition(_rigid.position + nextVec);
+        }
+
+        private void LateUpdate()
+        {
+            _animator.SetFloat("Speed", _inputVec.magnitude);
+            if (!_inputVec.x.Equals(0)) _spriter.flipX = _inputVec.x < 0;
         }
 
         private void OnMove(InputValue value)
