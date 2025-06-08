@@ -6,8 +6,9 @@ namespace Ducks.Player
     public class Player : MonoBehaviour
     {
         public float speed = 3f;
+        public Vector2 inputVec;
+
         private Animator _animator;
-        private Vector2 _inputVec;
         private Rigidbody2D _rigid;
         private SpriteRenderer _spriter;
 
@@ -21,24 +22,26 @@ namespace Ducks.Player
 
         private void Update()
         {
+            if (Input.GetButtonDown("Fire3")) speed = 5f;
+            if (Input.GetButtonUp("Fire3")) speed = 3f;
         }
 
         private void FixedUpdate()
         {
-            var nextVec = _inputVec * speed * Time.fixedDeltaTime;
+            var nextVec = inputVec * speed * Time.fixedDeltaTime;
 
             _rigid.MovePosition(_rigid.position + nextVec);
         }
 
         private void LateUpdate()
         {
-            _animator.SetFloat("Speed", _inputVec.magnitude);
-            if (!_inputVec.x.Equals(0)) _spriter.flipX = _inputVec.x < 0;
+            _animator.SetFloat("Speed", inputVec.magnitude);
+            if (!inputVec.x.Equals(0)) _spriter.flipX = inputVec.x < 0;
         }
 
         private void OnMove(InputValue value)
         {
-            _inputVec = value.Get<Vector2>();
+            inputVec = value.Get<Vector2>();
         }
     }
 }
