@@ -29,5 +29,11 @@ namespace Ducks.Enemy
 
             rigid.linearVelocity = Vector2.zero;
         }
+
+        private void LateUpdate()
+        {
+            sprite.flipX = target.position.x < rigid.position.x;
+            sprite.sortingOrder = target.position.y > rigid.position.y ? 6 : 2;
+        }
     }
 }
