@@ -4,6 +4,13 @@ namespace Ducks
 {
     public class MapReposition : MonoBehaviour
     {
+        public Collider2D col;
+
+        private void Awake()
+        {
+            col = GetComponent<Collider2D>();
+        }
+
         private void OnTriggerExit2D(Collider2D other)
         {
             if (!other.CompareTag("Area")) return;
@@ -27,7 +34,13 @@ namespace Ducks
                     else if (diffX < diffY)
                         transform.Translate(Vector2.up * dirY * 40);
                     break;
-                case "Enemy": break;
+                case "Enemy":
+                    if (col.enabled)
+                        transform.Translate(
+                            playerDir * 20
+                            + new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f))
+                        );
+                    break;
             }
         }
     }

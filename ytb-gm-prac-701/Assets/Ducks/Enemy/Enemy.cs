@@ -7,7 +7,7 @@ namespace Ducks.Enemy
         public float speed;
         public Rigidbody2D target;
 
-        public bool isLive;
+        public bool isLive = true;
 
         [Header("---components---")] //
         public SpriteRenderer sprite;
@@ -18,10 +18,13 @@ namespace Ducks.Enemy
         {
             rigid = GetComponent<Rigidbody2D>();
             sprite = GetComponent<SpriteRenderer>();
+            isLive = true;
         }
 
         private void FixedUpdate()
         {
+            if (!isLive) return;
+
             var dir = target.position - rigid.position;
             var nextVec = dir.normalized * speed * Time.fixedDeltaTime;
 
@@ -32,6 +35,8 @@ namespace Ducks.Enemy
 
         private void LateUpdate()
         {
+            if (!isLive) return;
+
             sprite.flipX = target.position.x < rigid.position.x;
             sprite.sortingOrder = target.position.y > rigid.position.y ? 6 : 2;
         }
