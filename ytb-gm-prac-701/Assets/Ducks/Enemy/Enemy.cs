@@ -40,5 +40,10 @@ namespace Ducks.Enemy
             sprite.flipX = target.position.x < rigid.position.x;
             sprite.sortingOrder = target.position.y > rigid.position.y ? 6 : 2;
         }
+
+        private void OnEnable()
+        {
+            target = GameManager.Instance.player.GetComponent<Rigidbody2D>();
+        }
     }
 }
