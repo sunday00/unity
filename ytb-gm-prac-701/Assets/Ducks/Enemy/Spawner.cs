@@ -6,6 +6,7 @@ namespace Ducks.Enemy
     {
         public Transform[] spawnPoints;
 
+        public int level;
         private float _timer;
 
         private void Awake()
@@ -17,7 +18,9 @@ namespace Ducks.Enemy
         {
             _timer += Time.deltaTime;
 
-            if (_timer > 0.2f)
+            level = Mathf.FloorToInt(GameManager.Instance.gameTime / 10f);
+
+            if (_timer > 1f / (level + 1))
             {
                 _timer = 0;
                 Spawn();
@@ -26,7 +29,7 @@ namespace Ducks.Enemy
 
         private void Spawn()
         {
-            var enemy = GameManager.Instance.pool.Get(Random.Range(0, 2));
+            var enemy = GameManager.Instance.pool.Get(level);
 
             enemy.transform.position = spawnPoints[Random.Range(1, spawnPoints.Length)].position;
         }
