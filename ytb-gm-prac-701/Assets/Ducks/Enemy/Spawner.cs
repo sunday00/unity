@@ -1,10 +1,13 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Ducks.Enemy
 {
     public class Spawner : MonoBehaviour
     {
         public Transform[] spawnPoints;
+        public SpawnData[] spawnData;
 
         public int level;
         private float _timer;
@@ -33,5 +36,14 @@ namespace Ducks.Enemy
 
             enemy.transform.position = spawnPoints[Random.Range(1, spawnPoints.Length)].position;
         }
+    }
+
+    [Serializable]
+    public class SpawnData
+    {
+        public int health;
+        public float spawnTime;
+        public float speed;
+        public int spriteType;
     }
 }
