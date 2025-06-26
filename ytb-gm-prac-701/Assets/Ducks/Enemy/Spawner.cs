@@ -23,7 +23,7 @@ namespace Ducks.Enemy
 
             level = Mathf.FloorToInt(GameManager.Instance.gameTime / 10f);
 
-            if (_timer > 1f / (level + 1))
+            if (_timer > spawnData[level].spawnTime)
             {
                 _timer = 0;
                 Spawn();
@@ -32,9 +32,10 @@ namespace Ducks.Enemy
 
         private void Spawn()
         {
-            var enemy = GameManager.Instance.pool.Get(level);
+            var enemy = GameManager.Instance.pool.Get(0);
 
             enemy.transform.position = spawnPoints[Random.Range(1, spawnPoints.Length)].position;
+            enemy.GetComponent<Enemy>().Init(spawnData[level]);
         }
     }
 

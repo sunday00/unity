@@ -5,19 +5,25 @@ namespace Ducks.Enemy
     public class Enemy : MonoBehaviour
     {
         public float speed;
+        public float health;
+        public float maxHealth;
+        public RuntimeAnimatorController[] animCon;
         public Rigidbody2D target;
 
-        public bool isLive = true;
+        public bool isLive;
 
         [Header("---components---")] //
         public SpriteRenderer sprite;
 
         public Rigidbody2D rigid;
 
+        public Animator anim;
+
         private void Awake()
         {
             rigid = GetComponent<Rigidbody2D>();
             sprite = GetComponent<SpriteRenderer>();
+            anim = GetComponent<Animator>();
             isLive = true;
         }
 
@@ -44,6 +50,16 @@ namespace Ducks.Enemy
         private void OnEnable()
         {
             target = GameManager.Instance.player.GetComponent<Rigidbody2D>();
+            isLive = true;
+            health = maxHealth;
+        }
+
+        public void Init(SpawnData spawnData)
+        {
+            anim.runtimeAnimatorController = animCon[spawnData.spriteType];
+            speed = spawnData.speed;
+            maxHealth = spawnData.health;
+            health = spawnData.health;
         }
     }
 }
