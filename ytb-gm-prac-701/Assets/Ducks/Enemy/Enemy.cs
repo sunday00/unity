@@ -1,3 +1,4 @@
+using Ducks.Object;
 using UnityEngine;
 
 namespace Ducks.Enemy
@@ -52,6 +53,28 @@ namespace Ducks.Enemy
             target = GameManager.Instance.player.GetComponent<Rigidbody2D>();
             isLive = true;
             health = maxHealth;
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!other.CompareTag("Bullet")) return;
+
+            var damage = other.GetComponent<Bullet>().damage;
+            health -= damage;
+
+            if (health > 0)
+                Damaged();
+            else
+                Dead();
+        }
+
+        private void Damaged()
+        {
+        }
+
+        private void Dead()
+        {
+            gameObject.SetActive(false);
         }
 
         public void Init(SpawnData spawnData)

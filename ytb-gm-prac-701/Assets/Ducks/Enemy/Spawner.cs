@@ -24,9 +24,8 @@ namespace Ducks.Enemy
             level =
                 Mathf.Min(
                     Mathf.FloorToInt(GameManager.Instance.gameTime / 10f),
-                    spawnPoints.Length - 1
+                    spawnData.Length - 1
                 );
-
 
             if (_timer > spawnData[level].spawnTime)
             {
