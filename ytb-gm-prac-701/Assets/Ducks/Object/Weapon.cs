@@ -17,6 +17,23 @@ namespace Ducks.Object
 
         private void Update()
         {
+            switch (id)
+            {
+                case 0:
+                    Repeat0();
+                    break;
+                default:
+                    Repeat1();
+                    break;
+            }
+        }
+
+        private void Repeat0()
+        {
+        }
+
+        private void Repeat1()
+        {
         }
 
         public void Init()
