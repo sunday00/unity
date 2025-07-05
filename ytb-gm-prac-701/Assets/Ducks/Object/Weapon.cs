@@ -26,6 +26,8 @@ namespace Ducks.Object
                     Repeat1();
                     break;
             }
+
+            if (Input.GetKeyDown(KeyCode.Space)) LevelUp(20, 5);
         }
 
         private void Repeat0()
@@ -64,8 +66,13 @@ namespace Ducks.Object
         {
             for (var i = 0; i < count; i++)
             {
-                var bullet = GameManager.Instance.pool.Get(prefabId).transform;
+                var bullet = i < transform.childCount
+                    ? transform.GetChild(i)
+                    : GameManager.Instance.pool.Get(prefabId).transform;
                 bullet.parent = transform;
+
+                bullet.localPosition = Vector3.zero;
+                bullet.localRotation = Quaternion.identity;
 
                 var rotVec = Vector3.forward * 360 * i / count;
                 bullet.Rotate(rotVec);
@@ -76,8 +83,12 @@ namespace Ducks.Object
             }
         }
 
-        public void LevelUp()
+        public void LevelUp(float dam, int cnt)
         {
+            damage = dam;
+            count += cnt;
+
+            if (id == 0) Batch();
         }
     }
 }
