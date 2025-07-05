@@ -30,6 +30,7 @@ namespace Ducks.Object
 
         private void Repeat0()
         {
+            transform.Rotate(Vector3.back * speed * Time.deltaTime);
         }
 
         private void Repeat1()
@@ -66,9 +67,17 @@ namespace Ducks.Object
                 var bullet = GameManager.Instance.pool.Get(prefabId).transform;
                 bullet.parent = transform;
 
+                var rotVec = Vector3.forward * 360 * i / count;
+                bullet.Rotate(rotVec);
+                bullet.Translate(bullet.up * 1.5f, Space.World);
+
                 var bulletScript = bullet.GetComponent<Bullet>();
                 bulletScript.Init(damage, -1); // -1 means Infinity per
             }
+        }
+
+        public void LevelUp()
+        {
         }
     }
 }
