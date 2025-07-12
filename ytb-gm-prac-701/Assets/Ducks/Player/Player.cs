@@ -7,6 +7,7 @@ namespace Ducks.Player
     {
         public float speed = 3f;
         public Vector2 inputVec;
+        public Scanner scanner;
 
         private Animator _animator;
         private Rigidbody2D _rigid;
@@ -17,6 +18,9 @@ namespace Ducks.Player
             _rigid = GetComponent<Rigidbody2D>();
             _spriter = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
+
+            scanner = GetComponent<Scanner>();
+
             speed = 3f;
         }
 

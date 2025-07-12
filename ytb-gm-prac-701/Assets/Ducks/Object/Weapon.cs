@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Ducks.Object
@@ -9,6 +10,14 @@ namespace Ducks.Object
         public float damage;
         public int count;
         public float speed;
+        private Player.Player player;
+
+        private float timer;
+
+        private void Awake()
+        {
+            player = GetComponentInParent<Player.Player>();
+        }
 
         private void Start()
         {
@@ -37,6 +46,20 @@ namespace Ducks.Object
 
         private void Repeat1()
         {
+            timer += Time.deltaTime;
+            if (timer >= speed)
+            {
+                timer = 0;
+                Fire();
+            }
+        }
+
+        private void Fire()
+        {
+            if (player.scanner.nearestTarget.IsUnityNull()) return;
+
+            var bullet = GameManager.Instance.pool.Get(prefabId).transform;
+            bullet.position = transform.position;
         }
 
         public void Init()
@@ -60,6 +83,7 @@ namespace Ducks.Object
 
         private void Action1()
         {
+            speed = 0.3f;
         }
 
         private void Batch()
