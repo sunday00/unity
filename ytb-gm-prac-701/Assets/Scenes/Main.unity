@@ -886,6 +886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   inputVec: {x: 0, y: 0}
+  scanner: {fileID: 0}
 --- !u!114 &848508799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18665,7 +18666,7 @@ MonoBehaviour:
   id: 1
   prefabId: 2
   damage: 3
-  count: 0
+  count: 1
   speed: 0
 --- !u!1 &2047257671
 GameObject:

@@ -58,8 +58,15 @@ namespace Ducks.Object
         {
             if (player.scanner.nearestTarget.IsUnityNull()) return;
 
+            var target = player.scanner.nearestTarget.position;
+            var dir = (target - transform.position).normalized;
+
             var bullet = GameManager.Instance.pool.Get(prefabId).transform;
             bullet.position = transform.position;
+            bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+
+            var bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.Init(damage, count, dir); // -1 means Infinity per
         }
 
         public void Init()
@@ -103,7 +110,7 @@ namespace Ducks.Object
                 bullet.Translate(bullet.up * 1.5f, Space.World);
 
                 var bulletScript = bullet.GetComponent<Bullet>();
-                bulletScript.Init(damage, -1); // -1 means Infinity per
+                bulletScript.Init(damage, -1, Vector3.zero); // -1 means Infinity per
             }
         }
 
