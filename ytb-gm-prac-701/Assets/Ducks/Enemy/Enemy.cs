@@ -1,3 +1,4 @@
+using System.Collections;
 using Ducks.Object;
 using UnityEngine;
 
@@ -20,17 +21,21 @@ namespace Ducks.Enemy
 
         public Animator anim;
 
+        private WaitForFixedUpdate wait;
+
         private void Awake()
         {
             rigid = GetComponent<Rigidbody2D>();
             sprite = GetComponent<SpriteRenderer>();
             anim = GetComponent<Animator>();
             isLive = true;
+
+            wait = new WaitForFixedUpdate();
         }
 
         private void FixedUpdate()
         {
-            if (!isLive) return;
+            if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
 
             var dir = target.position - rigid.position;
             var nextVec = dir.normalized * speed * Time.fixedDeltaTime;
@@ -62,6 +67,8 @@ namespace Ducks.Enemy
             var damage = other.GetComponent<Bullet>().damage;
             health -= damage;
 
+            StartCoroutine(KnockBack());
+
             if (health > 0)
                 Damaged();
             else
@@ -70,6 +77,20 @@ namespace Ducks.Enemy
 
         private void Damaged()
         {
+            anim.SetTrigger("Hit");
+        }
+
+        private IEnumerator KnockBack()
+        {
+            // yield return null;
+            //
+            // yield return new WaitForSeconds(0.2f);
+
+            yield return wait;
+
+            var playerPos = GameManager.Instance.player.transform.position;
+            var dirVec = transform.position - playerPos;
+            rigid.AddForce(dirVec.normalized * 3f, ForceMode2D.Impulse);
         }
 
         private void Dead()
