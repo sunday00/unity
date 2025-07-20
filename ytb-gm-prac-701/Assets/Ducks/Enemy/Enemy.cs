@@ -19,6 +19,8 @@ namespace Ducks.Enemy
 
         public Rigidbody2D rigid;
 
+        public Collider2D coll;
+
         public Animator anim;
 
         private WaitForFixedUpdate wait;
@@ -26,6 +28,7 @@ namespace Ducks.Enemy
         private void Awake()
         {
             rigid = GetComponent<Rigidbody2D>();
+            coll = GetComponent<Collider2D>();
             sprite = GetComponent<SpriteRenderer>();
             anim = GetComponent<Animator>();
             isLive = true;
@@ -57,6 +60,13 @@ namespace Ducks.Enemy
         {
             target = GameManager.Instance.player.GetComponent<Rigidbody2D>();
             isLive = true;
+
+            isLive = true;
+            coll.enabled = true;
+            rigid.simulated = true;
+
+            anim.SetBool("Dead", false);
+
             health = maxHealth;
         }
 
@@ -94,6 +104,17 @@ namespace Ducks.Enemy
         }
 
         private void Dead()
+        {
+            isLive = false;
+            coll.enabled = false;
+            rigid.simulated = false;
+
+            // sprite.sortingOrder = 1;
+
+            anim.SetBool("Dead", true);
+        }
+
+        private void DeadDisappear()
         {
             gameObject.SetActive(false);
         }
