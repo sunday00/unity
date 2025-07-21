@@ -18,9 +18,7 @@ namespace Ducks.Enemy
         public SpriteRenderer sprite;
 
         public Rigidbody2D rigid;
-
         public Collider2D coll;
-
         public Animator anim;
 
         private WaitForFixedUpdate wait;
@@ -72,7 +70,7 @@ namespace Ducks.Enemy
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.CompareTag("Bullet")) return;
+            if (!other.CompareTag("Bullet") || !isLive) return;
 
             var damage = other.GetComponent<Bullet>().damage;
             health -= damage;
@@ -112,6 +110,9 @@ namespace Ducks.Enemy
             // sprite.sortingOrder = 1;
 
             anim.SetBool("Dead", true);
+
+            GameManager.Instance.kill++;
+            GameManager.Instance.GetExp();
         }
 
         private void DeadDisappear()
