@@ -35,8 +35,12 @@ namespace Ducks
                     _mySlider.value = cueExp / maxExp;
 
                     break;
-                case InfoType.Level: break;
-                case InfoType.Kill: break;
+                case InfoType.Level:
+                    _myText.text = string.Format("Level.{0:F0}", GameManager.Instance.level);
+                    break;
+                case InfoType.Kill:
+                    _myText.text = string.Format("{0:F0}", GameManager.Instance.kill);
+                    break;
                 case InfoType.Time: break;
                 case InfoType.Health: break;
             }
