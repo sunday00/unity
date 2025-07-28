@@ -41,7 +41,13 @@ namespace Ducks
                 case InfoType.Kill:
                     _myText.text = string.Format("{0:F0}", GameManager.Instance.kill);
                     break;
-                case InfoType.Time: break;
+                case InfoType.Time:
+                    var remainTime = GameManager.Instance.maxGameTime - GameManager.Instance.gameTime;
+                    var hours = Mathf.FloorToInt(remainTime / 3600);
+                    var minutes = Mathf.FloorToInt(remainTime / 60);
+                    var seconds = Mathf.FloorToInt(remainTime % 60);
+                    _myText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", hours, minutes, seconds);
+                    break;
                 case InfoType.Health: break;
             }
         }
