@@ -48,7 +48,11 @@ namespace Ducks
                     var seconds = Mathf.FloorToInt(remainTime % 60);
                     _myText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", hours, minutes, seconds);
                     break;
-                case InfoType.Health: break;
+                case InfoType.Health:
+                    float cueHealth = GameManager.Instance.health;
+                    float maxHealth = GameManager.Instance.maxHealth;
+                    _mySlider.value = cueHealth / maxHealth;
+                    break;
             }
         }
     }

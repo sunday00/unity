@@ -21,10 +21,18 @@ namespace Ducks
         public int kill;
         public int exp;
 
+        public int health;
+        public int maxHealth = 100;
+
         private void Awake()
         {
             Instance = this;
             nextExp = new[] { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
+        }
+
+        private void Start()
+        {
+            health = maxHealth;
         }
 
         private void Update()
