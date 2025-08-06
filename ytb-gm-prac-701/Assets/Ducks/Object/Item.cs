@@ -32,6 +32,22 @@ namespace Ducks.Object
             {
                 case ItemData.ItemType.Melee:
                 case ItemData.ItemType.Range:
+                    if (level == 1)
+                    {
+                        var newWeapon = new GameObject();
+                        weapon = newWeapon.AddComponent<Weapon>();
+                        weapon.Init(data);
+                    }
+                    else
+                    {
+                        var nextDamage = data.baseDamage;
+                        var nextCount = 0;
+
+                        nextDamage += data.baseDamage * data.damages[level];
+                        nextCount += data.counts[level];
+
+                        weapon.LevelUp(nextDamage, nextCount);
+                    }
 
                     break;
                 case ItemData.ItemType.Glove:

@@ -16,13 +16,14 @@ namespace Ducks.Object
 
         private void Awake()
         {
-            player = GetComponentInParent<Player.Player>();
+            // player = GetComponentInParent<Player.Player>();
+            player = GameManager.Instance.player;
         }
 
-        private void Start()
-        {
-            Init();
-        }
+        // private void Start()
+        // {
+        //     Init();
+        // }
 
         private void Update()
         {
@@ -69,8 +70,23 @@ namespace Ducks.Object
             bulletScript.Init(damage, count, dir); // -1 means Infinity per
         }
 
-        public void Init()
+        public void Init(ItemData data)
         {
+            name = "Weapon " + data.itemId;
+            transform.parent = player.transform;
+            transform.localPosition = Vector3.zero;
+
+            id = data.itemId;
+            damage = data.baseDamage;
+            count = data.baseCount;
+
+            for (var index = 0; index < GameManager.Instance.pool.prefabs.Length; index++)
+                if (data.projectile == GameManager.Instance.pool.prefabs[index])
+                {
+                    prefabId = index;
+                    break;
+                }
+
             switch (id)
             {
                 case 0:
