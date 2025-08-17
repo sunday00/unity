@@ -67,10 +67,11 @@ namespace Ducks.Object
 
                     break;
                 case ItemData.ItemType.Heal:
+                    GameManager.Instance.health = GameManager.Instance.maxHealth;
                     break;
             }
 
-            level++;
+            if (data.itemType != ItemData.ItemType.Heal) level++;
 
             if (level == data.damages.Length) GetComponent<Button>().interactable = false;
         }
