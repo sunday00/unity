@@ -96,6 +96,8 @@ namespace Ducks.Object
                     Action1();
                     break;
             }
+
+            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
         }
 
         private void Action0()
@@ -136,6 +138,8 @@ namespace Ducks.Object
             count += cnt;
 
             if (id == 0) Batch();
+
+            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
         }
     }
 }

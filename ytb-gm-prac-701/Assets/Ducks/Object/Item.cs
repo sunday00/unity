@@ -8,6 +8,7 @@ namespace Ducks.Object
         public ItemData data;
         public int level;
         public Weapon weapon;
+        public Gear gear;
 
         private Image icon;
         private Text textLevel;
@@ -51,8 +52,19 @@ namespace Ducks.Object
 
                     break;
                 case ItemData.ItemType.Glove:
-                    break;
                 case ItemData.ItemType.Shoe:
+                    if (level == 1)
+                    {
+                        var newGear = new GameObject();
+                        gear = newGear.AddComponent<Gear>();
+                        gear.Init(data);
+                    }
+                    else
+                    {
+                        var nextRate = data.damages[level];
+                        gear.LevelUp(nextRate);
+                    }
+
                     break;
                 case ItemData.ItemType.Heal:
                     break;
