@@ -11,7 +11,10 @@ namespace Ducks.Object
         public Gear gear;
 
         private Image icon;
+        private Text textDesc;
         private Text textLevel;
+
+        private Text textName;
 
         private void Awake()
         {
@@ -20,12 +23,36 @@ namespace Ducks.Object
 
             var texts = GetComponentsInChildren<Text>();
             textLevel = texts[0];
+            textName = texts[1];
+            textDesc = texts[2];
+
+            textName.text = data.itemName;
         }
 
-        private void LateUpdate()
+        private void OnEnable()
         {
             textLevel.text = "Lv." + level;
+
+            switch (data.itemType)
+            {
+                case ItemData.ItemType.Melee:
+                case ItemData.ItemType.Range:
+                    textDesc.text = string.Format(data.itemDesc, data.damages[level] * 100, data.counts[level]);
+                    break;
+                case ItemData.ItemType.Glove:
+                case ItemData.ItemType.Shoe:
+                    textDesc.text = string.Format(data.itemDesc, data.damages[level] * 100);
+                    break;
+                default:
+                    textDesc.text = data.itemDesc;
+                    break;
+            }
         }
+
+        // private void LateUpdate()
+        // {
+        //     textLevel.text = "Lv." + level;
+        // }
 
         public void OnClick()
         {

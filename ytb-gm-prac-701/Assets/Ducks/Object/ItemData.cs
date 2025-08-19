@@ -20,7 +20,10 @@ namespace Ducks.Object
         public int itemId;
 
         public string itemName;
+
+        [TextArea] //
         public string itemDesc;
+
         public Sprite itemIcon;
 
         [Header("---Level Data---")] //

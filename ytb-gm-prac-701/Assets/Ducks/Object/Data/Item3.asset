@@ -15,7 +15,7 @@ MonoBehaviour:
   itemType: 3
   itemId: 3
   itemName: battleBoots
-  itemDesc: 
+  itemDesc: move speed {0}% inc
   itemIcon: {fileID: -966295699, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   baseDamage: 0
   baseCount: 0
@@ -27,3 +27,4 @@ MonoBehaviour:
   - 0.75
   counts: 0000000000000000000000000000000000000000
   projectile: {fileID: 0}
+  hand: {fileID: 0}

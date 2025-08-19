@@ -15,7 +15,9 @@ MonoBehaviour:
   itemType: 1
   itemId: 1
   itemName: gun
-  itemDesc: 
+  itemDesc: 'damage {0}% inc
+
+    through more {1} enemy'
   itemIcon: {fileID: -205726582, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   baseDamage: 3
   baseCount: 1
