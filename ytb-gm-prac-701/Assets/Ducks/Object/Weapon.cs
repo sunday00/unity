@@ -97,6 +97,10 @@ namespace Ducks.Object
                     break;
             }
 
+            var hand = player.hands[(int)data.itemType];
+            hand.sprite.sprite = data.hand;
+            hand.gameObject.SetActive(true);
+
             player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
         }
 

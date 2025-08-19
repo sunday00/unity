@@ -32,5 +32,7 @@ namespace Ducks.Object
 
         [Header("---Weapon---")] //
         public GameObject projectile;
+
+        public Sprite hand;
     }
 }

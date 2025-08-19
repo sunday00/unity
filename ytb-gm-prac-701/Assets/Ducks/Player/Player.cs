@@ -9,6 +9,8 @@ namespace Ducks.Player
         public Vector2 inputVec;
         public Scanner scanner;
 
+        public Hand[] hands;
+
         private Animator _animator;
         private Rigidbody2D _rigid;
         private SpriteRenderer _spriter;
@@ -22,6 +24,8 @@ namespace Ducks.Player
             scanner = GetComponent<Scanner>();
 
             speed = 3f;
+
+            hands = GetComponentsInChildren<Hand>(true);
         }
 
         private void Update()
