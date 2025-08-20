@@ -12,6 +12,7 @@ namespace Ducks
 
         public PoolManager pool;
         public Player.Player player;
+        public LevelUp uiLevelUp;
 
         [Header("---level and score---")] //
         public int level;
@@ -55,6 +56,7 @@ namespace Ducks
             {
                 level++;
                 exp = 0;
+                uiLevelUp.Show();
             }
         }
     }
