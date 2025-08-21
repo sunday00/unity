@@ -34,6 +34,9 @@ namespace Ducks
         private void Start()
         {
             health = maxHealth;
+
+            // Temporary
+            uiLevelUp.Select(0);
         }
 
         private void Update()
