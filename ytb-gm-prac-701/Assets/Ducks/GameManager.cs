@@ -7,6 +7,7 @@ namespace Ducks
     {
         public static GameManager Instance;
 
+        public bool isLive;
         public float gameTime;
         public float maxGameTime = 2 * 10f;
 
@@ -41,6 +42,8 @@ namespace Ducks
 
         private void Update()
         {
+            if (!isLive) return;
+
             gameTime += Time.deltaTime;
 
             if (gameTime > maxGameTime)
@@ -61,6 +64,18 @@ namespace Ducks
                 exp = 0;
                 uiLevelUp.Show();
             }
+        }
+
+        public void Stop()
+        {
+            isLive = false;
+            Time.timeScale = 0;
+        }
+
+        public void Resume()
+        {
+            isLive = true;
+            Time.timeScale = 1;
         }
     }
 }

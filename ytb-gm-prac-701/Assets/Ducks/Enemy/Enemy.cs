@@ -36,6 +36,8 @@ namespace Ducks.Enemy
 
         private void FixedUpdate()
         {
+            if (!GameManager.Instance.isLive) return;
+
             if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
 
             var dir = target.position - rigid.position;
@@ -48,7 +50,7 @@ namespace Ducks.Enemy
 
         private void LateUpdate()
         {
-            if (!isLive) return;
+            if (!isLive || !GameManager.Instance.isLive) return;
 
             sprite.flipX = target.position.x < rigid.position.x;
             sprite.sortingOrder = target.position.y > rigid.position.y ? 6 : 2;

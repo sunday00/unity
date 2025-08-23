@@ -19,6 +19,8 @@ namespace Ducks.Enemy
 
         private void Update()
         {
+            if (!GameManager.Instance.isLive) return;
+
             _timer += Time.deltaTime;
 
             level =

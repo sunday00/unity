@@ -30,12 +30,16 @@ namespace Ducks.Player
 
         private void Update()
         {
+            if (!GameManager.Instance.isLive) return;
+
             if (Input.GetButtonDown("Fire3")) speed = 5f;
             if (Input.GetButtonUp("Fire3")) speed = 3f;
         }
 
         private void FixedUpdate()
         {
+            if (!GameManager.Instance.isLive) return;
+
             var nextVec = inputVec * speed * Time.fixedDeltaTime;
 
             _rigid.MovePosition(_rigid.position + nextVec);
@@ -43,6 +47,8 @@ namespace Ducks.Player
 
         private void LateUpdate()
         {
+            if (!GameManager.Instance.isLive) return;
+
             _animator.SetFloat("Speed", inputVec.magnitude);
             if (!inputVec.x.Equals(0)) _spriter.flipX = inputVec.x < 0;
         }
