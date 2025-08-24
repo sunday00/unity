@@ -31,7 +31,10 @@ namespace Ducks
             {
                 case InfoType.Exp:
                     float cueExp = GameManager.Instance.exp;
-                    float maxExp = GameManager.Instance.nextExp[GameManager.Instance.level];
+                    // float maxExp = GameManager.Instance.nextExp[GameManager.Instance.level];
+                    float maxExp =
+                        GameManager.Instance.nextExp[
+                            Mathf.Min(GameManager.Instance.level, GameManager.Instance.nextExp.Length - 1)];
                     _mySlider.value = cueExp / maxExp;
 
                     break;
