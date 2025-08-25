@@ -32,14 +32,6 @@ namespace Ducks
             nextExp = new[] { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
         }
 
-        private void Start()
-        {
-            health = maxHealth;
-
-            // Temporary
-            uiLevelUp.Select(0);
-        }
-
         private void Update()
         {
             if (!isLive) return;
@@ -52,6 +44,14 @@ namespace Ducks
                 // next
                 print("not implemented");
             }
+        }
+
+        public void GameStart()
+        {
+            health = maxHealth;
+
+            uiLevelUp.Select(0); // Temporary
+            isLive = true;
         }
 
         public void GetExp()
