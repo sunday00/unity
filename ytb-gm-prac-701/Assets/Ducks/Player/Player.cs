@@ -53,6 +53,21 @@ namespace Ducks.Player
             if (!inputVec.x.Equals(0)) _spriter.flipX = inputVec.x < 0;
         }
 
+        private void OnCollisionStay2D(Collision2D other)
+        {
+            if (!GameManager.Instance.isLive) return;
+
+            GameManager.Instance.health -= Time.deltaTime * 10f;
+
+            if (GameManager.Instance.health <= 0)
+            {
+                for (var index = 2; index < transform.childCount; index++)
+                    transform.GetChild(index).gameObject.SetActive(false);
+
+                _animator.SetTrigger("Dead");
+            }
+        }
+
         private void OnMove(InputValue value)
         {
             inputVec = value.Get<Vector2>();

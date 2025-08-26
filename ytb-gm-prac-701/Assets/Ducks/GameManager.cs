@@ -23,8 +23,8 @@ namespace Ducks
         public int kill;
         public int exp;
 
-        public int health;
-        public int maxHealth = 100;
+        public float health;
+        public float maxHealth = 100f;
 
         private void Awake()
         {
