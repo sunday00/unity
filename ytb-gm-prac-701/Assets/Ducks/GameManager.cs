@@ -1,5 +1,7 @@
+using System.Collections;
 using Ducks.Enemy;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Ducks
 {
@@ -14,6 +16,8 @@ namespace Ducks
         public PoolManager pool;
         public Player.Player player;
         public LevelUp uiLevelUp;
+
+        public GameObject uiResult;
 
         [Header("---level and score---")] //
         public int level;
@@ -51,7 +55,27 @@ namespace Ducks
             health = maxHealth;
 
             uiLevelUp.Select(0); // Temporary
-            isLive = true;
+
+            Resume();
+        }
+
+        public void GameReStart()
+        {
+            SceneManager.LoadScene("Main");
+        }
+
+        public void GameOver()
+        {
+            StartCoroutine(GameOverRoutine());
+        }
+
+        private IEnumerator GameOverRoutine()
+        {
+            isLive = false;
+            yield return new WaitForSeconds(0.5f);
+
+            uiResult.SetActive(true);
+            Stop();
         }
 
         public void GetExp()

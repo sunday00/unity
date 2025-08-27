@@ -65,6 +65,7 @@ namespace Ducks.Player
                     transform.GetChild(index).gameObject.SetActive(false);
 
                 _animator.SetTrigger("Dead");
+                GameManager.Instance.GameOver();
             }
         }
 
