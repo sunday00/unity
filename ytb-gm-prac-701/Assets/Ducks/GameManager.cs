@@ -17,7 +17,8 @@ namespace Ducks
         public Player.Player player;
         public LevelUp uiLevelUp;
 
-        public GameObject uiResult;
+        public Result uiResult;
+        public GameObject enemyCleaner;
 
         [Header("---level and score---")] //
         public int level;
@@ -46,7 +47,7 @@ namespace Ducks
             {
                 gameTime = maxGameTime;
                 // next
-                print("not implemented");
+                GameVictory();
             }
         }
 
@@ -74,12 +75,35 @@ namespace Ducks
             isLive = false;
             yield return new WaitForSeconds(0.5f);
 
-            uiResult.SetActive(true);
+            // uiResult.SetActive(true);
+            uiResult.gameObject.SetActive(true);
+            uiResult.Lose();
+            Stop();
+        }
+
+        public void GameVictory()
+        {
+            StartCoroutine(GameVictoryRoutine());
+        }
+
+        private IEnumerator GameVictoryRoutine()
+        {
+            isLive = false;
+
+            enemyCleaner.SetActive(true);
+
+            yield return new WaitForSeconds(0.5f);
+
+            // uiResult.SetActive(true);
+            uiResult.gameObject.SetActive(true);
+            uiResult.Win();
             Stop();
         }
 
         public void GetExp()
         {
+            if (!isLive) return;
+
             exp++;
 
             // if (exp == nextExp[level])
