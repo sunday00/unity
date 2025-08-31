@@ -1623,7 +1623,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1908826106}
         m_TargetAssemblyTypeName: Ducks.GameManager, Assembly-CSharp
         m_MethodName: GameStart
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2018,7 +2018,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 7.7777777
+  orthographic size: 7.6666665
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3152,7 +3152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &848508794
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3308,6 +3308,10 @@ MonoBehaviour:
   inputVec: {x: 0, y: 0}
   scanner: {fileID: 0}
   hands: []
+  animCon:
+  - {fileID: 9100000, guid: 2dab3b44f19d14792b027d553914e018, type: 2}
+  - {fileID: 22100000, guid: 6cc2b7b42600e4462990597a68314426, type: 2}
+  - {fileID: 22100000, guid: 964374f300dd64a09bc382fba6243d6e, type: 2}
 --- !u!114 &848508799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13515,11 +13519,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1908826106}
         m_TargetAssemblyTypeName: Ducks.GameManager, Assembly-CSharp
         m_MethodName: GameStart
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
@@ -23844,6 +23848,7 @@ MonoBehaviour:
   uiLevelUp: {fileID: 1633456046}
   uiResult: {fileID: 1228894549}
   enemyCleaner: {fileID: 766575624}
+  playerId: 0
   level: 0
   nextExp: 
   kill: 0

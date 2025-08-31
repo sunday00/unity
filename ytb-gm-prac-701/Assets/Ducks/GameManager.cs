@@ -21,6 +21,8 @@ namespace Ducks
         public GameObject enemyCleaner;
 
         [Header("---level and score---")] //
+        public int playerId;
+
         public int level;
 
         public int[] nextExp;
@@ -51,11 +53,15 @@ namespace Ducks
             }
         }
 
-        public void GameStart()
+        public void GameStart(int id)
         {
+            playerId = id;
+
             health = maxHealth;
 
-            uiLevelUp.Select(0); // Temporary
+            player.gameObject.SetActive(true);
+
+            uiLevelUp.Select(playerId % 2); // Temporary
 
             Resume();
         }

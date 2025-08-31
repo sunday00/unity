@@ -10,6 +10,7 @@ namespace Ducks.Player
         public Scanner scanner;
 
         public Hand[] hands;
+        public RuntimeAnimatorController[] animCon;
 
         private Animator _animator;
         private Rigidbody2D _rigid;
@@ -51,6 +52,11 @@ namespace Ducks.Player
 
             _animator.SetFloat("Speed", inputVec.magnitude);
             if (!inputVec.x.Equals(0)) _spriter.flipX = inputVec.x < 0;
+        }
+
+        private void OnEnable()
+        {
+            _animator.runtimeAnimatorController = animCon[GameManager.Instance.playerId];
         }
 
         private void OnCollisionStay2D(Collision2D other)
