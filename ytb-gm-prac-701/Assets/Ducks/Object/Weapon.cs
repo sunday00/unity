@@ -1,3 +1,4 @@
+using Ducks.Player;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -79,7 +80,7 @@ namespace Ducks.Object
             transform.localPosition = Vector3.zero;
 
             id = data.itemId;
-            damage = data.baseDamage;
+            damage = data.baseDamage * Character.Damage;
             count = data.baseCount;
 
             for (var index = 0; index < GameManager.Instance.pool.prefabs.Length; index++)
@@ -108,13 +109,13 @@ namespace Ducks.Object
 
         private void Action0()
         {
-            speed = -150;
+            speed = -150 * Character.WeaponSpeed;
             Batch();
         }
 
         private void Action1()
         {
-            speed = 0.3f;
+            speed = 0.3f * Character.WeaponRate;
         }
 
         private void Batch()
@@ -140,7 +141,7 @@ namespace Ducks.Object
 
         public void LevelUp(float dam, int cnt)
         {
-            damage = dam;
+            damage = dam * Character.Damage;
             count += cnt;
 
             if (id == 0) Batch();

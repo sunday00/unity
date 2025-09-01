@@ -56,6 +56,7 @@ namespace Ducks.Player
 
         private void OnEnable()
         {
+            speed *= Character.Speed;
             _animator.runtimeAnimatorController = animCon[GameManager.Instance.playerId];
         }
 

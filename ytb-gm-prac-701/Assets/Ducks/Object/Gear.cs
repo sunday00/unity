@@ -1,3 +1,4 @@
+using Ducks.Player;
 using UnityEngine;
 
 namespace Ducks.Object
@@ -37,18 +38,25 @@ namespace Ducks.Object
         public void RateUp()
         {
             var weapons = transform.parent.GetComponentsInChildren<Weapon>();
+            var spd = 0f;
 
             foreach (var weapon in weapons)
                 switch (weapon.id)
                 {
-                    case 0: weapon.speed = 150 + 150 * rate; break;
-                    default: weapon.speed = 0.5f * (1f - rate); break;
+                    case 0:
+                        spd = 150 * Character.WeaponSpeed;
+                        weapon.speed = spd + spd * rate;
+                        break;
+                    default:
+                        spd = 0.5f * Character.WeaponRate;
+                        weapon.speed = spd * (1f - rate);
+                        break;
                 }
         }
 
         public void SpeedUp()
         {
-            float speed = 3;
+            var speed = 3 * Character.Speed;
             GameManager.Instance.player.speed = speed + speed * rate;
         }
     }
