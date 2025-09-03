@@ -23790,9 +23790,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05997a616bae542c5b6ffacca841783a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockCharacter:
+  lockCharacters:
   - {fileID: 2128737373}
-  unlockCharacter:
+  unlockCharacters:
   - {fileID: 606586292}
 --- !u!4 &1693084366
 Transform:
