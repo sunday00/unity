@@ -27,6 +27,11 @@ namespace Ducks.Player
             UnlockCharacter();
         }
 
+        private void LateUpdate()
+        {
+            foreach (var achieve in _achieves) CheckAchieves(achieve);
+        }
+
         private void Init()
         {
             PlayerPrefs.SetInt("MyData", 1);
@@ -44,6 +49,20 @@ namespace Ducks.Player
                 lockCharacters[index].SetActive(!isUnlock);
                 unlockCharacters[index].SetActive(isUnlock);
             }
+        }
+
+        private void CheckAchieves(Achieve achieve)
+        {
+            var isAchieve = false;
+
+            switch (achieve)
+            {
+                case Achieve.UnlockBob:
+                    isAchieve = GameManager.Instance.kill >= 10;
+                    break;
+            }
+
+            if (isAchieve && PlayerPrefs.GetInt(achieve.ToString()) == 0) PlayerPrefs.SetInt(achieve.ToString(), 1);
         }
     }
 }
