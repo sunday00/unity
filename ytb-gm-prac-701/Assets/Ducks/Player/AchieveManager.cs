@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Ducks.Player
@@ -12,12 +13,16 @@ namespace Ducks.Player
 
         public GameObject[] lockCharacters;
         public GameObject[] unlockCharacters;
+        public GameObject UiNotice;
 
         private Achieve[] _achieves;
+
+        private WaitForSecondsRealtime wait;
 
         private void Awake()
         {
             _achieves = (Achieve[])Enum.GetValues(typeof(Achieve));
+            wait = new WaitForSecondsRealtime(5f);
 
             if (!PlayerPrefs.HasKey("MyData")) Init();
         }
@@ -62,7 +67,27 @@ namespace Ducks.Player
                     break;
             }
 
-            if (isAchieve && PlayerPrefs.GetInt(achieve.ToString()) == 0) PlayerPrefs.SetInt(achieve.ToString(), 1);
+            if (isAchieve && PlayerPrefs.GetInt(achieve.ToString()) == 0)
+            {
+                PlayerPrefs.SetInt(achieve.ToString(), 1);
+
+                for (var index = 0; index < UiNotice.transform.childCount; index++)
+                {
+                    var isActive = index == (int)achieve;
+                    UiNotice.transform.GetChild(index).gameObject.SetActive(isActive);
+                }
+
+                StartCoroutine(NoticeRoutine());
+            }
+        }
+
+        private IEnumerator NoticeRoutine()
+        {
+            UiNotice.SetActive(true);
+
+            yield return wait;
+
+            UiNotice.SetActive(false);
         }
     }
 }
