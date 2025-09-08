@@ -71,6 +71,8 @@ namespace Ducks.Object
 
             var bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.Init(damage, count, dir); // -1 means Infinity per
+
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Range);
         }
 
         public void Init(ItemData data)

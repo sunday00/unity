@@ -4,6 +4,18 @@ namespace Ducks
 {
     public class AudioManager : MonoBehaviour
     {
+        public enum Sfx
+        {
+            Dead,
+            Hit,
+            LevelUp = 3,
+            Lose,
+            Melee,
+            Range = 7,
+            Select,
+            Win
+        }
+
         public static AudioManager Instance;
 
         [Header("#BGM")] //
@@ -52,6 +64,24 @@ namespace Ducks
                 sfxPlayers[i] = sfxObject.AddComponent<AudioSource>();
                 sfxPlayers[i].playOnAwake = false;
                 sfxPlayers[i].volume = sfxVolume;
+            }
+        }
+
+        public void PlaySfx(Sfx sfx)
+        {
+            for (var i = 0; i < channels; i++)
+            {
+                var loopIndex = (i + channelIndex) % channels;
+
+                if (sfxPlayers[loopIndex].isPlaying) continue;
+
+                var randIndex = 0;
+                if (sfx == Sfx.Hit || sfx == Sfx.Melee) randIndex = Random.Range(0, 2);
+
+                sfxPlayers[loopIndex].clip = sfxClips[(int)sfx + randIndex];
+                sfxPlayers[loopIndex].Play();
+
+                break;
             }
         }
     }

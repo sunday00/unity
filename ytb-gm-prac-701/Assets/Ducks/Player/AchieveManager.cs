@@ -84,6 +84,7 @@ namespace Ducks.Player
         private IEnumerator NoticeRoutine()
         {
             UiNotice.SetActive(true);
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.LevelUp);
 
             yield return wait;
 

@@ -64,6 +64,8 @@ namespace Ducks
             uiLevelUp.Select(playerId % 2); // Temporary
 
             Resume();
+
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Select);
         }
 
         public void GameReStart()
@@ -85,6 +87,8 @@ namespace Ducks
             uiResult.gameObject.SetActive(true);
             uiResult.Lose();
             Stop();
+
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Lose);
         }
 
         public void GameVictory()
@@ -104,6 +108,8 @@ namespace Ducks
             uiResult.gameObject.SetActive(true);
             uiResult.Win();
             Stop();
+
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Win);
         }
 
         public void GetExp()

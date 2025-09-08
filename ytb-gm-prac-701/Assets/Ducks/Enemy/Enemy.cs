@@ -88,6 +88,7 @@ namespace Ducks.Enemy
         private void Damaged()
         {
             anim.SetTrigger("Hit");
+            AudioManager.Instance.PlaySfx(AudioManager.Sfx.Hit);
         }
 
         private IEnumerator KnockBack()
@@ -115,6 +116,8 @@ namespace Ducks.Enemy
 
             GameManager.Instance.kill++;
             GameManager.Instance.GetExp();
+
+            if (GameManager.Instance.isLive) AudioManager.Instance.PlaySfx(AudioManager.Sfx.Dead);
         }
 
         private void DeadDisappear()
