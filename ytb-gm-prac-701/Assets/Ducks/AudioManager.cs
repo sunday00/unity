@@ -29,6 +29,7 @@ namespace Ducks
         public float sfxVolume;
 
         public int channels;
+        private AudioHighPassFilter bgmEffect;
 
         // private bgms
         private AudioSource bgmPlayer;
@@ -54,6 +55,7 @@ namespace Ducks
             bgmPlayer.loop = true;
             bgmPlayer.volume = bgmVolume;
             bgmPlayer.clip = bgmClip;
+            bgmEffect = Camera.main.GetComponent<AudioHighPassFilter>();
 
             var sfxObject = new GameObject("sfxPlayer");
             sfxObject.transform.parent = transform;
@@ -63,8 +65,20 @@ namespace Ducks
             {
                 sfxPlayers[i] = sfxObject.AddComponent<AudioSource>();
                 sfxPlayers[i].playOnAwake = false;
+                sfxPlayers[i].bypassListenerEffects = true;
                 sfxPlayers[i].volume = sfxVolume;
             }
+        }
+
+        public void PlayBgm(bool isPlay)
+        {
+            if (isPlay) bgmPlayer.Play();
+            else bgmPlayer.Stop();
+        }
+
+        public void EffectBgm(bool isPlay)
+        {
+            bgmEffect.enabled = isPlay;
         }
 
         public void PlaySfx(Sfx sfx)

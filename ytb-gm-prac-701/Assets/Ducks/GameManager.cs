@@ -65,6 +65,7 @@ namespace Ducks
 
             Resume();
 
+            AudioManager.Instance.PlayBgm(true);
             AudioManager.Instance.PlaySfx(AudioManager.Sfx.Select);
         }
 
@@ -88,6 +89,7 @@ namespace Ducks
             uiResult.Lose();
             Stop();
 
+            AudioManager.Instance.PlayBgm(false);
             AudioManager.Instance.PlaySfx(AudioManager.Sfx.Lose);
         }
 
@@ -109,6 +111,7 @@ namespace Ducks
             uiResult.Win();
             Stop();
 
+            AudioManager.Instance.PlayBgm(false);
             AudioManager.Instance.PlaySfx(AudioManager.Sfx.Win);
         }
 
