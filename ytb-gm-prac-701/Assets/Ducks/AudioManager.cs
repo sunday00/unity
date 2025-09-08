@@ -55,7 +55,9 @@ namespace Ducks
             bgmPlayer.loop = true;
             bgmPlayer.volume = bgmVolume;
             bgmPlayer.clip = bgmClip;
-            bgmEffect = Camera.main.GetComponent<AudioHighPassFilter>();
+            // bgmEffect = Camera.main.GetComponent<AudioHighPassFilter>();
+            bgmEffect = bgmObject.AddComponent<AudioHighPassFilter>();
+            bgmEffect.enabled = false;
 
             var sfxObject = new GameObject("sfxPlayer");
             sfxObject.transform.parent = transform;
