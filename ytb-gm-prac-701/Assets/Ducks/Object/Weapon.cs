@@ -137,7 +137,7 @@ namespace Ducks.Object
                 bullet.Translate(bullet.up * 1.5f, Space.World);
 
                 var bulletScript = bullet.GetComponent<Bullet>();
-                bulletScript.Init(damage, -1, Vector3.zero); // -1 means Infinity per
+                bulletScript.Init(damage, -100, Vector3.zero); // -1 means Infinity per
             }
         }
 

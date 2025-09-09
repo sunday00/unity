@@ -36,7 +36,7 @@ namespace Ducks
         private void Awake()
         {
             Instance = this;
-            nextExp = new[] { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
+            // nextExp = new[] { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
         }
 
         private void Update()

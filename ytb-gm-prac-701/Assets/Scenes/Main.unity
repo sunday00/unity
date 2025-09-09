@@ -2137,7 +2137,6 @@ GameObject:
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2319,16 +2318,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!165 &519420035
-AudioHighPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
-  m_CutoffFrequency: 5000
-  m_HighpassResonanceQ: 1
 --- !u!1 &568873773
 GameObject:
   m_ObjectHideFlags: 0
@@ -3477,7 +3466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 9999999
-  per: -1
+  per: -100
 --- !u!1 &806543602
 GameObject:
   m_ObjectHideFlags: 0
@@ -14999,6 +14988,7 @@ MonoBehaviour:
     speed: 2.4
     spriteType: 1
   level: 0
+  levelTime: 0
 --- !u!1 &1525145982
 GameObject:
   m_ObjectHideFlags: 0
@@ -24887,7 +24877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLive: 0
   gameTime: 0
-  maxGameTime: 20
+  maxGameTime: 10
   pool: {fileID: 1726407584}
   player: {fileID: 848508798}
   uiLevelUp: {fileID: 1633456046}
@@ -24895,7 +24885,7 @@ MonoBehaviour:
   enemyCleaner: {fileID: 766575624}
   playerId: 0
   level: 0
-  nextExp: 
+  nextExp: 03000000050000000a0000006400000096000000d20000001801000068010000c201000058020000
   kill: 0
   exp: 0
   health: 0

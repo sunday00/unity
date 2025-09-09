@@ -10,11 +10,14 @@ namespace Ducks.Enemy
         public SpawnData[] spawnData;
 
         public int level;
+
+        public float levelTime;
         private float _timer;
 
         private void Awake()
         {
             spawnPoints = GetComponentsInChildren<Transform>();
+            levelTime = GameManager.Instance.maxGameTime / spawnData.Length;
         }
 
         private void Update()
@@ -25,7 +28,7 @@ namespace Ducks.Enemy
 
             level =
                 Mathf.Min(
-                    Mathf.FloorToInt(GameManager.Instance.gameTime / 10f),
+                    Mathf.FloorToInt(GameManager.Instance.gameTime / levelTime),
                     spawnData.Length - 1
                 );
 

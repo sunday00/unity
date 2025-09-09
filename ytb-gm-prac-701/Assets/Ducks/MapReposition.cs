@@ -18,17 +18,20 @@ namespace Ducks
             var playerPos = GameManager.Instance.player.transform.position;
             var myPos = transform.position;
 
-            var diffX = Mathf.Abs(playerPos.x - myPos.x);
-            var diffY = Mathf.Abs(playerPos.y - myPos.y);
-
-            var playerDir = GameManager.Instance.player.inputVec;
-            var dirX = playerDir.x < 0 ? -1 : 1;
-            var dirY = playerDir.y < 0 ? -1 : 1;
 
             switch (transform.tag)
             {
                 // TODO: How to rectangle?? this only works on SQUARE shape.
                 case "Ground":
+                    var diffX = playerPos.x - myPos.x;
+                    var diffY = playerPos.y - myPos.y;
+
+                    var dirX = diffX < 0 ? -1 : 1;
+                    var dirY = diffY < 0 ? -1 : 1;
+
+                    diffX = Mathf.Abs(diffX);
+                    diffY = Mathf.Abs(diffY);
+
                     if (diffX > diffY)
                         transform.Translate(Vector2.right * dirX * 40);
                     else if (diffX < diffY)
@@ -36,10 +39,12 @@ namespace Ducks
                     break;
                 case "Enemy":
                     if (col.enabled)
-                        transform.Translate(
-                            playerDir * 20
-                            + new Vector2(Random.Range(-3f, 3f), Random.Range(-3f, 3f))
-                        );
+                    {
+                        var dist = playerPos - myPos;
+                        var ran = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0);
+                        transform.Translate(ran + dist * 2);
+                    }
+
                     break;
             }
         }
