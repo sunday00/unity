@@ -33,6 +33,8 @@ namespace Ducks
         public float health;
         public float maxHealth = 100f;
 
+        public Transform UiJoy;
+
         private void Awake()
         {
             Instance = this;
@@ -134,12 +136,16 @@ namespace Ducks
         {
             isLive = false;
             Time.timeScale = 0;
+
+            UiJoy.localScale = Vector3.zero;
         }
 
         public void Resume()
         {
             isLive = true;
             Time.timeScale = 1;
+
+            UiJoy.localScale = Vector3.one;
         }
     }
 }
