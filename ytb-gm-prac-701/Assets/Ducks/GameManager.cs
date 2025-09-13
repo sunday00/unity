@@ -39,6 +39,7 @@ namespace Ducks
         {
             Instance = this;
             // nextExp = new[] { 3, 5, 10, 100, 150, 210, 280, 360, 450, 600 };
+            Application.targetFrameRate = 60;
         }
 
         private void Update()
@@ -146,6 +147,11 @@ namespace Ducks
             Time.timeScale = 1;
 
             UiJoy.localScale = Vector3.one;
+        }
+
+        public void GameQuit()
+        {
+            Application.Quit();
         }
     }
 }
